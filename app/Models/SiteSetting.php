@@ -22,16 +22,16 @@ class SiteSetting extends Model
     ];
 
     protected $appends = [
-        'site_logo',
-        'site_favicon'
+        'site_logo_url',
+        'site_favicon_url'
     ];
 
-    public function getSiteLogoAttribute($value)
+    public function getSiteLogoUrlAttribute($value)
     {
         return storage_url($this->attributes['site_logo']);
     }
     
-    public function getSiteFaviconAttribute($value)
+    public function getSiteFaviconUrlAttribute($value)
     {
         return storage_url($this->attributes['site_favicon']);
     }

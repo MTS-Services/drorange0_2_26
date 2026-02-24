@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\SiteSetting;
 use Illuminate\Database\Seeder;
 
 class SiteSettingSeeder extends Seeder
@@ -12,6 +12,9 @@ class SiteSettingSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        SiteSetting::create([
+            'site_name' => 'BathPro Remodeling',
+            'site_title' => 'BathPro Remodeling',
+        ]);
     }
 }

@@ -10,6 +10,11 @@ const aboutContent = {
 };
 
 export function WillWritingAboutSection() {
+    return (
+        <>
+        
+        </>
+    );
     // return (
     //     <section className="bg-linear-to-b from-primary-50 via-white to-white px-4 py-16 sm:px-6 lg:px-10">
     //         <div className="mx-auto max-w-5xl rounded-[36px] bg-white/70 p-8 shadow-2xl shadow-primary-200/40">

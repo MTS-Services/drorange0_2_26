@@ -1,13 +1,15 @@
 <?php
 
-use App\Models\User;
+use App\Models\Admin;
 
-test('guests are redirected to the login page', function () {
-    $this->get(route('dashboard'))->assertRedirect(route('login'));
+test('guests are redirected to the admin login page', function () {
+    $this->get('/admin/dashboard')->assertRedirect('/admin/login');
 });
 
-test('authenticated users can visit the dashboard', function () {
-    $this->actingAs($user = User::factory()->create());
+test('authenticated admins can visit the dashboard', function () {
+    $admin = Admin::factory()->create();
 
-    $this->get(route('dashboard'))->assertOk();
+    $this->actingAs($admin, 'admin')
+        ->get('/admin/dashboard')
+        ->assertOk();
 });

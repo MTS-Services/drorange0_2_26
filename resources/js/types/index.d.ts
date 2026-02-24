@@ -2,8 +2,13 @@ import { InertiaLinkProps } from '@inertiajs/react';
 import { LucideIcon } from 'lucide-react';
 
 export interface Auth {
-    user: User;
-    permissions?: string[];
+    admin: AdminUser | null;
+}
+
+export interface AdminUser {
+    id: number;
+    name: string;
+    email: string;
 }
 
 export interface BreadcrumbItem {
@@ -46,10 +51,7 @@ export interface SharedData {
 }
 
 export interface Features {
-    canRegister: boolean;
     canResetPassword: boolean;
-    canVerifyEmail: boolean;
-    canUseTwoFactorAuthentication: boolean;
 }
 
 export interface User {

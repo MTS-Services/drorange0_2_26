@@ -1,8 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import * as React from 'react';
 
-import { login, register } from '@/routes';
-
 interface AuthLayoutProps {
     children: React.ReactNode;
     title: string;
@@ -23,9 +21,9 @@ export default function AuthLayout({
         description || 'Manage shifts, authorize requests, and sync your people from anywhere in the world.';
 
     const isRegisterView = context === 'register';
-    const ctaHref = isRegisterView ? login() : register();
-    const ctaLabel = isRegisterView ? 'Return to login' : 'Create account';
-    const ctaPrompt = isRegisterView ? 'Already onboard?' : 'Need a seat?';
+    const ctaHref = '/admin/login';
+    const ctaLabel = isRegisterView ? 'Return to login' : 'Admin login';
+    const ctaPrompt = 'Admin access only';
 
 
     const highlights = [

@@ -12,6 +12,12 @@ const adminNavItems: NavItemType[] = [
         href: route('admin.dashboard'),
         icon: LayoutGrid,
         slug: 'dashboard',
+    },
+    {
+        title: 'Site Settings',
+        href: route('admin.site-settings.index'),
+        icon: LayoutGrid,
+        slug: 'site-settings',
     }
 ];
 

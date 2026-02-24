@@ -8,9 +8,9 @@ import { Label } from '@/components/ui/label';
 import { PasswordInput } from '@/components/ui/password-input';
 import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
-import { register } from '@/routes';
-import { store } from '@/routes/login';
-import { request } from '@/routes/password';
+// Routes for admin authentication
+const adminLogin = '/admin/login';
+const adminForgotPassword = '/admin/forgot-password';
 import { SharedData } from '@/types';
 
 export default function Login() {
@@ -33,7 +33,8 @@ export default function Login() {
                 </div>
 
                 <Form
-                    {...store.form()}
+                    action={adminLogin}
+                    method="post"
                     resetOnSuccess={['password']}
                     className="space-y-3 px-1 sm:space-y-6 sm:px-0"
                 >
@@ -69,7 +70,7 @@ export default function Login() {
                                         </Label>
                                         {features.canResetPassword && (
                                             <TextLink
-                                                href={request()}
+                                                href={adminForgotPassword}
                                                 className="text-xs font-semibold text-primary-600"
                                             >
                                                 Forgot?
@@ -130,10 +131,7 @@ export default function Login() {
                 </Form>
 
                 <div className="text-center text-xs uppercase tracking-[0.3em] text-primary-500">
-                    Ready to join us?{' '}
-                    <TextLink href={register()} className="font-semibold text-primary-500 border-none hover:text-primary-200">
-                        Create your account
-                    </TextLink>
+                    Admin access only
                 </div>
             </div>
         </AuthLayout>

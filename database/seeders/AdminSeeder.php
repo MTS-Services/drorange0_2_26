@@ -9,7 +9,7 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        Admin::factory()->create([
+        Admin::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => 'password',

@@ -8,6 +8,7 @@ use App\Services\HomeServiceService;
 use App\Services\RemodelingHeroService;
 use App\Services\RemodelingOptionService;
 use App\Services\RemodelingWhatIncludeService;
+use App\Services\RemodelingWhyChooseService;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,7 +20,8 @@ class FrontendController extends Controller
     protected HomeServiceService $serviceService,
     protected RemodelingHeroService $remodelingHeroService,
     protected RemodelingWhatIncludeService $remodelingWhatIncludeService,
-    protected RemodelingOptionService $remodelingOptionService
+    protected RemodelingOptionService $remodelingOptionService,
+    protected RemodelingWhyChooseService $remodelingWhyChooseService,
    )
    {
   
@@ -41,10 +43,12 @@ class FrontendController extends Controller
         $banner = $this->remodelingHeroService->first();
         $includes = $this->remodelingWhatIncludeService->latest(6);
         $options = $this->remodelingOptionService->latest(4);
+        $whychooses = $this->remodelingWhyChooseService->latest(3);
         return Inertia::render('frontend/bathroom-remodeling',[
             'banner' => $banner,
             'includes' => $includes,
             'options' => $options,
+            'whychooses' => $whychooses,
         ]);
     }
 

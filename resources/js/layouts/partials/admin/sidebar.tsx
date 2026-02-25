@@ -55,6 +55,12 @@ const adminNavItems: NavItemType[] = [
                         href: route('admin.pm.remodeling-option.index'),
                         slug: 'remodeling-option',
                     },
+                    
+                    {
+                        title: 'Why Choose',
+                        href: route('admin.pm.remodeling-why-choose.index'),
+                        slug: 'remodeling-why-choose',
+                    },
                 ]
             },
         ],

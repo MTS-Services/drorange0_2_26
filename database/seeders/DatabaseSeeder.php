@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\HomeServiceSeeder;
 use Database\Seeders\RemodelingWhatIncludeSeeder;
 use Database\Seeders\RemodelingOptionSeeder;
+use Database\Seeders\RemodelingWhyChooseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
             HomeServiceSeeder::class,
             RemodelingWhatIncludeSeeder::class,
             RemodelingOptionSeeder::class,
+            RemodelingWhyChooseSeeder::class,
 
         ]);
     }

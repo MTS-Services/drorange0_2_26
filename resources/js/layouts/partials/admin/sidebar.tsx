@@ -14,6 +14,25 @@ const adminNavItems: NavItemType[] = [
         slug: 'dashboard',
     },
     {
+        title: 'Page Management',
+        icon: LayoutGrid,
+        slug: 'page-management',
+        children: [
+            {
+                title: 'Home Page',
+                icon: LayoutGrid,
+                slug: 'home-page',
+                children:[
+                    {
+                        title: 'Hero Section',
+                        href: route('admin.pm.hero-section'),
+                        slug: 'hero-section',
+                    },
+                ]
+            },
+        ],
+    },
+    {
         title: 'Site Settings',
         href: route('admin.site-settings.index'),
         icon: LayoutGrid,

@@ -27,6 +27,10 @@ const adminNavItems: NavItemType[] = [
                         title: 'Hero Section',
                         href: route('admin.pm.hero-section'),
                         slug: 'hero-section',
+                    },{
+                        title: 'Services',
+                        href: route('admin.pm.service-section.index'),
+                        slug: 'service-section',
                     },
                 ]
             },

@@ -3,19 +3,37 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\DataTableService;
+use App\Services\HomeServiceService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class HomeServiceController extends Controller
 {
+    public function __construct(protected HomeServiceService $service, protected DataTableService $dataTableService)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-        return Inertia::render('Admin/ManagePage/HomePage/Services/Index'); 
+        $query = $this->service->getQuery();
+        $result = $this->dataTableService->process($query, request(), [
+            'searchable' => ['title', 'subtitle'],
+            'filterable' => ['title', 'subtitle'],
+            'sortable' => ['title', 'subtitle'],
+        ]);
+        return Inertia::render('Admin/ManagePage/HomePage/Services/Index', [
+            'services' => $result['data'],
+            'pagination' => $result['pagination'],
+            'offset' => $result['offset'],
+            'filters' => $result['filters'],
+            'search' => $result['search'],
+            'sortBy' => $result['sort_by'],
+            'sortOrder' => $result['sort_order']
+        ]); 
     }
 
     /**

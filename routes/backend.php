@@ -22,7 +22,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
             Route::put('hero-section', [HomePageController::class, 'updateHeroSection'])->name('hero-section.update');
             //Home Page Service Section
             
-            Route::resource('service-section', HomeServiceController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+            Route::resource('service-section', HomeServiceController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
 
 
             // Remodeling Page Hero Section

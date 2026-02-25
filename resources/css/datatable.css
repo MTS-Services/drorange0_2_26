@@ -223,20 +223,30 @@
 }
 
 .datatable-cell-center {
-    padding: 3rem 1rem;
+    padding: 1.25rem 1rem;
     text-align: center;
     color: var(--datatable-text-muted);
+    font-size: 0.875rem;
 }
 
 /* Loading & Empty States */
 .datatable-loading,
 .datatable-empty {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
     color: var(--datatable-text-muted);
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
+    border-radius: 0.5rem;
+    background-color: var(--datatable-header-bg);
+    margin: 0.75rem auto;
+}
+
+.datatable-empty .datatable-empty-icon {
+    width: 18px;
+    height: 18px;
 }
 
 /* Actions */

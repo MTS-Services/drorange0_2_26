@@ -23,7 +23,7 @@ class HomeServiceController extends Controller
         $result = $this->dataTableService->process($query, request(), [
             'searchable' => ['title', 'subtitle'],
             'filterable' => ['title', 'subtitle'],
-            'sortable' => ['title', 'subtitle'],
+            'sortable' => ['title', 'subtitle', 'created_at', 'updated_at'],
         ]);
         return Inertia::render('Admin/ManagePage/HomePage/Services/Index', [
             'services' => $result['data'],

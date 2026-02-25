@@ -17,5 +17,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 
             Route::get('hero-section', [HomePageController::class, 'editHeroSection'])->name('hero-section');
             Route::put('hero-section', [HomePageController::class, 'updateHeroSection'])->name('hero-section.update');
+
+            Route::get('remodeling-hero', [HomePageController::class, 'editRemodelingHeroSection'])->name('remodeling-hero');
+            Route::put('remodeling-hero', [HomePageController::class, 'updateRemodelingHeroSection'])->name('remodeling-hero.update');
         });
 });

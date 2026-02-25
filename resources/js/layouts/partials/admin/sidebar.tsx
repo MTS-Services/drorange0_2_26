@@ -36,9 +36,9 @@ const adminNavItems: NavItemType[] = [
                 slug: 'remodeling',
                 children:[
                     {
-                        title: 'Remodeling Hero',
-                        href: route('admin.pm.hero-section'),
-                        slug: 'remodeling-section',
+                        title: 'Hero',
+                        href: route('admin.pm.remodeling-hero'),
+                        slug: 'remodeling-hero',
                     },
                 ]
             },

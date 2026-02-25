@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+use function App\Helper\storage_url;
+
+class RemodelingWhatInclude extends Model
+{
+    protected $fillable = [
+        'title',
+        'subtitle',
+        'icon',
+    ];
+
+    protected $appends = ['icon_url'];
+
+    public function getIconUrlAttribute($value)
+    {
+        return storage_url($this->attributes['icon'] ?? null);
+    }
+}

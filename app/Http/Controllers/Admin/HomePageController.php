@@ -18,7 +18,7 @@ class HomePageController extends Controller
         $hero = $this->service->first();
 
        
-        
+
         return Inertia::render('Admin/ManagePage/HomePage/EditHeroSection', [
             'hero' => $hero,
         ]);
@@ -39,7 +39,6 @@ class HomePageController extends Controller
             'button1_url' => 'nullable|string|max:255',
             'button2_text' => 'nullable|string|max:255',
             'button2_url' => 'nullable|string|max:255',
-            'overlay_color' => 'nullable|string|max:50',
             'background_image' => 'nullable|image|mimes:jpeg,png,jpg|max:4096',
             'aditional_information' => 'nullable|string',
             'delete_existing_background' => 'nullable|boolean',

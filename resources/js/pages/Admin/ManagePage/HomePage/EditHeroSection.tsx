@@ -21,7 +21,6 @@ interface Props {
         button1_url?: string;
         button2_text?: string;
         button2_url?: string;
-        overlay_color?: string;
         background_image?: string;
         background_image_url?: string;
         aditional_information?: string;
@@ -40,7 +39,6 @@ export default function Index({ hero }: Props) {
         button1_url: record.button1_url ?? '',
         button2_text: record.button2_text ?? '',
         button2_url: record.button2_url ?? '',
-        overlay_color: record.overlay_color ?? '',
         background_image: null as File | null,
         delete_existing_background: false,
         aditional_information: record.aditional_information ?? '',
@@ -170,18 +168,6 @@ export default function Index({ hero }: Props) {
                                                     onChange={(e) => setData('button2_url', e.target.value)}
                                                 />
                                                 <InputError message={errors.button2_url} />
-                                            </div>
-
-                                            <div className="grid gap-2">
-                                                <Label htmlFor="overlay_color">Overlay Color</Label>
-                                                <Input
-                                                    id="overlay_color"
-                                                    type="text"
-                                                    value={data.overlay_color}
-                                                    onChange={(e) => setData('overlay_color', e.target.value)}
-                                                    placeholder="#000000"
-                                                />
-                                                <InputError message={errors.overlay_color} />
                                             </div>
 
                                             <div className="grid gap-2">

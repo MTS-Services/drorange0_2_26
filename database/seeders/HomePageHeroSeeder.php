@@ -19,7 +19,6 @@ class HomePageHeroSeeder extends Seeder
             'button1_text'=> 'Get Your Free Estimate',
             'button2_text'=> 'Learn More',
             'button2_url'=> 'https://www.drorange.com',
-            'overlay_color'=> '#000000',
             'background_image'=> 'images/ImageWithFallback.png',
             'aditional_information'=> '<span className="flex items-center justify-center w-5 h-5 rounded-full ring-2 ring-white/60 shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 text-white" viewBox="0 0 20 20" fill="currentColor">

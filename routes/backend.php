@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\HomeServiceController;
 use App\Http\Controllers\Admin\RemodelingPageController;
+use App\Http\Controllers\Admin\RemodelingWhatIncludeController;
 use App\Http\Controllers\Backend\Admin\AdminDashboardController;
 use App\Http\Controllers\Backend\Admin\SiteSettingsController;
 
@@ -28,5 +29,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
             // Remodeling Page Hero Section
             Route::get('remodeling-hero', [RemodelingPageController::class, 'editRemodelingHeroSection'])->name('remodeling-hero');
             Route::put('remodeling-hero', [RemodelingPageController::class, 'updateRemodelingHeroSection'])->name('remodeling-hero.update');
+      
+            // Remodeling Page Service Section
+            Route::resource('remodeling-what-include', RemodelingWhatIncludeController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
         });
 });

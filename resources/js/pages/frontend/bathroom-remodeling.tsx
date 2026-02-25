@@ -6,13 +6,13 @@ import { MissionSection } from '@/components/frontend/horizon-wills/mission-sect
 import { TeamSection } from '@/components/frontend/horizon-wills/team-section';
 import FrontendLayout from '@/layouts/frontend-layout';
 
-export default function BathroomRemodeling({banner}: any) {
+export default function BathroomRemodeling({banner, includes }: any) {
     return (
         <FrontendLayout>
             <main className="flex flex-col">
                 <HorizonHeroSection  banner={banner}/>
                 <MissionSection />
-                <JobSection />
+                <JobSection  includes={includes}/>
                 <TeamSection />
             </main>
         </FrontendLayout>

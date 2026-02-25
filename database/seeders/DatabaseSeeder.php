@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\HomeServiceSeeder;
+use Database\Seeders\RemodelingWhatIncludeSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +20,7 @@ class DatabaseSeeder extends Seeder
             HomePageHeroSeeder::class,
             RemodelingHeroSeeder::class,
             HomeServiceSeeder::class,
+            RemodelingWhatIncludeSeeder::class,
 
         ]);
     }

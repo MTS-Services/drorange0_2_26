@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\HomePageHeroService;
 use App\Services\HomeServiceService;
 use App\Services\RemodelingHeroService;
+use App\Services\RemodelingWhatIncludeService;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,7 +16,8 @@ class FrontendController extends Controller
    public  function __construct(
     protected HomePageHeroService $homePageHeroService,
     protected HomeServiceService $serviceService,
-    protected RemodelingHeroService $remodelingHeroService
+    protected RemodelingHeroService $remodelingHeroService,
+    protected RemodelingWhatIncludeService $remodelingWhatIncludeService
    )
    {
   
@@ -35,8 +37,10 @@ class FrontendController extends Controller
     public function BathroomRemodeling(): Response
     {
         $banner = $this->remodelingHeroService->first();
+        $includes = $this->remodelingWhatIncludeService->latest(6);
         return Inertia::render('frontend/bathroom-remodeling',[
             'banner' => $banner,
+            'includes' => $includes,
         ]);
     }
 

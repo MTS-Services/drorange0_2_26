@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\HomePageController;
+use App\Http\Controllers\Admin\HomeServiceController;
+use App\Http\Controllers\Admin\RemodelingPageController;
 use App\Http\Controllers\Backend\Admin\AdminDashboardController;
 use App\Http\Controllers\Backend\Admin\SiteSettingsController;
 
@@ -15,10 +17,16 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
         ->as('pm.')
         ->group(function () {
 
+            // Home Page Hero Section
             Route::get('hero-section', [HomePageController::class, 'editHeroSection'])->name('hero-section');
             Route::put('hero-section', [HomePageController::class, 'updateHeroSection'])->name('hero-section.update');
+            //Home Page Service Section
+            
+            Route::resource('service-section', HomeServiceController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-            Route::get('remodeling-hero', [HomePageController::class, 'editRemodelingHeroSection'])->name('remodeling-hero');
-            Route::put('remodeling-hero', [HomePageController::class, 'updateRemodelingHeroSection'])->name('remodeling-hero.update');
+
+            // Remodeling Page Hero Section
+            Route::get('remodeling-hero', [RemodelingPageController::class, 'editRemodelingHeroSection'])->name('remodeling-hero');
+            Route::put('remodeling-hero', [RemodelingPageController::class, 'updateRemodelingHeroSection'])->name('remodeling-hero.update');
         });
 });

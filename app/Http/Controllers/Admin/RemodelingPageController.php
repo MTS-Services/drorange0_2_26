@@ -3,38 +3,33 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\HomePageHeroService;
 use App\Services\RemodelingHeroService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class HomePageController extends Controller
+class RemodelingPageController extends Controller
 {
-    public function __construct(
-        protected HomePageHeroService $service,
+     public function __construct(
         protected RemodelingHeroService $remodelingService,
     ) {
     }
-
-    public function editHeroSection(): Response
+    public function editRemodelingHeroSection(): Response
     {
-        $hero = $this->service->first();
+        $hero = $this->remodelingService->first();
 
-       
-
-        return Inertia::render('Admin/ManagePage/HomePage/EditHeroSection', [
+        return Inertia::render('Admin/ManagePage/Remodeling/EditHeroSection', [
             'hero' => $hero,
         ]);
     }
 
-    public function updateHeroSection(Request $request): Response|\Illuminate\Http\RedirectResponse
+    public function updateRemodelingHeroSection(Request $request): Response|\Illuminate\Http\RedirectResponse
     {
-        $hero = $this->service->first();
+        $hero = $this->remodelingService->first();
 
         if (! $hero) {
-            return back()->with('error', 'Hero section not found');
+            return back()->with('error', 'Remodeling hero section not found');
         }
 
         $data = $request->validate([
@@ -50,7 +45,7 @@ class HomePageController extends Controller
         ]);
 
         if ($request->hasFile('background_image')) {
-            $data['background_image'] = $request->file('background_image')->store('home-page', 'public');
+            $data['background_image'] = $request->file('background_image')->store('remodeling-hero', 'public');
 
             if ($hero->background_image && Storage::disk('public')->exists($hero->background_image)) {
                 Storage::disk('public')->delete($hero->background_image);
@@ -64,10 +59,8 @@ class HomePageController extends Controller
             unset($data['background_image']);
         }
 
-        $this->service->update($hero, $data);
+        $this->remodelingService->update($hero, $data);
 
-        return back()->with('success', 'Hero section updated successfully');
+        return back()->with('success', 'Remodeling hero section updated successfully');
     }
-
-    
 }

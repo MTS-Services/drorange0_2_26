@@ -11,7 +11,8 @@ export function useDataTable(options: UseDataTableProps = {}) {
     const {
         preserveState = true,
         preserveScroll = true,
-        only = ['users', 'pagination', 'offset', 'filters', 'search', 'sortBy', 'sortOrder'],
+        // When provided, limits the props returned during partial reloads. Leave undefined to return everything.
+        only,
     } = options;
 
     const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +30,7 @@ export function useDataTable(options: UseDataTableProps = {}) {
                 {
                     preserveState,
                     preserveScroll,
-                    only,
+                    ...(only ? { only } : {}),
                     onFinish: () => setIsLoading(false),
                 }
             );

@@ -7,30 +7,30 @@ import { Input } from '@/components/ui/input'
 import AdminLayout from '@/layouts/admin-layout'
 import { Head, useForm } from '@inertiajs/react'
 import { Label } from '@/components/ui/label'
-import { ArrowLeft, PencilOff, Save } from 'lucide-react'
+import { PencilOff, Save } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { Textarea } from '@/components/ui/textarea'
 
 interface Props {
     hero?: {
-        id?: number | string;
-        title?: string;
-        subtitle?: string;
-        button1_text?: string;
-        button1_url?: string;
-        button2_text?: string;
-        button2_url?: string;
-        background_image?: string;
-        background_image_url?: string;
-        aditional_information?: string;
-        created_at?: string;
-        updated_at?: string;
-    };
+        id?: number | string
+        title?: string
+        subtitle?: string
+        button1_text?: string
+        button1_url?: string
+        button2_text?: string
+        button2_url?: string
+        background_image?: string
+        background_image_url?: string
+        aditional_information?: string
+        created_at?: string
+        updated_at?: string
+    }
 }
 
 export default function Index({ hero }: Props) {
-    const record = hero ?? {};
+    const record = hero ?? {}
 
     const { data, setData, post, processing, errors } = useForm({
         title: record.title ?? '',
@@ -43,23 +43,23 @@ export default function Index({ hero }: Props) {
         delete_existing_background: false,
         aditional_information: record.aditional_information ?? '',
         _method: 'PUT',
-    });
+    })
 
     function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        post(route('admin.pm.hero-section.update'), {
+        e.preventDefault()
+        post(route('admin.pm.remodeling-hero.update'), {
             forceFormData: true,
             onSuccess: () => {
-                toast.success('Hero section updated successfully');
+                toast.success('Remodeling hero updated successfully')
             },
 
             onError: () => {
-                toast.error('Failed to update hero section');
+                toast.error('Failed to update remodeling hero')
             },
-        });
+        })
     }
 
-    const [background, setBackground] = useState<any[]>([]);
+    const [background, setBackground] = useState<any[]>([])
     useEffect(() => {
         if (record.background_image_url) {
             setBackground([
@@ -70,11 +70,11 @@ export default function Index({ hero }: Props) {
                     mime_type: 'image/*',
                     path: record.background_image_url,
                 },
-            ]);
+            ])
         } else {
-            setBackground([]);
+            setBackground([])
         }
-    }, [record.background_image, record.background_image_url]);
+    }, [record.background_image, record.background_image_url])
 
     const handleRemoveBackgroundExisting = () => {
         if (
@@ -82,19 +82,19 @@ export default function Index({ hero }: Props) {
                 'Are you sure you want to remove this file? You must upload a new file to save the changes.',
             )
         ) {
-            setBackground([]);
-            setData('delete_existing_background', true);
+            setBackground([])
+            setData('delete_existing_background', true)
         }
-    };
+    }
 
     return (
         <AdminLayout>
             <>
-                <Head title="Hero Section" />
+                <Head title="Remodeling Hero" />
 
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between">
-                        <h1 className="text-2xl font-bold">Hero Section</h1>
+                        <h1 className="text-2xl font-bold">Remodeling Hero</h1>
                         <div className="flex gap-2" />
                     </CardHeader>
                     <CardContent>
@@ -174,7 +174,6 @@ export default function Index({ hero }: Props) {
                                                 <Label htmlFor="aditional_information">Additional Information</Label>
                                                 <Textarea
                                                     id="aditional_information"
-                                                   
                                                     value={data.aditional_information}
                                                     onChange={(e) => setData('aditional_information', e.target.value)}
                                                 />
@@ -185,9 +184,7 @@ export default function Index({ hero }: Props) {
 
                                     <Card>
                                         <CardHeader>
-                                            <CardTitle className="text-lg">
-                                                Background Image
-                                            </CardTitle>
+                                            <CardTitle className="text-lg">Background Image</CardTitle>
                                         </CardHeader>
                                         <CardContent className="space-y-4">
                                             <div className="grid gap-2">
@@ -209,9 +206,7 @@ export default function Index({ hero }: Props) {
                                 <div className="space-y-6">
                                     <Card>
                                         <CardHeader>
-                                            <CardTitle className="text-lg">
-                                                Insights
-                                            </CardTitle>
+                                            <CardTitle className="text-lg">Insights</CardTitle>
                                         </CardHeader>
                                         <CardContent className="space-y-4">
                                             <div>
@@ -247,12 +242,9 @@ export default function Index({ hero }: Props) {
                                                     className="flex h-auto w-full items-center justify-center bg-secondary px-6 py-0! hover:bg-secondary/80"
                                                 >
                                                     <Save className="mr-2 h-4 w-4" />
-                                                    {processing ? 'Updating...' : 'Update Hero'}
+                                                    {processing ? 'Updating...' : 'Update Remodeling Hero'}
                                                 </Button>
-                                                <ActionButton
-                                                    IconNode={PencilOff}
-                                                    href={''}
-                                                >
+                                                <ActionButton IconNode={PencilOff} href={''}>
                                                     Cancel
                                                 </ActionButton>
                                             </div>
@@ -265,5 +257,5 @@ export default function Index({ hero }: Props) {
                 </Card>
             </>
         </AdminLayout>
-    );
+    )
 }

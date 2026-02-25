@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\SiteSettingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -81,11 +82,13 @@ class SiteSettingsController extends Controller
 
         // Handle logo upload
         if ($request->hasFile('site_logo')) {
-            $data['site_logo'] = $request->file('site_logo')->store('site-settings', 'public');
-
             if ($siteSetting->site_logo && Storage::disk('public')->exists($siteSetting->site_logo)) {
                 Storage::disk('public')->delete($siteSetting->site_logo);
             }
+
+            $logoFile = $request->file('site_logo');
+            $logoName = 'logo_' . time() . '_' . Str::random(8) . '.' . $logoFile->getClientOriginalExtension();
+            $data['site_logo'] = $logoFile->storeAs('images', $logoName, 'public');
         } elseif ($request->boolean('delete_existing_logo')) {
             if ($siteSetting->site_logo && Storage::disk('public')->exists($siteSetting->site_logo)) {
                 Storage::disk('public')->delete($siteSetting->site_logo);
@@ -97,11 +100,13 @@ class SiteSettingsController extends Controller
 
         // Handle favicon upload
         if ($request->hasFile('site_favicon')) {
-            $data['site_favicon'] = $request->file('site_favicon')->store('site-settings', 'public');
-
             if ($siteSetting->site_favicon && Storage::disk('public')->exists($siteSetting->site_favicon)) {
                 Storage::disk('public')->delete($siteSetting->site_favicon);
             }
+
+            $faviconFile = $request->file('site_favicon');
+            $faviconName = 'favicon_' . time() . '_' . Str::random(8) . '.' . $faviconFile->getClientOriginalExtension();
+            $data['site_favicon'] = $faviconFile->storeAs('images', $faviconName, 'public');
         } elseif ($request->boolean('delete_existing_favicon')) {
             if ($siteSetting->site_favicon && Storage::disk('public')->exists($siteSetting->site_favicon)) {
                 Storage::disk('public')->delete($siteSetting->site_favicon);

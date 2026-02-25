@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             SiteSettingSeeder::class,
             HomePageHeroSeeder::class,
+            RemodelingHeroSeeder::class,
+            HomeServiceSeeder::class,
+
         ]);
     }
 }

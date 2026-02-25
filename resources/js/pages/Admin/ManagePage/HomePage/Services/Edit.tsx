@@ -8,30 +8,64 @@ import { Label } from '@/components/ui/label';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { Save } from 'lucide-react';
 import { toast } from 'sonner';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 
-export default function Create() {
+interface Service {
+  id: number;
+  title: string;
+  subtitle: string;
+  icon: string | null;
+  icon_url?: string | null;
+  created_at?: string;
+  updated_at?: string;
+}
+
+interface Props {
+  service: Service;
+}
+
+export default function Edit({ service }: Props) {
+  const existingFile = useMemo(() => {
+    if (!service.icon_url) {
+      return [] as any[];
+    }
+    const name = service.icon?.split('/').pop() || 'icon';
+    return [
+      {
+        id: service.id,
+        url: service.icon_url,
+        name,
+        mime_type: 'image/*',
+        path: service.icon_url,
+      },
+    ];
+  }, [service]);
+
+  const [existingIcons, setExistingIcons] = useState<any[]>(existingFile);
+
   const { data, setData, post, processing, errors } = useForm({
-    title: '',
-    subtitle: '',
+    title: service.title ?? '',
+    subtitle: service.subtitle ?? '',
     icon: null as File | null,
+    _method: 'PUT',
+    delete_existing_icon: false,
   });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    post(route('admin.pm.service-section.store'), {
+    post(route('admin.pm.service-section.update', service.id), {
       forceFormData: true,
-      onSuccess: () => toast.success('Service created successfully'),
-      onError: () => toast.error('Failed to create service. Please check the form.'),
+      onSuccess: () => toast.success('Service updated successfully'),
+      onError: () => toast.error('Failed to update service. Please check the form.'),
     });
   };
 
   return (
     <AdminLayout activeSlug="service-section">
-      <Head title="Create Service" />
+      <Head title="Edit Service" />
 
       <div className="flex justify-between mb-6">
-        <h1 className="text-2xl font-bold">Create Service</h1>
+        <h1 className="text-2xl font-bold">Edit Service</h1>
         <Link href={route('admin.pm.service-section.index')}>
           <Button>Back</Button>
         </Link>
@@ -79,7 +113,16 @@ export default function Create() {
                       <FileUpload
                         accept="image/*"
                         multiple={false}
-                        onChange={(file) => setData('icon', file as File)}
+                        existingFiles={existingIcons}
+                        onChange={(file) => {
+                          setData('icon', file as File);
+                          setData('delete_existing_icon', false);
+                        }}
+                        onRemoveExisting={() => {
+                          setExistingIcons([]);
+                          setData('icon', null);
+                          setData('delete_existing_icon', true);
+                        }}
                       />
                       <InputError message={errors.icon} />
                     </div>
@@ -90,13 +133,35 @@ export default function Create() {
               <div className="space-y-6">
                 <Card>
                   <CardHeader>
+                    <CardTitle className="text-lg">Insights</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="grid grid-cols-2 gap-3 text-sm text-muted-foreground">
+                      <div>
+                        <div>Created At</div>
+                        <div className="font-medium text-foreground">
+                          {service.created_at ? new Date(service.created_at).toLocaleDateString() : 'N/A'}
+                        </div>
+                      </div>
+                      <div>
+                        <div>Updated At</div>
+                        <div className="font-medium text-foreground">
+                          {service.updated_at ? new Date(service.updated_at).toLocaleDateString() : 'N/A'}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
                     <CardTitle className="text-lg">Action</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 pt-2">
                     <div className="flex flex-col gap-3">
                       <Button type="submit" disabled={processing} className="gap-2 w-full">
                         <Save className="h-4 w-4" />
-                        {processing ? 'Creating...' : 'Create Service'}
+                        {processing ? 'Updating...' : 'Update Service'}
                       </Button>
                       <Link href={route('admin.pm.service-section.index')}>
                         <Button type="button" variant="outline" className="w-full">

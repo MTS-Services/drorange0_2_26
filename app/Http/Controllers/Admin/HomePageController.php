@@ -7,6 +7,7 @@ use App\Services\HomePageHeroService;
 use App\Services\RemodelingHeroService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -50,11 +51,13 @@ class HomePageController extends Controller
         ]);
 
         if ($request->hasFile('background_image')) {
-            $data['background_image'] = $request->file('background_image')->store('home-page', 'public');
-
             if ($hero->background_image && Storage::disk('public')->exists($hero->background_image)) {
                 Storage::disk('public')->delete($hero->background_image);
             }
+
+            $file = $request->file('background_image');
+            $fileName = 'hero_' . time() . '_' . Str::random(8) . '.' . $file->getClientOriginalExtension();
+            $data['background_image'] = $file->storeAs('images', $fileName, 'public');
         } elseif ($request->boolean('delete_existing_background')) {
             if ($hero->background_image && Storage::disk('public')->exists($hero->background_image)) {
                 Storage::disk('public')->delete($hero->background_image);

@@ -19,6 +19,6 @@ class HomeService extends Model
     
     public function getIconUrlAttribute($value)
     {
-        storage_url($this->attributes['icon']);
+        return storage_url($this->attributes['icon'] ?? null);
     }
 }

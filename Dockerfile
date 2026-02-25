@@ -17,8 +17,7 @@ COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 COPY . .
 
-RUN cp .env.example .env || touch .env \
-    && mkdir -p storage/framework/{views,sessions,cache} storage/logs bootstrap/cache \
+RUN mkdir -p storage/framework/{views,sessions,cache} storage/logs bootstrap/cache \
     && composer install --no-dev --optimize-autoloader --no-scripts \
     && npm install && npm run build \
     && chown -R www-data:www-data /var/www \

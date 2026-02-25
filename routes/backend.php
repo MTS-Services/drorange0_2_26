@@ -11,10 +11,11 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 
     Route::resource('site-settings', SiteSettingsController::class)->only(['index', 'update']);
 
-Route::prefix('page-management')
-    ->as('pm.')
-    ->group(function () {
+    Route::prefix('page-management')
+        ->as('pm.')
+        ->group(function () {
 
-    Route::get('hero-section', [HomePageController::class, 'editHeroSection'])->name('hero-section');
-});
+            Route::get('hero-section', [HomePageController::class, 'editHeroSection'])->name('hero-section');
+            Route::put('hero-section', [HomePageController::class, 'updateHeroSection'])->name('hero-section.update');
+        });
 });

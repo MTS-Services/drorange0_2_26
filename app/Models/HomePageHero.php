@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use function App\Helper\storage_url;
 
 class HomePageHero extends Model
 {
@@ -18,4 +19,15 @@ class HomePageHero extends Model
         'background_image',
         'aditional_information'
     ];
+
+    protected $appends = [
+        'background_image_url',
+    ];
+
+    public function getBackgroundImageUrlAttribute(): ?string
+    {
+        $path = $this->attributes['background_image'] ?? null;
+
+        return $path ? storage_url($path) : null;
+    }
 }

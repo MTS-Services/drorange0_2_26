@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('button1_url')->nullable();
             $table->string('button2_text')->nullable();
             $table->string('button2_url')->nullable();
-            $table->string('overlay_color')->nullable();
             $table->string('background_image')->nullable();
             $table->text('aditional_information')->nullable();
             $table->timestamps();

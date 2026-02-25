@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Laravel\Fortify\Features;
@@ -44,6 +45,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'admin' => $admin ? $admin->only(['id', 'name', 'email']) : null,
             ],
+            'siteSetting' => SiteSetting::all()->first(),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'features' => [
                 'canResetPassword' => Features::enabled(Features::resetPasswords()),

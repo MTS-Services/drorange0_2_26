@@ -10,6 +10,10 @@ class HomeServiceService
     {
         
     }
+    public function latest($limit = 6)
+    {
+        return $this->model->latest()->take($limit)->get();
+    }
     public function getQuery()
     {
         return $this->model->query();

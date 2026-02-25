@@ -12,13 +12,13 @@ import { WhyCreateWillCardsGrid } from '@/components/frontend/home/why-create-wi
 import { WhyCreateWillSection } from '@/components/frontend/home/why-create-will-section';
 import FrontendLayout from '@/layouts/frontend-layout';
 
-export default function Home() {
+export default function Home({banner, services}: any) {
     return (
         <FrontendLayout>
-            <Banner />
+            <Banner banner={banner} />
             {/* <CTASection /> */}
             <WhyCreateWillSection />
-            <WhyCreateWillCardsGrid />
+            <WhyCreateWillCardsGrid services={services} />
             <HowItWorksSection />
             {/* <DashboardPreviewSection /> */}
             <EstateApproachSection />

@@ -3,19 +3,41 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Services\HomePageHeroService;
+use App\Services\HomeServiceService;
+use App\Services\RemodelingHeroService;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class FrontendController extends Controller
 {
+
+   public  function __construct(
+    protected HomePageHeroService $homePageHeroService,
+    protected HomeServiceService $serviceService,
+    protected RemodelingHeroService $remodelingHeroService
+   )
+   {
+  
+   }
     public function index(): Response
     {
-        return Inertia::render('frontend/home');
+        $services = $this->serviceService->latest(4);
+      
+        $banner = $this->homePageHeroService->first();
+        
+        return Inertia::render('frontend/home', [
+            'banner' => $banner,
+            'services' => $services,
+        ]);
     }
 
-    public function horizonWills(): Response
+    public function BathroomRemodeling(): Response
     {
-        return Inertia::render('frontend/will-writing-online');
+        $banner = $this->remodelingHeroService->first();
+        return Inertia::render('frontend/bathroom-remodeling',[
+            'banner' => $banner,
+        ]);
     }
 
     public function contact(): Response

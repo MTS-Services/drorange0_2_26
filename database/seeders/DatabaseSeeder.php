@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\HomeServiceSeeder;
 use Database\Seeders\RemodelingWhatIncludeSeeder;
+use Database\Seeders\RemodelingOptionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
             RemodelingHeroSeeder::class,
             HomeServiceSeeder::class,
             RemodelingWhatIncludeSeeder::class,
+            RemodelingOptionSeeder::class,
 
         ]);
     }

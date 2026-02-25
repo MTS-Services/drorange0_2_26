@@ -49,6 +49,12 @@ const adminNavItems: NavItemType[] = [
                         href: route('admin.pm.remodeling-what-include.index'),
                         slug: 'remodeling-what-include',
                     },
+                    
+                    {
+                        title: 'Options',
+                        href: route('admin.pm.remodeling-option.index'),
+                        slug: 'remodeling-option',
+                    },
                 ]
             },
         ],

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\HomeServiceController;
 use App\Http\Controllers\Admin\RemodelingPageController;
 use App\Http\Controllers\Admin\RemodelingWhatIncludeController;
+use App\Http\Controllers\Admin\RemodelingOptionController;
 use App\Http\Controllers\Backend\Admin\AdminDashboardController;
 use App\Http\Controllers\Backend\Admin\SiteSettingsController;
 
@@ -32,5 +33,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
       
             // Remodeling Page Service Section
             Route::resource('remodeling-what-include', RemodelingWhatIncludeController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+
+            // Remodeling Options Section
+            Route::resource('remodeling-option', RemodelingOptionController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
         });
 });

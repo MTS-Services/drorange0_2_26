@@ -18,7 +18,7 @@ const pages = [
     'User dashboard',
 ];
 
-export function TeamSection() {
+export function TeamSection({options}: any) {
     return (
         <>
         <section className="lg:py-20 py-8 bg-white">
@@ -29,50 +29,21 @@ export function TeamSection() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
     
-            <div className="option-card flex gap-4 items-start p-12">
-              <div className="icon-box mt-0.5">
-                <img src="images/icon/🚿.png" alt="" />
+            {
+              options.map((option:any, index:number)=>{
+                return (
+                  <div className="option-card flex gap-4 items-start p-12">
+                  <div className="icon-box mt-0.5">
+                   <img src={option.icon_url} alt="" />
               </div>
               <div>
-                <h3 className="font-medium text-gray-900 text-sm mb-1">Tub to Shower Conversion</h3>
-                <p className="text-xs text-gray-500 leading-relaxed">Replace your existing tub with a spacious walk-in shower
-                  for a modern, accessible space.</p>
+                <h3 className="font-medium text-gray-900 text-sm mb-1">{option.title}</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">{option.subtitle}</p>
               </div>
             </div>
-    
-            <div className="option-card flex gap-4 items-start p-12">
-              <div className="icon-box mt-0.5">
-                <img src="images/icon/🛁.png" alt="" />
-              </div>
-              <div>
-                <h3 className="font-medium text-gray-900 text-sm mb-1">Complete Remodel</h3>
-                <p className="text-xs text-gray-500 leading-relaxed">Full bathroom transformation including flooring, walls,
-                  fixtures, tile, lighting, and more.</p>
-              </div>
-            </div>
-    
-            <div className="option-card flex gap-4 items-start p-12">
-              <div className="icon-box mt-0.5">
-                <img src="images/icon/🪞.png" alt="" />
-              </div>
-              <div>
-                <h3 className="font-medium text-gray-900 text-sm mb-1">Vanity &amp; Fixture Upgrade</h3>
-                <p className="text-xs text-gray-500 leading-relaxed">Refresh your bathroom with new vanities, sinks, toilets,
-                  and fixtures without a full renovation.</p>
-              </div>
-            </div>
-    
-            <div className="option-card flex gap-4 items-start p-12">
-              <div className="icon-box mt-0.5">
-                <img src="images/icon/image 1.png" alt="" />
-              </div>
-              <div>
-                <h3 className="font-medium text-gray-900 text-sm mb-1">Tile Installation</h3>
-                <p className="text-xs text-gray-500 leading-relaxed">Beautiful tile work for floors, shower walls, and
-                  backsplashes. Dozens of styles and patterns.</p>
-              </div>
-            </div>
-    
+                )
+              })
+            }    
           </div>
         </div>
       </section>

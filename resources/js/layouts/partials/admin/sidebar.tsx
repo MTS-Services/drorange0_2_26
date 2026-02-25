@@ -30,6 +30,18 @@ const adminNavItems: NavItemType[] = [
                     },
                 ]
             },
+            {
+                title: 'Remodeling',
+                icon: LayoutGrid,
+                slug: 'remodeling',
+                children:[
+                    {
+                        title: 'Remodeling Hero',
+                        href: route('admin.pm.hero-section'),
+                        slug: 'remodeling-section',
+                    },
+                ]
+            },
         ],
     },
     {

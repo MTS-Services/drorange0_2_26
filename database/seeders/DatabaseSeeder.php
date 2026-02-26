@@ -12,6 +12,11 @@ use Database\Seeders\HowItWorksSeeder;
 use Database\Seeders\HowItWorksBannerSeeder;
 use Database\Seeders\StayInformedSeeder;
 use Database\Seeders\HowItWorkFaqSeeder;
+use Database\Seeders\AboutBannerSeeder;
+use Database\Seeders\AboutInformationSeeder;
+use Database\Seeders\AboutWhyChooseSeeder;
+use Database\Seeders\AboutLicenseSeeder;
+use Database\Seeders\AboutServiceAreaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,6 +38,11 @@ class DatabaseSeeder extends Seeder
             HowItWorksSeeder::class,
             StayInformedSeeder::class,
             HowItWorkFaqSeeder::class,
+            AboutBannerSeeder::class,
+            AboutInformationSeeder::class,
+            AboutWhyChooseSeeder::class,
+            AboutLicenseSeeder::class,
+            AboutServiceAreaSeeder::class,
 
         ]);
     }

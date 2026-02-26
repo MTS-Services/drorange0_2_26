@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Services\AboutBannerService;
+use App\Services\AboutInformationService;
+use App\Services\AboutLicenseService;
+use App\Services\AboutServiceAreaService;
+use App\Services\AboutWhyChooseService;
 use App\Services\HomePageHeroService;
 use App\Services\HomeServiceService;
 use App\Services\HowItWorkFaqService;
@@ -29,7 +34,12 @@ class FrontendController extends Controller
     protected HowItWorksService $howItWorksService,
     protected StayInformedService $stayInformedService,
     protected HowItWorkFaqService $howItWorkFaqService,
-    protected HowItWorksBannerService $howItWorksBannerService
+    protected HowItWorksBannerService $howItWorksBannerService,
+    protected AboutBannerService $aboutBannerService,
+    protected AboutInformationService $aboutInfromationService,
+    protected AboutLicenseService $aboutLicenseService,
+    protected AboutServiceAreaService $aboutServiceAreaService,
+    protected AboutWhyChooseService $aboutWhyChooseService,
    )
    {
   
@@ -60,6 +70,25 @@ class FrontendController extends Controller
         ]);
     }
 
+
+    public function About(): Response
+    {
+        $banner = $this->aboutBannerService->getFirst();
+        $about = $this->aboutInfromationService->getFirst();
+        $aboutLicense = $this->aboutLicenseService->latest(6);
+        $aboutServiceArea = $this->aboutServiceAreaService->latest();
+        $aboutWhyChoose = $this->aboutWhyChooseService->latest();
+
+        return Inertia::render('frontend/about', [
+            'banner' => $banner,
+            'about' => $about,
+            'aboutLicense' => $aboutLicense,
+            'aboutServiceArea' => $aboutServiceArea,
+            'aboutWhyChoose' => $aboutWhyChoose,
+        ]);
+    }
+
+
     public function contact(): Response
     {
         return Inertia::render('frontend/contact');
@@ -75,11 +104,7 @@ class FrontendController extends Controller
     //     return Inertia::render('frontend/will-writing-start');
     // }
 
-    public function lpa(): Response
-    {
-        return Inertia::render('frontend/lpa');
-    }
-
+ 
     public function lpaStart(): Response
     {
 

@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", [FrontendController::class, "index"])->name("home");
 Route::get("/bathroom", [FrontendController::class, "BathroomRemodeling"])->name("bathroom");
 Route::get("/how-it-works", [FrontendController::class, "HowItWorks"])->name("how-it-work");
-
+Route::get("/about", [FrontendController::class, "About"])->name("lpa");
 Route::get("/contact", action: [FrontendController::class, "contact"])->name("contact");
 
 Route::get("/will-writing", [FrontendController::class, "willWriting"])->name("will-writing");
-Route::get("/about", [FrontendController::class, "lpa"])->name("lpa");
+
 Route::get("/lpa/start", [FrontendController::class, "lpaStart"])->name("lpa.start");
 
 Route::get("/privacy-policy", [FrontendController::class, "privacyPolicy"])->name("privacy");

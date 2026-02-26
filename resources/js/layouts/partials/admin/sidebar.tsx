@@ -89,6 +89,38 @@ const adminNavItems: NavItemType[] = [
                     }
                 ]
             },
+            {
+                title: 'About Page',
+                icon: LayoutGrid,
+                slug: 'about-page',
+                children:[
+                    {
+                        title: 'Banner',
+                        href: route('admin.pm.about-banner.edit', 1),
+                        slug: 'about-banner',
+                    },
+                    {
+                        title: 'About Information',
+                        href: route('admin.pm.about-information.edit', 1),
+                        slug: 'about-information',
+                    },
+                    {
+                        title: 'Why Choose',
+                        href: route('admin.pm.about-why-choose.index'),
+                        slug: 'about-why-choose',
+                    },
+                    {
+                        title: 'Licenses & Certifications',
+                        href: route('admin.pm.about-license.index'),
+                        slug: 'about-license',
+                    },
+                    {
+                        title: 'Service Areas',
+                        href: route('admin.pm.about-service-area.index'),
+                        slug: 'about-service-area',
+                    },
+                ]
+            },
         ],
     },
     {

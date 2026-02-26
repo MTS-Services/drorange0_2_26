@@ -4,7 +4,7 @@ import { ContactConsultationSection } from '@/components/frontend/contact/contac
 import { ContactHeroSection } from '@/components/frontend/contact/contact-hero-section';
 import { ContactMapSection } from '@/components/frontend/contact/contact-map-section';
 import FrontendLayout from '@/layouts/frontend-layout';
-import { LpaFaqSection } from '@/components/frontend/lpa/lpa-faq-section';
+import { LpaFaqSection } from '@/components/frontend/about/lpa-faq-section';
 
 export default function Contact() {
     return (

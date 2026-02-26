@@ -16,7 +16,9 @@ export default function About({banner, about, aboutLicense, aboutServiceArea, ab
         <FrontendLayout>
             <main >
                 <AboutHeroSection banner={banner} />
+
                 <AboutInformation about={about} />
+                
                 <LpaFeaturedLogosSection />
 
                 <WhyChooseSection  whyChoose={aboutWhyChoose}/>

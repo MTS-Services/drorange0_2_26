@@ -68,6 +68,11 @@ const adminNavItems: NavItemType[] = [
                 slug: 'how-it-work',
                 children:[
                     {
+                        title: 'Banner',
+                        href: route('admin.pm.how-it-works-banner.edit', 1),
+                        slug: 'how-it-works-banner',
+                    },
+                    {
                         title: 'How It Works',
                         href: route('admin.pm.how-it-works.index'),
                         slug: 'how-it-work',
@@ -82,6 +87,38 @@ const adminNavItems: NavItemType[] = [
                         href: route('admin.pm.how-it-work-faq.index'),
                         slug: 'how-it-work-faq',
                     }
+                ]
+            },
+            {
+                title: 'About Page',
+                icon: LayoutGrid,
+                slug: 'about-page',
+                children:[
+                    {
+                        title: 'Banner',
+                        href: route('admin.pm.about-banner.edit', 1),
+                        slug: 'about-banner',
+                    },
+                    {
+                        title: 'About Information',
+                        href: route('admin.pm.about-information.edit', 1),
+                        slug: 'about-information',
+                    },
+                    {
+                        title: 'Why Choose',
+                        href: route('admin.pm.about-why-choose.index'),
+                        slug: 'about-why-choose',
+                    },
+                    {
+                        title: 'Licenses & Certifications',
+                        href: route('admin.pm.about-license.index'),
+                        slug: 'about-license',
+                    },
+                    {
+                        title: 'Service Areas',
+                        href: route('admin.pm.about-service-area.index'),
+                        slug: 'about-service-area',
+                    },
                 ]
             },
         ],

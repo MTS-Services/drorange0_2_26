@@ -3,12 +3,18 @@
 use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\HomeServiceController;
 use App\Http\Controllers\Admin\HowItWorksController;
+use App\Http\Controllers\Admin\HowItWorksBannerController;
 use App\Http\Controllers\Admin\RemodelingPageController;
 use App\Http\Controllers\Admin\RemodelingWhatIncludeController;
 use App\Http\Controllers\Admin\RemodelingOptionController;
 use App\Http\Controllers\Admin\RemodelingWhyChooseController;
 use App\Http\Controllers\Admin\HowItWorkFaqController;
 use App\Http\Controllers\Admin\StayInformedController;
+use App\Http\Controllers\Admin\AboutBannerController;
+use App\Http\Controllers\Admin\AboutInformationController;
+use App\Http\Controllers\Admin\AboutWhyChooseController;
+use App\Http\Controllers\Admin\AboutLicenseController;
+use App\Http\Controllers\Admin\AboutServiceAreaController;
 use App\Http\Controllers\Backend\Admin\AdminDashboardController;
 use App\Http\Controllers\Backend\Admin\SiteSettingsController;
 
@@ -43,8 +49,16 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
             Route::resource('remodeling-why-choose', RemodelingWhyChooseController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
 
             // How it Works Section
+            Route::resource('how-it-works-banner', HowItWorksBannerController::class)->only(['edit', 'update']);
             Route::resource('how-it-works', HowItWorksController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
             Route::resource('stay-informed', StayInformedController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
             Route::resource('how-it-work-faq', HowItWorkFaqController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+
+            // About Page
+            Route::resource('about-banner', AboutBannerController::class)->only(['edit', 'update']);
+            Route::resource('about-information', AboutInformationController::class)->only(['edit', 'update']);
+            Route::resource('about-why-choose', AboutWhyChooseController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+            Route::resource('about-license', AboutLicenseController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+            Route::resource('about-service-area', AboutServiceAreaController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
         });
-});
+    });

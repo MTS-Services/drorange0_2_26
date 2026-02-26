@@ -8,14 +8,14 @@ import { WhatIsProbateSection } from '@/components/frontend/how-it-works/what-is
 import FrontendLayout from '@/layouts/frontend-layout';
 import { howItWork } from '@/routes';
 
-export default function HowItWorks({howItWorks,stayInforms,faqs}: any) {
+export default function HowItWorks({howItWorks,stayInforms,faqs,banner}: any) {
 
 
 
     return (
         <FrontendLayout>
             <main>
-                <HeroSection />
+                <HeroSection banner={banner}/>
                 <HowItWorksList  howItWorks={  howItWorks}/>
                 <WhatIsProbateSection />
                 <StayInformedSection  stayInforms={stayInforms}/>

@@ -8,7 +8,7 @@ import { WillWritingPricingSection } from '@/components/frontend/will-writing/wi
 import { WillWritingProcessSection } from '@/components/frontend/will-writing/will-writing-process-section';
 import FrontendLayout from '@/layouts/frontend-layout';
 import { TeamSection } from '@/components/frontend/horizon-wills/team-section';
-import { LpaFaqSection } from '@/components/frontend/lpa/lpa-faq-section';
+import { LpaFaqSection } from '@/components/frontend/about/lpa-faq-section';
 
 export default function WillWriting() {
     return (

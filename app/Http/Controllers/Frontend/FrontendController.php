@@ -9,6 +9,7 @@ use App\Services\RemodelingHeroService;
 use App\Services\RemodelingOptionService;
 use App\Services\RemodelingWhatIncludeService;
 use App\Services\RemodelingWhyChooseService;
+use App\Services\HowItWorksService;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -22,6 +23,7 @@ class FrontendController extends Controller
     protected RemodelingWhatIncludeService $remodelingWhatIncludeService,
     protected RemodelingOptionService $remodelingOptionService,
     protected RemodelingWhyChooseService $remodelingWhyChooseService,
+    protected HowItWorksService $howItWorksService,
    )
    {
   
@@ -74,12 +76,16 @@ class FrontendController extends Controller
 
     public function lpaStart(): Response
     {
+
         return Inertia::render('frontend/lpa-start');
     }
 
-    public function probate(): Response
+    public function HowItWorks(): Response
     {
-        return Inertia::render(component: 'frontend/probate');
+        $howItWorks = $this->howItWorksService->latest(7);
+        return Inertia::render('frontend/how-it-works',[
+            'howItWorks' => $howItWorks,
+        ]);
     }
 
     public function privacyPolicy(): Response

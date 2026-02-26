@@ -62,6 +62,22 @@ const adminNavItems: NavItemType[] = [
                         slug: 'remodeling-why-choose',
                     },
                 ]
+            },{
+                title: 'How It Works',
+                icon: LayoutGrid,
+                slug: 'how-it-work',
+                children:[
+                    {
+                        title: 'How It Works',
+                        href: route('admin.pm.how-it-works.index'),
+                        slug: 'how-it-work',
+                    },
+                    {
+                        title: 'Stay Inform',
+                        href: route('admin.pm.stay-informed.index'),
+                        slug: 'stay-informed',
+                    }
+                ]
             },
         ],
     },

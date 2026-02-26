@@ -1,13 +1,6 @@
-import React from 'react';
 
-import { useScrollAnimation } from '@/hooks/use-scroll-animation';
+export function StayInformedSection() {
 
-export function HowWeHelpSection() {
-    const [ref, visible] = useScrollAnimation<HTMLDivElement>();
-    const base = 'transition-all duration-700 ease-out';
-    const state = visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6';
-
-    const tileClass = `${base} ${state}`;
 
     return (
       <section className="lg:py-16 py-8 bg-white">

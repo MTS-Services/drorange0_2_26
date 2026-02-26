@@ -1,44 +1,6 @@
-import React from 'react';
 
-import { Link } from '@inertiajs/react';
-import { useReveal } from '@/hooks/use-reveal';
-
-const steps = [
-    {
-        number: '1',
-        gradient: 'from-green-400 to-green-600',
-        accent: 'bg-yellow-400',
-        accentBottom: 'bg-green-300',
-        title: 'Answer Questions',
-        description:
-            "While there is more than one way to make a will online, you can generally expect to answer questions about your circumstances such as whether you're single or married, and where your assets are located from your mobile phone or comfort of your computer chair.",
-        delay: 'delay-0',
-    },
-    {
-        number: '2',
-        gradient: 'from-yellow-400 to-yellow-600',
-        accent: 'bg-orange-400',
-        accentBottom: 'bg-yellow-300',
-        title: 'Expert Review',
-        description:
-            'Following this, a team of experts will typically examine your application, recommend any changes and do a final review to ensure everything is legally compliant and meets your specific needs.',
-        delay: 'delay-200',
-    },
-    {
-        number: '3',
-        gradient: 'from-orange-400 to-orange-600',
-        accent: 'bg-red-400',
-        accentBottom: 'bg-orange-300',
-        title: 'Sign & Witness',
-        description:
-            "Once approved, you'll still need to print and sign your legally-binding document in the presence of two witnesses to make it valid and enforceable under law.",
-        delay: 'delay-500',
-    },
-];
-
-export function HowItWorksSection() {
-    const [headerRef, headerVisible] = useReveal<HTMLDivElement>();
-    const [stepsRef, stepsVisible] = useReveal<HTMLDivElement>(0.1);
+export function HowItWorksSection({howItWorks}: any) {
+   
 
     return (
  

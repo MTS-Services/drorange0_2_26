@@ -26,7 +26,7 @@ const items: Item[] = [
         title: 'Probate Services',
         desc: 'Detail your preferences for memorial services, burial or cremation, and share the traditions that matter most to you.',
         delay: 'delay-150',
-        href: route('probate'),
+        href: route('how-it-work'),
         icon: (
             <svg className="h-8 w-8 text-primary-600 group-hover:text-primary-600 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 12a4 4 0 100-8 4 4 0 000 8zm9 8a9 9 0 10-18 0" />

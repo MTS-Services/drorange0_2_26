@@ -1,80 +1,128 @@
-import AdminLayout from '@/layouts/admin-layout';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { DataTable } from '@/components/ui/data-table';
+import { useDataTable } from '@/hooks/use-data-table';
+import AdminLayout from '@/layouts/admin-layout';
+import { ActionConfig, ColumnConfig, PaginationData } from '@/types/data-table.types';
 import { Head, Link, router } from '@inertiajs/react';
+import { Eye, Pencil, Trash2 } from 'lucide-react';
 import React from 'react';
 
-interface Item {
-    id: number;
-    title: string;
-    subtitle: string;
-    icon_url?: string | null;
-}
+type Item = Record<string, unknown> & {
+  id: number;
+  title: string;
+  subtitle: string;
+  icon: string | null;
+  icon_url: string | null;
+  created_at: string;
+  updated_at: string;
+};
 
 interface Props {
-    items: Item[];
+  items: Item[];
+  pagination: PaginationData;
+  offset: number;
+  filters: Record<string, string | number>;
+  search: string;
+  sortBy: string;
+  sortOrder: 'asc' | 'desc';
 }
 
-export default function Index({ items }: Props) {
-    return (
-        <AdminLayout activeSlug="stay-informed">
-            <Head title="Stay Informed" />
+export default function Index({ items, pagination, offset, filters, search, sortBy, sortOrder }: Props) {
+  const { isLoading, handleSearch, handleFilterChange, handleSort, handlePerPageChange, handlePageChange } = useDataTable();
 
-            <div className="flex items-center justify-between mb-6">
-                <h1 className="text-2xl font-bold">Stay Informed</h1>
-                <Button onClick={() => router.visit(route('admin.pm.stay-informed.create'))}>Add Item</Button>
-            </div>
+  const columns: ColumnConfig<Item>[] = [
+    {
+      key: 'title',
+      label: 'Title',
+      sortable: true,
+      render: (item) => <div className="font-medium text-gray-900 dark:text-gray-100">{item.title}</div>,
+    },
+    {
+      key: 'subtitle',
+      label: 'Subtitle',
+      sortable: true,
+      render: (item) => <div className="text-gray-700 dark:text-gray-300">{item.subtitle}</div>,
+    },
+    {
+      key: 'icon',
+      label: 'Icon',
+      sortable: true,
+      render: (item) => (
+        <div className="font-medium text-gray-900 dark:text-gray-100">
+          {item.icon_url ? <img src={item.icon_url} alt={item.title as string} className="h-10 w-10 object-contain" /> : '—'}
+        </div>
+      ),
+    },
+    {
+      key: 'created_at',
+      label: 'Created Date',
+      sortable: true,
+      render: (item) => <div className="text-gray-600 dark:text-gray-400">{new Date(item.created_at).toLocaleDateString()}</div>,
+    },
+    {
+      key: 'updated_at',
+      label: 'Updated Date',
+      sortable: true,
+      render: (item) => <div className="text-gray-600 dark:text-gray-400">{new Date(item.updated_at).toLocaleDateString()}</div>,
+    },
+  ];
 
-            <Card>
-                <CardHeader>
-                    <CardTitle>All Items</CardTitle>
-                </CardHeader>
-                <CardContent className="overflow-x-auto">
-                    <table className="min-w-full text-sm">
-                        <thead className="bg-muted/40 text-left text-muted-foreground">
-                            <tr>
-                                <th className="px-4 py-2">Title</th>
-                                <th className="px-4 py-2">Subtitle</th>
-                                <th className="px-4 py-2">Icon</th>
-                                <th className="px-4 py-2 text-right">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {items?.map((item) => (
-                                <tr key={item.id} className="border-t">
-                                    <td className="px-4 py-3 font-medium text-foreground">{item.title}</td>
-                                    <td className="px-4 py-3 text-muted-foreground">{item.subtitle}</td>
-                                    <td className="px-4 py-3">
-                                        {item.icon_url ? (
-                                            <img src={item.icon_url} alt="" className="h-10 w-10 object-contain rounded" />
-                                        ) : (
-                                            <span className="text-muted-foreground">—</span>
-                                        )}
-                                    </td>
-                                    <td className="px-4 py-3 text-right space-x-3">
-                                        <Link href={route('admin.pm.stay-informed.edit', item.id)} className="text-blue-600 hover:underline">
-                                            Edit
-                                        </Link>
-                                        <button
-                                            onClick={() => router.delete(route('admin.pm.stay-informed.destroy', item.id))}
-                                            className="text-red-600 hover:underline"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                            {(!items || items.length === 0) && (
-                                <tr>
-                                    <td className="px-4 py-6 text-center text-muted-foreground" colSpan={4}>
-                                        No records found.
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </CardContent>
-            </Card>
-        </AdminLayout>
-    );
+  const actions: ActionConfig<Item>[] = [
+    {
+      label: 'Show',
+      icon: <Eye className="h-4 w-4" />,
+      onClick: (item) => router.visit(route('admin.pm.stay-informed.show', item.id)),
+    },
+    {
+      label: 'Edit',
+      icon: <Pencil className="h-4 w-4" />,
+      onClick: (item) => router.visit(route('admin.pm.stay-informed.edit', item.id)),
+    },
+    {
+      label: 'Delete',
+      icon: <Trash2 className="h-4 w-4" />,
+      onClick: (item) => {
+        if (confirm(`Are you sure you want to delete ${item.title}?`)) {
+          router.delete(route('admin.pm.stay-informed.destroy', item.id));
+        }
+      },
+      variant: 'destructive',
+    },
+  ];
+
+  return (
+    <AdminLayout activeSlug="stay-informed">
+      <Head title="Stay Informed" />
+
+      <div className="flex justify-between mb-6">
+        <h1 className="text-2xl font-bold">Stay Informed</h1>
+        <Link href={route('admin.pm.stay-informed.create')}>
+          <Button>Add Item</Button>
+        </Link>
+      </div>
+
+      <div className="mx-auto">
+        <DataTable
+          data={items as Record<string, unknown>[]}
+          columns={columns as ColumnConfig<Record<string, unknown>>[]}
+          pagination={pagination}
+          offset={offset}
+          showNumbering
+          actions={actions as ActionConfig<Record<string, unknown>>[]}
+          onSearch={handleSearch}
+          onFilterChange={handleFilterChange}
+          onSort={handleSort}
+          onPerPageChange={handlePerPageChange}
+          onPageChange={handlePageChange}
+          searchValue={search}
+          filterValues={filters}
+          sortBy={sortBy}
+          sortOrder={sortOrder}
+          isLoading={isLoading}
+          emptyMessage="No items found"
+          searchPlaceholder="Search items..."
+        />
+      </div>
+    </AdminLayout>
+  );
 }

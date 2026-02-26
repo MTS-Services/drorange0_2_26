@@ -71,6 +71,11 @@ const adminNavItems: NavItemType[] = [
                         title: 'How It Works',
                         href: route('admin.pm.how-it-works.index'),
                         slug: 'how-it-work',
+                    },
+                    {
+                        title: 'Stay Inform',
+                        href: route('admin.pm.stay-informed.index'),
+                        slug: 'stay-informed',
                     }
                 ]
             },

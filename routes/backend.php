@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\RemodelingPageController;
 use App\Http\Controllers\Admin\RemodelingWhatIncludeController;
 use App\Http\Controllers\Admin\RemodelingOptionController;
 use App\Http\Controllers\Admin\RemodelingWhyChooseController;
+use App\Http\Controllers\Admin\StayInformedController;
 use App\Http\Controllers\Backend\Admin\AdminDashboardController;
 use App\Http\Controllers\Backend\Admin\SiteSettingsController;
 
@@ -42,5 +43,6 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 
             // How it Works Section
             Route::resource('how-it-works', HowItWorksController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+            Route::resource('stay-informed', StayInformedController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
         });
 });

@@ -83,6 +83,8 @@ class FrontendController extends Controller
     public function HowItWorks(): Response
     {
         $howItWorks = $this->howItWorksService->latest(7);
+
+    
         return Inertia::render('frontend/how-it-works',[
             'howItWorks' => $howItWorks,
         ]);

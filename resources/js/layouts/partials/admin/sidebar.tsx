@@ -68,6 +68,11 @@ const adminNavItems: NavItemType[] = [
                 slug: 'how-it-work',
                 children:[
                     {
+                        title: 'Banner',
+                        href: route('admin.pm.how-it-works-banner.edit', 1),
+                        slug: 'how-it-works-banner',
+                    },
+                    {
                         title: 'How It Works',
                         href: route('admin.pm.how-it-works.index'),
                         slug: 'how-it-work',

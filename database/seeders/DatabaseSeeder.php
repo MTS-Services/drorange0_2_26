@@ -9,6 +9,7 @@ use Database\Seeders\RemodelingWhatIncludeSeeder;
 use Database\Seeders\RemodelingOptionSeeder;
 use Database\Seeders\RemodelingWhyChooseSeeder;
 use Database\Seeders\HowItWorksSeeder;
+use Database\Seeders\HowItWorksBannerSeeder;
 use Database\Seeders\StayInformedSeeder;
 use Database\Seeders\HowItWorkFaqSeeder;
 
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
             RemodelingWhatIncludeSeeder::class,
             RemodelingOptionSeeder::class,
             RemodelingWhyChooseSeeder::class,
+            HowItWorksBannerSeeder::class,
             HowItWorksSeeder::class,
             StayInformedSeeder::class,
             HowItWorkFaqSeeder::class,

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\HomePageHeroService;
 use App\Services\HomeServiceService;
 use App\Services\HowItWorkFaqService;
+use App\Services\HowItWorksBannerService;
 use App\Services\RemodelingHeroService;
 use App\Services\RemodelingOptionService;
 use App\Services\RemodelingWhatIncludeService;
@@ -27,7 +28,8 @@ class FrontendController extends Controller
     protected RemodelingWhyChooseService $remodelingWhyChooseService,
     protected HowItWorksService $howItWorksService,
     protected StayInformedService $stayInformedService,
-    protected HowItWorkFaqService $howItWorkFaqService
+    protected HowItWorkFaqService $howItWorkFaqService,
+    protected HowItWorksBannerService $howItWorksBannerService
    )
    {
   
@@ -92,10 +94,13 @@ class FrontendController extends Controller
 
         $faqs = $this->howItWorkFaqService->latest(4);
 
+        $banner = $this->howItWorksBannerService->getFirst();
+
         return Inertia::render('frontend/how-it-works',[
             'howItWorks' => $howItWorks,
             'stayInforms' => $stayInforms,
             'faqs' => $faqs,
+            'banner' => $banner,
         ]);
     }
 

@@ -9,7 +9,7 @@ export function HeroSection({banner}: any) {
       <p className="text-gray-100 lg:text-lg text-base font-medium  max-w-2xl mx-auto leading-relaxed">
         {banner.subtitle}
       </p>
-      <div className="text-gray-100 lg:text-lg text-base font-medium  max-w-2xl mx-auto leading-relaxed">
+      <div className="max-w-2xl mx-auto ">
         {banner.additional_info}
       </div>
     </div>

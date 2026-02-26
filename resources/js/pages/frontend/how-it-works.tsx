@@ -8,7 +8,7 @@ import { WhatIsProbateSection } from '@/components/frontend/how-it-works/what-is
 import FrontendLayout from '@/layouts/frontend-layout';
 import { howItWork } from '@/routes';
 
-export default function HowItWorks({howItWorks,stayInforms}: any) {
+export default function HowItWorks({howItWorks,stayInforms,faqs}: any) {
 
 
 
@@ -19,7 +19,7 @@ export default function HowItWorks({howItWorks,stayInforms}: any) {
                 <HowItWorksList  howItWorks={  howItWorks}/>
                 <WhatIsProbateSection />
                 <StayInformedSection  stayInforms={stayInforms}/>
-                <PreferToTalkSection />
+                <PreferToTalkSection faqs={faqs}/>
             </main>
         </FrontendLayout>
     );

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Services\HomePageHeroService;
 use App\Services\HomeServiceService;
+use App\Services\HowItWorkFaqService;
 use App\Services\RemodelingHeroService;
 use App\Services\RemodelingOptionService;
 use App\Services\RemodelingWhatIncludeService;
@@ -26,6 +27,7 @@ class FrontendController extends Controller
     protected RemodelingWhyChooseService $remodelingWhyChooseService,
     protected HowItWorksService $howItWorksService,
     protected StayInformedService $stayInformedService,
+    protected HowItWorkFaqService $howItWorkFaqService
    )
    {
   
@@ -88,9 +90,12 @@ class FrontendController extends Controller
 
         $stayInforms = $this->stayInformedService->latest(4);
 
+        $faqs = $this->howItWorkFaqService->latest(4);
+
         return Inertia::render('frontend/how-it-works',[
             'howItWorks' => $howItWorks,
             'stayInforms' => $stayInforms,
+            'faqs' => $faqs,
         ]);
     }
 

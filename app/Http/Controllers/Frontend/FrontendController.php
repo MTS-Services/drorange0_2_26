@@ -10,6 +10,7 @@ use App\Services\RemodelingOptionService;
 use App\Services\RemodelingWhatIncludeService;
 use App\Services\RemodelingWhyChooseService;
 use App\Services\HowItWorksService;
+use App\Services\StayInformedService;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -24,6 +25,7 @@ class FrontendController extends Controller
     protected RemodelingOptionService $remodelingOptionService,
     protected RemodelingWhyChooseService $remodelingWhyChooseService,
     protected HowItWorksService $howItWorksService,
+    protected StayInformedService $stayInformedService,
    )
    {
   
@@ -84,9 +86,11 @@ class FrontendController extends Controller
     {
         $howItWorks = $this->howItWorksService->latest(7);
 
-    
+        $stayInforms = $this->stayInformedService->latest(4);
+
         return Inertia::render('frontend/how-it-works',[
             'howItWorks' => $howItWorks,
+            'stayInforms' => $stayInforms,
         ]);
     }
 

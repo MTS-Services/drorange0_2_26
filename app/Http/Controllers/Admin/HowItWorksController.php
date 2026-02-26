@@ -104,7 +104,11 @@ class HowItWorksController extends Controller
                 Storage::disk('public')->delete($item->icon);
             }
             $data['icon'] = null;
+        } else {
+            unset($data['icon']);
         }
+
+        unset($data['delete_existing_icon']);
 
         $this->service->update($item->id, $data);
 

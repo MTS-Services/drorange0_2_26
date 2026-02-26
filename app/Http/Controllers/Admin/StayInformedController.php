@@ -95,6 +95,8 @@ class StayInformedController extends Controller
             $data['icon'] = null;
         }
 
+        unset($data['delete_existing_icon']);
+
         $this->service->update($item->id, $data);
 
         return redirect()

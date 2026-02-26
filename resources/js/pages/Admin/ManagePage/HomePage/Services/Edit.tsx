@@ -1,14 +1,15 @@
-import FileUpload from '@/components/file-upload';
-import InputError from '@/components/input-error';
-import AdminLayout from '@/layouts/admin-layout';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Head, Link, useForm } from '@inertiajs/react';
-import { Save } from 'lucide-react';
-import { toast } from 'sonner';
-import React, { useMemo, useState } from 'react';
+import FileUpload from '@/components/file-upload'
+import InputError from '@/components/input-error'
+import AdminLayout from '@/layouts/admin-layout'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Head, useForm } from '@inertiajs/react'
+import { ActionButton } from '@/components/ui/action-button'
+import { PencilOff, Save } from 'lucide-react'
+import { toast } from 'sonner'
+import React, { useEffect, useState } from 'react'
 
 interface Service {
   id: number;
@@ -25,157 +26,165 @@ interface Props {
 }
 
 export default function Edit({ service }: Props) {
-  const existingFile = useMemo(() => {
-    if (!service.icon_url) {
-      return [] as any[];
-    }
-    const name = service.icon?.split('/').pop() || 'icon';
-    return [
-      {
-        id: service.id,
-        url: service.icon_url,
-        name,
-        mime_type: 'image/*',
-        path: service.icon_url,
-      },
-    ];
-  }, [service]);
-
-  const [existingIcons, setExistingIcons] = useState<any[]>(existingFile);
+  const record = service ?? {};
 
   const { data, setData, post, processing, errors } = useForm({
-    title: service.title ?? '',
-    subtitle: service.subtitle ?? '',
+    title: record.title ?? '',
+    subtitle: record.subtitle ?? '',
     icon: null as File | null,
-    _method: 'PUT',
     delete_existing_icon: false,
+    _method: 'PUT',
   });
+
+  const [existingIcons, setExistingIcons] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (record.icon_url) {
+      setExistingIcons([
+        {
+          id: record.id,
+          url: record.icon_url,
+          name: record.icon?.split('/').pop() || 'icon',
+          mime_type: 'image/*',
+          path: record.icon_url,
+        },
+      ]);
+    } else {
+      setExistingIcons([]);
+    }
+  }, [record.icon, record.icon_url, record.id]);
+
+  const handleRemoveExistingIcon = () => {
+    if (
+      confirm(
+        'Are you sure you want to remove this file? You must upload a new file to save the changes.',
+      )
+    ) {
+      setExistingIcons([]);
+      setData('delete_existing_icon', true);
+      setData('icon', null);
+    }
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    post(route('admin.pm.service-section.update', service.id), {
+    post(route('admin.pm.service-section.update', record.id), {
       forceFormData: true,
       onSuccess: () => toast.success('Service updated successfully'),
-      onError: () => toast.error('Failed to update service. Please check the form.'),
+      onError: () => toast.error('Failed to update service'),
     });
   };
 
   return (
-    <AdminLayout activeSlug="service-section">
-      <Head title="Edit Service" />
+    <AdminLayout>
+      <>
+        <Head title="Service Section" />
 
-      <div className="flex justify-between mb-6">
-        <h1 className="text-2xl font-bold">Edit Service</h1>
-        <Link href={route('admin.pm.service-section.index')}>
-          <Button>Back</Button>
-        </Link>
-      </div>
-
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <h2 className="text-2xl font-bold">Service Section</h2>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-              <div className="space-y-6 lg:col-span-2">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Service Details</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="grid gap-2">
-                      <Label htmlFor="title">Title</Label>
-                      <Input
-                        id="title"
-                        name="title"
-                        value={data.title}
-                        onChange={(event) => setData('title', event.target.value)}
-                        required
-                      />
-                      <InputError message={errors.title} />
-                    </div>
-
-                    <div className="grid gap-2">
-                      <Label htmlFor="subtitle">Subtitle</Label>
-                      <Input
-                        id="subtitle"
-                        name="subtitle"
-                        value={data.subtitle}
-                        onChange={(event) => setData('subtitle', event.target.value)}
-                        required
-                      />
-                      <InputError message={errors.subtitle} />
-                    </div>
-
-                    <div className="grid gap-2">
-                      <Label htmlFor="icon">Icon</Label>
-                      <FileUpload
-                        accept="image/*"
-                        multiple={false}
-                        existingFiles={existingIcons}
-                        onChange={(file) => {
-                          setData('icon', file as File);
-                          setData('delete_existing_icon', false);
-                        }}
-                        onRemoveExisting={() => {
-                          setExistingIcons([]);
-                          setData('icon', null);
-                          setData('delete_existing_icon', true);
-                        }}
-                      />
-                      <InputError message={errors.icon} />
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              <div className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">Insights</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div className="grid grid-cols-2 gap-3 text-sm text-muted-foreground">
-                      <div>
-                        <div>Created At</div>
-                        <div className="font-medium text-foreground">
-                          {service.created_at ? new Date(service.created_at).toLocaleDateString() : 'N/A'}
-                        </div>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <h1 className="text-2xl font-bold">Service Section</h1>
+            <div className="flex gap-2" />
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                <div className="space-y-6 lg:col-span-2">
+                  <Card>
+                    <CardContent className="space-y-4">
+                      <div className="grid gap-2">
+                        <Label htmlFor="title">Title</Label>
+                        <Input
+                          id="title"
+                          type="text"
+                          value={data.title}
+                          onChange={(event) => setData('title', event.target.value)}
+                          required
+                        />
+                        <InputError message={errors.title} />
                       </div>
-                      <div>
-                        <div>Updated At</div>
-                        <div className="font-medium text-foreground">
-                          {service.updated_at ? new Date(service.updated_at).toLocaleDateString() : 'N/A'}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">Action</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4 pt-2">
-                    <div className="flex flex-col gap-3">
-                      <Button type="submit" disabled={processing} className="gap-2 w-full">
-                        <Save className="h-4 w-4" />
-                        {processing ? 'Updating...' : 'Update Service'}
-                      </Button>
-                      <Link href={route('admin.pm.service-section.index')}>
-                        <Button type="button" variant="outline" className="w-full">
-                          Cancel
+                      <div className="grid gap-2">
+                        <Label htmlFor="subtitle">Subtitle</Label>
+                        <Input
+                          id="subtitle"
+                          type="text"
+                          value={data.subtitle}
+                          onChange={(event) => setData('subtitle', event.target.value)}
+                          required
+                        />
+                        <InputError message={errors.subtitle} />
+                      </div>
+
+                      <div className="grid gap-2">
+                        <Label htmlFor="icon">Icon</Label>
+                        <FileUpload
+                          accept="image/*"
+                          multiple={false}
+                          existingFiles={existingIcons}
+                          onChange={(file) => {
+                            setData('icon', file as File);
+                            setData('delete_existing_icon', false);
+                          }}
+                          onRemoveExisting={handleRemoveExistingIcon}
+                        />
+                        <InputError message={errors.icon} />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Insights</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div>
+                        <Label className="text-sm text-muted-foreground">Created At</Label>
+                        <p className="mt-1 text-sm font-medium">
+                          {record.created_at
+                            ? new Date(record.created_at).toLocaleDateString()
+                            : 'N/A'}
+                        </p>
+                      </div>
+
+                      <div>
+                        <Label className="text-sm text-muted-foreground">Updated At</Label>
+                        <p className="mt-1 text-sm font-medium">
+                          {record.updated_at
+                            ? new Date(record.updated_at).toLocaleDateString()
+                            : 'N/A'}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="flex flex-row justify-between gap-3">
+                        <Button
+                          type="submit"
+                          disabled={processing}
+                          className="flex h-auto w-full items-center justify-center bg-secondary px-6 py-0! hover:bg-secondary/80"
+                        >
+                          <Save className="mr-2 h-4 w-4" />
+                          {processing ? 'Updating...' : 'Update Service'}
                         </Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
+                        <ActionButton
+                          IconNode={PencilOff}
+                          href={route('admin.pm.service-section.index')}
+                        >
+                          Cancel
+                        </ActionButton>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+            </form>
+          </CardContent>
+        </Card>
+      </>
     </AdminLayout>
   );
 }

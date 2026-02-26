@@ -6,7 +6,7 @@ import { PreferToTalkSection } from '@/components/frontend/how-it-works/prefer-t
 import { HowItWorksList } from '@/components/frontend/how-it-works/how-it-works-list';
 import { WhatIsProbateSection } from '@/components/frontend/how-it-works/what-is-probate-section';
 import FrontendLayout from '@/layouts/frontend-layout';
-import { howItWork } from '@/routes';
+
 
 export default function HowItWorks({howItWorks,stayInforms,faqs,banner}: any) {
 

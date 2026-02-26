@@ -119,7 +119,11 @@ class HomeServiceController extends Controller
                 Storage::disk('public')->delete($service->icon);
             }
             $data['icon'] = null;
+        } else {
+            unset($data['icon']);
         }
+
+        unset($data['delete_existing_icon']);
 
         $service->update($data);
 

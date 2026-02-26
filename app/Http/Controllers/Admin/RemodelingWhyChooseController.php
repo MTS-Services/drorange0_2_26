@@ -103,7 +103,11 @@ class RemodelingWhyChooseController extends Controller
                 Storage::disk('public')->delete($option->icon);
             }
             $data['icon'] = null;
+        } else {
+            unset($data['icon']);
         }
+
+        unset($data['delete_existing_icon']);
 
         $option->update($data);
 

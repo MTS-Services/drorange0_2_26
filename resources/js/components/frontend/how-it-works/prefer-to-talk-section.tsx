@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useScrollAnimation } from '@/hooks/use-scroll-animation';
+export function PreferToTalkSection({faqs}: any) {
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-export function PreferToTalkSection() {
-    const [sectionRef, isVisible] = useScrollAnimation<HTMLDivElement>();
-    const base = 'transition-all duration-700 ease-out';
-    const state = isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6';
+    useEffect(() => {
+        if (faqs && faqs.length > 0) {
+            setOpenIndex(0);
+        }
+    }, [faqs]);
+
+    const handleToggle = (index: number) => {
+        setOpenIndex((current) => (current === index ? null : index));
+    };
 
     return (
       <>
-        <section className="bg-gray-50 min-h-screen py-12 px-4">
+        <section className="bg-gray-50 min-auto py-12 px-4">
 
         <div className="max-w-6xl mx-auto">
 
@@ -21,75 +27,28 @@ export function PreferToTalkSection() {
             {/* FAQ Items */}
             <div className="space-y-4">
 
-            {/* Item 1 */}
-            <div className="bg-white rounded-md shadow-sm border border-gray-100 px-6 py-5 cursor-pointer" onClick={() => toggle(this)}>
-                <div className="flex items-center justify-between gap-4">
-                <h3 className="text-sm font-semibold text-gray-900">How accurate are the online estimates?</h3>
-                <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-gray-400">
-                    <svg className="plus w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12M6 12h12"/></svg>
-                    <svg className="minus w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"/></svg>
-                </span>
+         {faqs?.map((faq: any, index: number) => {
+            const isOpen = openIndex === index;
+            return (
+                <div
+                    key={index}
+                    className="bg-white rounded-md shadow-sm border border-gray-100 px-6 py-5 cursor-pointer"
+                    onClick={() => handleToggle(index)}
+                >
+                    <div className="flex items-center justify-between gap-4">
+                        <h3 className="text-sm font-semibold text-gray-900">{faq.title}</h3>
+                        <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-gray-400">
+                            <svg className={`plus w-4 h-4 ${isOpen ? 'hidden' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12M6 12h12"/></svg>
+                            <svg className={`minus w-4 h-4 ${isOpen ? '' : 'hidden'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6"/></svg>
+                        </span>
+                    </div>
+                    <div className={`faq-body ${isOpen ? 'block' : 'hidden'}`}>
+                        <p className="text-sm text-gray-500 leading-relaxed pt-3">{faq.subtitle}</p>
+                    </div>
                 </div>
-                <div className="faq-body">
-                <p className="text-sm text-gray-500 leading-relaxed pt-3">Our estimates are very accurate because they're based on your actual photos and specific selections. We use precise pricing databases to generate quotes, and we account for regional labor and material costs. Actual project costs are typically within 5% of the initial estimate.</p>
-                </div>
-            </div>
+            );
+         })}
 
-            {/* Item 2 */}
-            <div className="bg-white rounded-md shadow-sm border border-gray-100 px-6 py-5 cursor-pointer" onClick={() => toggle(this)}>
-                <div className="flex items-center justify-between gap-4">
-                <h3 className="text-sm font-semibold text-gray-900">What if I need to change something?</h3>
-                <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-gray-400">
-                    <svg className="plus w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12M6 12h12"/></svg>
-                    <svg className="minus w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"/></svg>
-                </span>
-                </div>
-                <div className="faq-body">
-                <p className="text-sm text-gray-500 leading-relaxed pt-3">No problem! Before approving your estimate, you can request any changes or modifications. After approval, our team can discuss modifications, though they may impact the timeline and pricing.</p>
-                </div>
-            </div>
-
-            {/* Item 3 */}
-            <div className="bg-white rounded-md shadow-sm border border-gray-100 px-6 py-5 cursor-pointer" onClick={() => toggle(this)}>
-                <div className="flex items-center justify-between gap-4">
-                <h3 className="text-sm font-semibold text-gray-900">Do I really get my estimate in 24 hours?</h3>
-                <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-gray-400">
-                    <svg className="plus w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12M6 12h12"/></svg>
-                    <svg className="minus w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"/></svg>
-                </span>
-                </div>
-                <div className="faq-body">
-                <p className="text-sm text-gray-500 leading-relaxed pt-3">Yes! Our team reviews your submission and prepares a detailed estimate within 24 hours (business days). You'll receive both a text notification and email when it's ready.</p>
-                </div>
-            </div>
-
-            {/* Item 4 */}
-            <div className="bg-white rounded-md shadow-sm border border-gray-100 px-6 py-5 cursor-pointer" onClick={() => toggle(this)}>
-                <div className="flex items-center justify-between gap-4">
-                <h3 className="text-sm font-semibold text-gray-900">What photos should I take?</h3>
-                <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-gray-400">
-                    <svg className="plus w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12M6 12h12"/></svg>
-                    <svg className="minus w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"/></svg>
-                </span>
-                </div>
-                <div className="faq-body">
-                <p className="text-sm text-gray-500 leading-relaxed pt-3">Take 4–6 photos from each corner of your bathroom. Make sure to capture all walls, the floor, the ceiling, and any fixtures you want replaced or updated. Clear, well-lit photos help us provide the most accurate estimate possible.</p>
-                </div>
-            </div>
-
-            {/* Item 5 */}
-            <div className="bg-white rounded-md shadow-sm border border-gray-100 px-6 py-5 cursor-pointer" onClick={() => toggle(this)}>
-                <div className="flex items-center justify-between gap-4">
-                <h3 className="text-sm font-semibold text-gray-900">Is the mobile verification required?</h3>
-                <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-gray-400">
-                    <svg className="plus w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12M6 12h12"/></svg>
-                    <svg className="minus w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6"/></svg>
-                </span>
-                </div>
-                <div className="faq-body">
-                <p className="text-sm text-gray-500 leading-relaxed pt-3">Yes, mobile verification is how we confirm estimates and ensure we can reach you with your estimate. Your phone number and all personal details are secured with our privacy policy and will never be shared with third parties.</p>
-                </div>
-            </div>
 
             </div>
         </div>

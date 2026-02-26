@@ -103,7 +103,11 @@ class RemodelingWhatIncludeController extends Controller
                 Storage::disk('public')->delete($include->icon);
             }
             $data['icon'] = null;
+        } else {
+            unset($data['icon']);
         }
+
+        unset($data['delete_existing_icon']);
 
         $include->update($data);
 

@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
-export default defineConfig(({ isSsrBuild }) => ({
+export default defineConfig(({ mode, isSsrBuild }) => ({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.tsx'],
@@ -17,21 +17,28 @@ export default defineConfig(({ isSsrBuild }) => ({
             },
         }),
         tailwindcss(),
-        wayfinder({
-            formVariants: true,
-        }),
-    ],
+
+        mode !== 'production'
+            ? wayfinder({
+                  formVariants: true,
+              })
+            : null,
+    ].filter(Boolean),
+
     esbuild: {
         jsx: 'automatic',
     },
+
     build: {
-        rollupOptions: isSsrBuild ? {} : {
-            output: {
-                manualChunks: {
-                    ui: ['@headlessui/react', 'lucide-react', 'sonner'],
-                },
-            },
-        },
+        rollupOptions: isSsrBuild
+            ? {}
+            : {
+                  output: {
+                      manualChunks: {
+                          ui: ['@headlessui/react', 'lucide-react', 'sonner'],
+                      },
+                  },
+              },
         chunkSizeWarningLimit: 600,
     },
 }));

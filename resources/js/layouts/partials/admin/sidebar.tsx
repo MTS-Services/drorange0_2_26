@@ -141,6 +141,12 @@ const adminNavItems: NavItemType[] = [
         ],
     },
     {
+        title: 'Contact',
+        href: route('admin.pm.contact.index'),
+        icon: LayoutGrid,
+        slug: 'contact',
+    },
+    {
         title: 'Site Settings',
         href: route('admin.site-settings.index'),
         icon: LayoutGrid,

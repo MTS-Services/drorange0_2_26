@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\ContactBannerController;
 use App\Http\Controllers\Admin\ContactFaqController;
 use App\Http\Controllers\Backend\Admin\AdminDashboardController;
 use App\Http\Controllers\Backend\Admin\SiteSettingsController;
-
+use App\Http\Controllers\Admin\ContactController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -66,5 +66,6 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
             // Contact Page
             Route::resource('contact-banner', ContactBannerController::class)->only(['edit', 'update']);
             Route::resource('contact-faq', ContactFaqController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+            Route::resource('contact', ContactController::class)->only(['index', 'show','destroy']);
         });
     });

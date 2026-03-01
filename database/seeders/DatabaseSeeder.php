@@ -50,6 +50,10 @@ class DatabaseSeeder extends Seeder
             OptionSeeder::class,
             DiemensionSeeder::class,
             CurrentSetupSeeder::class,
+            EstimateSeeder::class,
+            ContactInformationSeeder::class,
+            OtpVerificationSeeder::class,
+            EstimateImageSeeder::class,
         ]);
     }
 }

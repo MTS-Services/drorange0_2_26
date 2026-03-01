@@ -141,6 +141,12 @@ const adminNavItems: NavItemType[] = [
         ],
     },
     {
+        title: 'Estimates',
+        href: route('admin.estimates.index'),
+        icon: LayoutGrid,
+        slug: 'estimates',
+    },
+    {
         title: 'Services',
         icon: LayoutGrid,
         slug: 'services',
@@ -150,6 +156,24 @@ const adminNavItems: NavItemType[] = [
                 icon: LayoutGrid,
                 slug: 'service-type',
                 href: route('admin.sm.service-type.index'),
+            },
+            {
+                title: 'Options',
+                icon: LayoutGrid,
+                slug: 'option',
+                href: route('admin.sm.option.index'),
+            },
+            {
+                title: 'Dimensions',
+                icon: LayoutGrid,
+                slug: 'diemension',
+                href: route('admin.sm.diemension.index'),
+            },
+            {
+                title: 'Current Setup',
+                icon: LayoutGrid,
+                slug: 'current-setup',
+                href: route('admin.sm.current-setup.index'),
             },
         ]
     },

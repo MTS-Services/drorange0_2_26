@@ -20,6 +20,10 @@ use App\Http\Controllers\Admin\ContactFaqController;
 use App\Http\Controllers\Backend\Admin\AdminDashboardController;
 use App\Http\Controllers\Backend\Admin\SiteSettingsController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\CurrentSetupController;
+use App\Http\Controllers\Admin\DiemensionController;
+use App\Http\Controllers\Admin\EstimateController;
+use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\ServiceTypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,9 +74,15 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
             Route::resource('contact', ContactController::class)->only(['index', 'show','destroy']);
         });
 
+        Route::resource('estimates', EstimateController::class)->only(['index', 'show', 'destroy']);
+        Route::patch('estimates/{estimate}/status', [EstimateController::class, 'updateStatus'])->name('estimates.update-status');
+
         Route::prefix('service-management')
         ->as('sm.')
         ->group(function () {
              Route::resource('service-type', ServiceTypeController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+             Route::resource('option', OptionController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+             Route::resource('diemension', DiemensionController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+             Route::resource('current-setup', CurrentSetupController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
         });
     });

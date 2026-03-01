@@ -1,38 +1,8 @@
-import React, { useMemo, useState } from 'react';
 
-type FaqItem = {
-    q: string;
-    a: string;
-};
 
-export function ContactFaqSection() {
+export function ContactFaqSection({ faqs }: any) {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-    const faqItems: FaqItem[] = useMemo(
-        () => [
-            {
-                q: 'How much does it cost to make a Will?',
-                a: 'Costs vary depending on complexity. Book a free consultation and we’ll provide a precise quote after understanding your needs.',
-            },
-            {
-                q: 'What is the difference between a Will and a Codicil?',
-                a: 'A Will outlines everything from scratch, while a Codicil is a legal add-on that updates specific clauses of an existing Will.',
-            },
-            {
-                q: 'What can I include in my Will?',
-                a: 'You can cover property, guardianship, business interests, personal items, funeral wishes, and more—we’ll guide you through what applies.',
-            },
-            {
-                q: 'Do I need legal professionals to write my Will?',
-                a: 'DIY Wills can cause errors or disputes. Professional guidance ensures signatures, witnesses, and wording all hold up when needed.',
-            },
-            {
-                q: 'How much does it cost to change your Will?',
-                a: 'Minor changes may be done via a Codicil; bigger updates may require a new Will. We’ll recommend the most cost-effective option.',
-            },
-        ],
-        []
-    );
 
     return (
         <section className="bg-white pb-16">
@@ -40,12 +10,12 @@ export function ContactFaqSection() {
                 <h2 className="text-center text-2xl font-semibold text-primary-600 animate-fadeInUp">Frequently Asked Questions</h2>
 
                 <div className="mx-auto mt-8 max-w-6xl divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
-                    {faqItems.map((item, idx) => {
+                    {faqs.map((item:any, idx:any) => {
                         const isOpen = openFaq === idx;
 
                         return (
                             <div
-                                key={item.q}
+                                key={item.id}
                                 className="p-5 md:p-6 animate-fadeInUp"
                                 style={{ animationDelay: `${idx * 80}ms` }}
                             >
@@ -61,7 +31,7 @@ export function ContactFaqSection() {
                                                 <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </span>
-                                        <p className="font-semibold text-primary-900">{item.q}</p>
+                                        <p className="font-semibold text-primary-900">{item.question}</p>
                                     </div>
 
                                     <span className="mt-1 text-primary-400">
@@ -78,7 +48,7 @@ export function ContactFaqSection() {
                                 </button>
 
                                 {isOpen ? (
-                                    <p className="mt-3 pl-9 text-sm leading-relaxed text-primary-600">{item.a}</p>
+                                    <p className="mt-3 pl-9 text-sm leading-relaxed text-primary-600">{item.answer}</p>
                                 ) : null}
                             </div>
                         );

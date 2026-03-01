@@ -6,12 +6,12 @@ import { ContactMapSection } from '@/components/frontend/contact/contact-map-sec
 import FrontendLayout from '@/layouts/frontend-layout';
 
 
-export default function Contact() {
+export default function Contact({ banner, faqs }: any) {
     return (
         <FrontendLayout>
             <main className="bg-white">
-                <ContactHeroSection />
-                <ContactConsultationSection />
+                <ContactHeroSection banner={banner}/>
+                <ContactConsultationSection faqs={faqs} />
                 <ContactMapSection />
             </main>
         </FrontendLayout>

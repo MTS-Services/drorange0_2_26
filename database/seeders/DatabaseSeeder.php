@@ -54,6 +54,7 @@ class DatabaseSeeder extends Seeder
             ContactInformationSeeder::class,
             OtpVerificationSeeder::class,
             EstimateImageSeeder::class,
+            EstimateStatusSeeder::class,
         ]);
     }
 }

@@ -141,6 +141,12 @@ const adminNavItems: NavItemType[] = [
         ],
     },
     {
+        title: 'Estimates',
+        href: route('admin.estimates.index'),
+        icon: LayoutGrid,
+        slug: 'estimates',
+    },
+    {
         title: 'Services',
         icon: LayoutGrid,
         slug: 'services',

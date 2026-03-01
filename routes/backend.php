@@ -15,9 +15,11 @@ use App\Http\Controllers\Admin\AboutInformationController;
 use App\Http\Controllers\Admin\AboutWhyChooseController;
 use App\Http\Controllers\Admin\AboutLicenseController;
 use App\Http\Controllers\Admin\AboutServiceAreaController;
+use App\Http\Controllers\Admin\ContactBannerController;
+use App\Http\Controllers\Admin\ContactFaqController;
 use App\Http\Controllers\Backend\Admin\AdminDashboardController;
 use App\Http\Controllers\Backend\Admin\SiteSettingsController;
-
+use App\Http\Controllers\Admin\ContactController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -60,5 +62,10 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
             Route::resource('about-why-choose', AboutWhyChooseController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
             Route::resource('about-license', AboutLicenseController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
             Route::resource('about-service-area', AboutServiceAreaController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+       
+            // Contact Page
+            Route::resource('contact-banner', ContactBannerController::class)->only(['edit', 'update']);
+            Route::resource('contact-faq', ContactFaqController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+            Route::resource('contact', ContactController::class)->only(['index', 'show','destroy']);
         });
     });

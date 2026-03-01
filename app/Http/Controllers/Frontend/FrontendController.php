@@ -8,6 +8,8 @@ use App\Services\AboutInformationService;
 use App\Services\AboutLicenseService;
 use App\Services\AboutServiceAreaService;
 use App\Services\AboutWhyChooseService;
+use App\Services\ContactBannerService;
+use App\Services\ContactFaqService;
 use App\Services\HomePageHeroService;
 use App\Services\HomeServiceService;
 use App\Services\HowItWorkFaqService;
@@ -40,6 +42,8 @@ class FrontendController extends Controller
     protected AboutLicenseService $aboutLicenseService,
     protected AboutServiceAreaService $aboutServiceAreaService,
     protected AboutWhyChooseService $aboutWhyChooseService,
+    protected ContactBannerService $contactBannerService,
+    protected ContactFaqService $contactFaqService,
    )
    {
   
@@ -91,7 +95,12 @@ class FrontendController extends Controller
 
     public function contact(): Response
     {
-        return Inertia::render('frontend/contact');
+        $banner = $this->contactBannerService->getFirst();
+        $faqs = $this->contactFaqService->latest(20);
+        return Inertia::render('frontend/contact', [
+            'banner' => $banner,
+            'faqs' => $faqs,
+        ]);
     }
 
     public function willWriting(): Response

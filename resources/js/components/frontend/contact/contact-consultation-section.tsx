@@ -25,7 +25,7 @@ const contactDetails = [
     },
 ];
 
-export function ContactConsultationSection() {
+export function ContactForm() {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto px-4 py-6">
  

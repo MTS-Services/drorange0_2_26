@@ -1,4 +1,8 @@
-import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useForm } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react';
 
 const contactDetails = [
     {
@@ -26,6 +30,31 @@ const contactDetails = [
 ];
 
 export function ContactForm() {
+    const { props } = usePage();
+    const flash = props.flash as { success?: string; error?: string } || {};
+    
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+    });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log(data)
+        post('/contact/send-message', {
+            onSuccess: () => {
+                reset();
+            }
+        });
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setData(e.target.name as keyof typeof data, e.target.value);
+    };
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto px-4 py-6">
  
@@ -102,32 +131,94 @@ export function ContactForm() {
             <div className="md:col-span-2">
                 <div className="bg-white rounded-2xl shadow-md border border-gray-100 py-8 px-6">
                 <h2 className="text-xl font-medium font-inter mb-6 text-gray-900">Send Us a Message</h2>
-                <form className="space-y-5">
+                
+                {/* Flash Messages */}
+                {flash.success && (
+                    <div className="mb-4 bg-green-50 border border-green-200 rounded-lg p-3">
+                        <p className="text-sm text-green-800">{flash.success}</p>
+                    </div>
+                )}
+                
+                {flash.error && (
+                    <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-3">
+                        <p className="text-sm text-red-800">{flash.error}</p>
+                    </div>
+                )}
+                
+                <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Name <span className="text-gray-500">*</span></label>
-                    <input type="text" className="w-full border border-gray-200 text-gray-500 rounded-lg px-4 py-2.5 text-sm transition-all" placeholder="Your full name" />
+                    <Input 
+                        type="text" 
+                        name="name"
+                        value={data.name}
+                        onChange={handleChange}
+                        placeholder="Your full name" 
+                        className="w-full border border-gray-200 text-gray-500 rounded-lg px-4 py-2.5 text-sm transition-all"
+                        required
+                    />
+                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Email <span className="text-gray-500">*</span></label>
-                        <input type="email" className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-gray-500 text-sm transition-all" placeholder="you@example.com" />
+                        <Input 
+                            type="email" 
+                            name="email"
+                            value={data.email}
+                            onChange={handleChange}
+                            placeholder="you@example.com" 
+                            className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-gray-500 text-sm transition-all"
+                            required
+                        />
+                        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Phone <span className="text-gray-400 font-normal">(Optional)</span></label>
-                        <input type="tel" className="w-full text-gray-500 border border-gray-200 rounded-lg px-4 py-2.5 text-sm transition-all" placeholder="(555) 123-4567" />
+                        <Input 
+                            type="tel" 
+                            name="phone"
+                            value={data.phone}
+                            onChange={handleChange}
+                            placeholder="(555) 123-4567" 
+                            className="w-full text-gray-500 border border-gray-200 rounded-lg px-4 py-2.5 text-sm transition-all"
+                        />
+                        {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                     </div>
                     </div>
                     <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                    <input type="text" className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-500 transition-all" placeholder="How can we help?" />
+                    <Input 
+                        type="text" 
+                        name="subject"
+                        value={data.subject}
+                        onChange={handleChange}
+                        placeholder="How can we help?" 
+                        className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-500 transition-all"
+                    />
+                    {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
                     </div>
                     <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Message <span className="text-gray-500">*</span></label>
-                    <textarea rows={5} className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-gray-500 text-sm transition-all resize-none" placeholder="Tell us about your project..."></textarea>
+                    <Textarea 
+                        name="message"
+                        value={data.message}
+                        onChange={handleChange}
+                        rows={5} 
+                        className="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-gray-500 text-sm transition-all resize-none" 
+                        placeholder="Tell us about your project..."
+                        required
+                    />
+                    {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
                     </div>
-                    <button type="submit" className="bg-blue-600 hover:bg-brand-700 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition-colors">
-                    Send Message
-                    </button>
+                    
+                    <Button 
+                        type="submit" 
+                        disabled={processing}
+                        className="bg-blue-600 hover:bg-brand-700 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition-colors"
+                    >
+                        {processing ? 'Sending...' : 'Send Message'}
+                    </Button>
                 </form>
                 </div>
 

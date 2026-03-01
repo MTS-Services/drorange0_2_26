@@ -14,12 +14,16 @@ use App\Services\HomePageHeroService;
 use App\Services\HomeServiceService;
 use App\Services\HowItWorkFaqService;
 use App\Services\HowItWorksBannerService;
+use App\Services\MessageService;
 use App\Services\RemodelingHeroService;
 use App\Services\RemodelingOptionService;
 use App\Services\RemodelingWhatIncludeService;
 use App\Services\RemodelingWhyChooseService;
 use App\Services\HowItWorksService;
 use App\Services\StayInformedService;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -44,6 +48,7 @@ class FrontendController extends Controller
     protected AboutWhyChooseService $aboutWhyChooseService,
     protected ContactBannerService $contactBannerService,
     protected ContactFaqService $contactFaqService,
+    protected MessageService $messageService,
    )
    {
   
@@ -161,6 +166,28 @@ class FrontendController extends Controller
     {
         return Inertia::render('frontend/track-order');
        
+    }
+
+    public function sendMessage(Request $request): RedirectResponse
+    {
+        // Validate request
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'subject' => 'nullable|string|max:255',
+            'message' => 'required|string|max:2000',
+        ]);
+        
+        try {
+            // Store message using service
+            $this->messageService->storeMessage($validated);
+            
+            return Redirect::back()->with('success', 'Message sent successfully!');
+            
+        } catch (\Exception $e) {
+            return Redirect::back()->with('error', 'Failed to send message. Please try again.');
+        }
     }
 
     // public function photos(): Response

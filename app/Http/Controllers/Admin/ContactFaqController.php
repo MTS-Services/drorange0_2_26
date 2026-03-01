@@ -3,65 +3,99 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\ContactFaqService;
+use App\Services\DataTableService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class ContactFaqController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected ContactFaqService $service, protected DataTableService $dataTableService)
     {
-        //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(): Response
     {
-        //
+        $query = $this->service->getQuery();
+        $result = $this->dataTableService->process($query, request(), [
+            'searchable' => ['title', 'subtitle'],
+            'filterable' => ['title', 'subtitle'],
+            'sortable' => ['title', 'subtitle', 'created_at', 'updated_at'],
+        ]);
+
+        return Inertia::render('Admin/ManagePage/ContactPage/Faq/Index', [
+            'items' => $result['data'],
+            'pagination' => $result['pagination'],
+            'offset' => $result['offset'],
+            'filters' => $result['filters'],
+            'search' => $result['search'],
+            'sortBy' => $result['sort_by'],
+            'sortOrder' => $result['sort_order'],
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function create(): Response
+    {
+        return Inertia::render('Admin/ManagePage/ContactPage/Faq/Create');
+    }
+
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'question' => ['required', 'string', 'max:255'],
+            'answer' => ['required', 'string', 'max:500'],
+        ]);
+
+        $this->service->create($data);
+
+        return redirect()
+            ->route('admin.pm.contact-faq.index')
+            ->with('success', 'FAQ created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(int $id): Response
     {
-        //
+        $item = $this->service->find($id)->firstOrFail();
+
+        return Inertia::render('Admin/ManagePage/ContactPage/Faq/Show', [
+            'item' => $item,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(int $id): Response
     {
-        //
+        $item = $this->service->find($id)->firstOrFail();
+
+        return Inertia::render('Admin/ManagePage/ContactPage/Faq/Edit', [
+            'item' => $item,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $item = $this->service->find($id)->firstOrFail();
+
+        $data = $request->validate([
+            'question' => ['required', 'string', 'max:255'],
+            'answer' => ['required', 'string', 'max:500'],
+        ]);
+
+        $this->service->update($item->id, $data);
+
+        return redirect()
+            ->route('admin.pm.contact-faq.index')
+            ->with('success', 'FAQ updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        $item = $this->service->find($id)->firstOrFail();
+
+        $this->service->delete($item->id);
+
+        return redirect()
+            ->route('admin.pm.contact-faq.index')
+            ->with('success', 'FAQ deleted successfully.');
     }
 }

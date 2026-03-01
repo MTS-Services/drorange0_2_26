@@ -3,65 +3,42 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactBanner;
+use App\Services\ContactBannerService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class ContactBannerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected ContactBannerService $service)
     {
-        //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function edit(?ContactBanner $contactBanner = null): Response
     {
-        //
+        $banner = $contactBanner ?? $this->service->getFirst();
+
+        return Inertia::render('Admin/ManagePage/ContactPage/Banner/Edit', [
+            'banner' => $banner,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request, ?ContactBanner $contactBanner = null): RedirectResponse
     {
-        //
-    }
+        $data = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'subtitle' => ['nullable', 'string', 'max:255'],
+            'additionalInfo' => ['nullable', 'string'],
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $this->service->update([
+            'title' => $data['title'],
+            'subtitle' => $data['subtitle'] ?? null,
+            'additional_info' => $data['additionalInfo'] ?? null,
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return back()->with('success', 'Contact banner updated successfully');
     }
 }

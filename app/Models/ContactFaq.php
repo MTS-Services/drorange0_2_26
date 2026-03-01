@@ -11,4 +11,9 @@ class ContactFaq extends Model
         'question',
         'answer',
     ];
+
+    protected $casts = [
+        'question' => 'string',
+        'answer' => 'string',
+    ];
 }

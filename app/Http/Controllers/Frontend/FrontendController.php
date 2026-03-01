@@ -229,8 +229,10 @@ class FrontendController extends Controller
         }
     }
 
-    // public function photos(): Response
-    // {
-    //     return Inertia::render('frontend/photos');
-    // }
+    public function freeEstimate(): Response
+    {
+        
+        return Inertia::render('frontend/free-estimate');
+
+    }
 }

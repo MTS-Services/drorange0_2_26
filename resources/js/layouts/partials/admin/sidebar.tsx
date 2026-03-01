@@ -141,6 +141,19 @@ const adminNavItems: NavItemType[] = [
         ],
     },
     {
+        title: 'Services',
+        icon: LayoutGrid,
+        slug: 'services',
+        children:[
+            {
+                title: 'Service Type',
+                icon: LayoutGrid,
+                slug: 'service-type',
+                href: route('admin.sm.service-type.index'),
+            },
+        ]
+    },
+    {
         title: 'Contact',
         href: route('admin.pm.contact.index'),
         icon: LayoutGrid,

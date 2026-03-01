@@ -10,4 +10,9 @@ class ServiceType extends Model
     protected $fillable = [
         'name', 'slug', 'price',
      ];
+     
+    public function options()
+    {
+        return $this->hasMany(Option::class, 'service_type_id', 'id');
+    }
 }

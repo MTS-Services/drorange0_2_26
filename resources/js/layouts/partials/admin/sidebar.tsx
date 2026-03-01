@@ -151,6 +151,12 @@ const adminNavItems: NavItemType[] = [
                 slug: 'service-type',
                 href: route('admin.sm.service-type.index'),
             },
+            {
+                title: 'Options',
+                icon: LayoutGrid,
+                slug: 'option',
+                href: route('admin.sm.option.index'),
+            },
         ]
     },
     {

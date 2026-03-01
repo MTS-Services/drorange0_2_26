@@ -76,5 +76,6 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
         ->group(function () {
              Route::resource('service-type', ServiceTypeController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
              Route::resource('option', OptionController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+            //  Route::resource('diemension', DiemensionController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
         });
     });

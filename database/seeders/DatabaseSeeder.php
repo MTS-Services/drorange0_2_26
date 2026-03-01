@@ -47,6 +47,8 @@ class DatabaseSeeder extends Seeder
             ContactFaqSeeder::class,
             ContactSeeder::class,
             ServiceTypeSeeder::class,
+            OptionSeeder::class,
+            DiemensionSeeder::class,
         ]);
     }
 }

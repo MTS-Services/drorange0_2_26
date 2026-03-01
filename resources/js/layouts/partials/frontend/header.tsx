@@ -53,10 +53,10 @@ export function FrontendHeader() {
 
             {/* CTA Button — desktop only */}
             <Link
-                href="#estimate"
+                href={route('free-estimate')}
                 className="hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold shadow-sm active:bg-blue-900 transition-colors duration-150 whitespace-nowrap"
             >
-                Get Free Estimate
+                Get Free Estimates
             </Link>
 
             {/* Mobile Hamburger */}
@@ -92,10 +92,10 @@ export function FrontendHeader() {
                     </Link>
                 ))}
                 <Link
-                    href="#estimate"
+                    href={route('free-estimate')}
                     className="mt-3 inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold transition-colors duration-150"
                 >
-                    Get Free Estimate
+                    Get Free Estimates
                 </Link>
             </div>
         </header>

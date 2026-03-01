@@ -19,3 +19,4 @@ Route::get("/terms-and-conditions", [FrontendController::class, "terms"])->name(
 Route::get("/consumer-rights-act-2015", [FrontendController::class, "consumerRights"])->name("consumer-rights");
 Route::get("/cookie-policy", [FrontendController::class, "cookiePolicy"])->name("cookies");
 Route::get("/track-orders", [FrontendController::class, "trackOrders"])->name("track-orders");
+Route::get("/free-estimate", [FrontendController::class, "freeEstimate"])->name("free-estimate");

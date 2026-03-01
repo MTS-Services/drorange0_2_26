@@ -20,3 +20,5 @@ Route::get("/consumer-rights-act-2015", [FrontendController::class, "consumerRig
 Route::get("/cookie-policy", [FrontendController::class, "cookiePolicy"])->name("cookies");
 Route::get("/track-orders", [FrontendController::class, "trackOrders"])->name("track-orders");
 Route::get("/free-estimate", [FrontendController::class, "freeEstimate"])->name("free-estimate");
+
+

@@ -3,65 +3,115 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\StoreDiemensionRequest;
+use App\Http\Requests\Admin\UpdateDiemensionRequest;
+use App\Services\DiemensionService;
+use App\Services\ServiceTypeService;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class DiemensionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function __construct(
+        protected DiemensionService $service,
+        protected ServiceTypeService $serviceTypeService
+    ) {
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display all ServiceTypes with dimension counts.
      */
-    public function create()
+    public function index(): Response
     {
-        //
+        $serviceTypes = $this->serviceTypeService->getAll()->map(function ($serviceType) {
+            $serviceType->dimensions_count = $this->service->getDimensionsCountByServiceType($serviceType->id);
+            return $serviceType;
+        });
+
+        return Inertia::render('Admin/ManagePage/Diemensions/Index', [
+            'serviceTypes' => $serviceTypes,
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show dimensions for a specific service type.
      */
-    public function store(Request $request)
+    public function show(int $serviceTypeId): Response
     {
-        //
+        $serviceType = $this->serviceTypeService->find($serviceTypeId)->firstOrFail();
+        $dimensions = $this->service->getByServiceType($serviceTypeId);
+
+        return Inertia::render('Admin/ManagePage/Diemensions/Show', [
+            'serviceType' => $serviceType,
+            'dimensions' => $dimensions,
+        ]);
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for creating a new dimension.
      */
-    public function show(string $id)
+    public function create(): Response
     {
-        //
+        return Inertia::render('Admin/ManagePage/Diemensions/Create', [
+            'serviceTypes' => $this->serviceTypeService->getAll(),
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Store a newly created dimension in storage.
      */
-    public function edit(string $id)
+    public function store(StoreDiemensionRequest $request): RedirectResponse
     {
-        //
+        $data = $request->validated();
+
+        $this->service->create($data);
+
+        return redirect()
+            ->route('admin.sm.diemension.index')
+            ->with('success', 'Dimension created successfully.');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Show the form for editing the specified dimension.
      */
-    public function update(Request $request, string $id)
+    public function edit(int $id): Response
     {
-        //
+        $dimension = $this->service->find($id)->firstOrFail();
+
+        return Inertia::render('Admin/ManagePage/Diemensions/Edit', [
+            'dimension' => $dimension,
+            'serviceTypes' => $this->serviceTypeService->getAll(),
+        ]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Update the specified dimension in storage.
      */
-    public function destroy(string $id)
+    public function update(UpdateDiemensionRequest $request, int $id): RedirectResponse
     {
-        //
+        $dimension = $this->service->find($id)->firstOrFail();
+
+        $data = $request->validated();
+
+        $this->service->update($id, $data);
+
+        return redirect()
+            ->route('admin.sm.diemension.index')
+            ->with('success', 'Dimension updated successfully.');
+    }
+
+    /**
+     * Remove the specified dimension from storage.
+     */
+    public function destroy(int $id): RedirectResponse
+    {
+        $dimension = $this->service->find($id)->firstOrFail();
+
+        $this->service->delete($id);
+
+        return redirect()
+            ->route('admin.sm.diemension.index')
+            ->with('success', 'Dimension deleted successfully.');
     }
 }

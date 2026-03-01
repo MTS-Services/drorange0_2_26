@@ -15,4 +15,9 @@ class ServiceType extends Model
     {
         return $this->hasMany(Option::class, 'service_type_id', 'id');
     }
+
+    public function dimensions()
+    {
+        return $this->hasMany(Diemension::class, 'service_type_id', 'id');
+    }
 }

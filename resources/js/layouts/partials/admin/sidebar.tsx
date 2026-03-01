@@ -121,6 +121,23 @@ const adminNavItems: NavItemType[] = [
                     },
                 ]
             },
+            {
+                title: 'Contact Page',
+                icon: LayoutGrid,
+                slug: 'contact-page',
+                children:[
+                    {
+                        title: 'FAQ',
+                        href: route('admin.pm.contact-faq.index'),
+                        slug: 'contact-faq',
+                    },
+                    {
+                        title: 'Banner',
+                        href: route('admin.pm.contact-banner.edit', 1),
+                        slug: 'contact-banner',
+                    },
+                ]
+            },
         ],
     },
     {

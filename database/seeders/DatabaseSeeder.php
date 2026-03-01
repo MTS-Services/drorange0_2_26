@@ -43,7 +43,8 @@ class DatabaseSeeder extends Seeder
             AboutWhyChooseSeeder::class,
             AboutLicenseSeeder::class,
             AboutServiceAreaSeeder::class,
-
+            ContactBannerSeeder::class,
+            ContactFaqSeeder::class,
         ]);
     }
 }

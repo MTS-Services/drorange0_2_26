@@ -35,9 +35,16 @@ class MessageService
         return $this->model->findOrFail($id);
     }
 
-    public function create(array $data)
+    public function storeMessage(array $data)
     {
-        return $this->model->create($data);
+        return $this->model->create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'] ?? null,
+            'subject' => $data['subject'] ?? null,
+            'message' => $data['message'],
+            'seen' => false,
+        ]);
     }
 
     public function update(int $id, array $data)

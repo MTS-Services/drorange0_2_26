@@ -8,6 +8,7 @@ Route::get("/bathroom", [FrontendController::class, "BathroomRemodeling"])->name
 Route::get("/how-it-works", [FrontendController::class, "HowItWorks"])->name("how-it-work");
 Route::get("/about", [FrontendController::class, "About"])->name("lpa");
 Route::get("/contact", action: [FrontendController::class, "contact"])->name("contact");
+Route::post("/contact/send-message", [FrontendController::class, "sendMessage"])->name("contact.send-message");
 
 Route::get("/will-writing", [FrontendController::class, "willWriting"])->name("will-writing");
 

@@ -24,6 +24,7 @@ use App\Services\StayInformedService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -170,6 +171,27 @@ class FrontendController extends Controller
 
     public function sendMessage(Request $request): RedirectResponse
     {
+        // Get user identifier (IP address)
+        $identifier = $request->ip();
+        
+        // Check for successful submission block (1 hour)
+        $successBlockKey = "message_success_block:{$identifier}";
+        if (Cache::has($successBlockKey)) {
+            $remainingTime = Cache::get($successBlockKey) - time();
+            $minutes = ceil($remainingTime / 60);
+            return Redirect::back()->with('error', "You have already sent a response. Please try again after {$minutes} minutes.");
+        }
+        
+        // Check for failed attempts block (15 minutes after 5 failures)
+        $failedAttemptsKey = "message_failed_attempts:{$identifier}";
+        $failedBlockKey = "message_failed_block:{$identifier}";
+        
+        if (Cache::has($failedBlockKey)) {
+            $remainingTime = Cache::get($failedBlockKey) - time();
+            $minutes = ceil($remainingTime / 60);
+            return Redirect::back()->with('error', "Too many attempts. Please try again after {$minutes} minutes.");
+        }
+        
         // Validate request
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -183,9 +205,26 @@ class FrontendController extends Controller
             // Store message using service
             $this->messageService->storeMessage($validated);
             
+            // Clear failed attempts on successful submission
+            Cache::forget($failedAttemptsKey);
+            Cache::forget($failedBlockKey);
+            
+            // Block successful submissions for 1 hour
+            Cache::put($successBlockKey, time() + 3600, 3600);
+            
             return Redirect::back()->with('success', 'Message sent successfully!');
             
         } catch (\Exception $e) {
+            // Increment failed attempts
+            $failedAttempts = Cache::get($failedAttemptsKey, 0) + 1;
+            Cache::put($failedAttemptsKey, $failedAttempts, 900); // Store for 15 minutes
+            
+            // Block after 5 failed attempts
+            if ($failedAttempts >= 5) {
+                Cache::put($failedBlockKey, time() + 900, 900); // Block for 15 minutes
+                return Redirect::back()->with('error', 'Too many attempts. Please try again after 15 minutes.');
+            }
+            
             return Redirect::back()->with('error', 'Failed to send message. Please try again.');
         }
     }

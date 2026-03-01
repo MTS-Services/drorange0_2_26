@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
             ServiceTypeSeeder::class,
             OptionSeeder::class,
             DiemensionSeeder::class,
+            CurrentSetupSeeder::class,
         ]);
     }
 }

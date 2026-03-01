@@ -163,6 +163,12 @@ const adminNavItems: NavItemType[] = [
                 slug: 'diemension',
                 href: route('admin.sm.diemension.index'),
             },
+            {
+                title: 'Current Setup',
+                icon: LayoutGrid,
+                slug: 'current-setup',
+                href: route('admin.sm.current-setup.index'),
+            },
         ]
     },
     {

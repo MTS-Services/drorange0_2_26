@@ -3,65 +3,57 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\MessageService;
+use App\Services\DataTableService;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected MessageService $service, protected DataTableService $dataTableService)
     {
-        //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(): Response
     {
-        //
+        $query = $this->service->getQuery();
+        $result = $this->dataTableService->process($query, request(), [
+            'searchable' => ['name', 'email', 'subject'],
+            'filterable' => ['name', 'email', 'subject', 'seen'],
+            'sortable' => ['name', 'email', 'subject', 'seen', 'created_at', 'updated_at'],
+        ]);
+
+        return Inertia::render('Admin/ManagePage/ContactPage/Message/Index', [
+            'items' => $result['data'],
+            'pagination' => $result['pagination'],
+            'offset' => $result['offset'],
+            'filters' => $result['filters'],
+            'search' => $result['search'],
+            'sortBy' => $result['sort_by'],
+            'sortOrder' => $result['sort_order'],
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show(int $id): Response
     {
-        //
+        $message = $this->service->getById($id);
+        
+        // Mark as seen
+        if (!$message->seen) {
+            $this->service->update($id, ['seen' => true]);
+            $message->refresh();
+        }
+
+        return Inertia::render('Admin/ManagePage/ContactPage/Message/Show', [
+            'message' => $message,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy(int $id): RedirectResponse
     {
-        //
-    }
+        $this->service->delete($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return back()->with('success', 'Message deleted successfully');
     }
 }

@@ -108,7 +108,7 @@ export default function Index({SiteSetting}: Props) {
         }
     };
   return (
-   <AdminLayout>
+   <AdminLayout activeSlug="site-settings">
       <>
          <Head title={`Site Settings`} />
 

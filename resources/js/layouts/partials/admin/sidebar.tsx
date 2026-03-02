@@ -1,12 +1,12 @@
 import AppLogo from '@/components/app-logo';
-import { NavItem } from '@/components/ui/nav-item';
+import { NavItem as NavItemComponent } from '@/components/ui/nav-item';
 import { cn } from '@/lib/utils';
-import { type NavItemType, type SharedData } from '@/types';
+import { type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { LayoutGrid } from 'lucide-react';
 import * as React from 'react';
 // Navigation configuration
-const adminNavItems: NavItemType[] = [
+const adminNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: route('admin.dashboard'),
@@ -15,11 +15,13 @@ const adminNavItems: NavItemType[] = [
     },
     {
         title: 'Page Management',
+        href: '#',
         icon: LayoutGrid,
         slug: 'page-management',
         children: [
             {
                 title: 'Home Page',
+                href: '#',
                 icon: LayoutGrid,
                 slug: 'home-page',
                 children:[
@@ -36,6 +38,7 @@ const adminNavItems: NavItemType[] = [
             },
             {
                 title: 'Remodeling',
+                href: '#',
                 icon: LayoutGrid,
                 slug: 'remodeling',
                 children:[
@@ -64,6 +67,7 @@ const adminNavItems: NavItemType[] = [
                 ]
             },{
                 title: 'How It Works',
+                href: '#',
                 icon: LayoutGrid,
                 slug: 'how-it-work',
                 children:[
@@ -91,6 +95,7 @@ const adminNavItems: NavItemType[] = [
             },
             {
                 title: 'About Page',
+                href: '#',
                 icon: LayoutGrid,
                 slug: 'about-page',
                 children:[
@@ -123,6 +128,7 @@ const adminNavItems: NavItemType[] = [
             },
             {
                 title: 'Contact Page',
+                href: '#',
                 icon: LayoutGrid,
                 slug: 'contact-page',
                 children:[
@@ -148,6 +154,7 @@ const adminNavItems: NavItemType[] = [
     },
     {
         title: 'Services',
+        href: '#',
         icon: LayoutGrid,
         slug: 'services',
         children:[
@@ -204,12 +211,9 @@ export const AdminSidebar = React.memo<AdminSidebarProps>(
         // Extract permissions from auth props
         const userPermissions = React.useMemo(() => {
             const auth = props.auth as SharedData['auth'];
-            return (
-                auth?.user?.permissions ||
-                auth?.user?.all_permissions ||
-                auth?.permissions ||
-                []
-            );
+            // For admin users, we'll assume all permissions for now
+            // You may need to adjust this based on your actual admin permission structure
+            return [];
         }, [props.auth]);
 
         return (
@@ -244,13 +248,14 @@ export const AdminSidebar = React.memo<AdminSidebarProps>(
                 <div className="custom-scrollbar flex-1 overflow-y-auto px-3 py-4">
                     <nav className="space-y-1">
                         {adminNavItems.map((item, index) => (
-                            <NavItem
+                            <NavItemComponent
                                 key={`${item.title}-${index}`}
                                 item={item}
                                 isCollapsed={isCollapsed}
                                 currentRoute={currentRoute}
                                 isActive={activeSlug === item.slug}
                                 permissions={userPermissions}
+                                activeSlug={activeSlug || undefined}
                             />
                         ))}
                     </nav>

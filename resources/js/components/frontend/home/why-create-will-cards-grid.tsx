@@ -18,13 +18,13 @@ export function WhyCreateWillCardsGrid({ services }: any) {
     return (
         <section className="overflow-hidden bg-white">
             {/* Services */}
-            <section id="services" className="bg-gray-50 py-10 lg:py-20">
-                <div className="mx-auto max-w-6xl px-6">
+            <section id="services" className=" ">
+                <div className= "max-w-7xl mx-auto px-6 py-10 lg:py-20 bg-gray-50">
                     <div className="mb-12 text-center">
-                        <h2 className="font-inter text-3xl font-black font-bold text-gray-900 md:text-4xl">
+                        <h2 className="font-sf-pro font-semibold text-gray-900 text-3xl md:text-4xl xl:text-5xl">
                             Our Services
                         </h2>
-                        <p className="mx-auto mt-3 max-w-xl text-gray-500">
+                        <p className="mx-auto mt-3 max-w-xl text-gray-500 font-inter font-normal text-xl">
                             From complete renovations to targeted upgrades, we
                             handle every aspect of your bathroom transformation.
                         </p>
@@ -38,10 +38,10 @@ export function WhyCreateWillCardsGrid({ services }: any) {
                                         alt={service.title}
                                     />
                                 </div>
-                                <h3 className="mb-2 text-lg font-medium text-gray-900">
+                                <h3 className="mb-2 text-gray-900 font-inter font-normal text-xl">
                                     {service.title}
                                 </h3>
-                                <p className="text-sm leading-relaxed text-gray-500">
+                                <p className="text-gray-500 font-inter font-normal text-base">
                                     {service.subtitle}
                                 </p>
                             </div>
@@ -50,7 +50,7 @@ export function WhyCreateWillCardsGrid({ services }: any) {
                     <div className="mt-10 text-center">
                         <Link
                             href={route('bathroom')}
-                            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition-all hover:gap-3"
+                            className="inline-flex items-center gap-2 text-base font-inter font-bold text-blue-600 transition-all hover:gap-3"
                         >
                             Learn More About Our Services
                             <svg

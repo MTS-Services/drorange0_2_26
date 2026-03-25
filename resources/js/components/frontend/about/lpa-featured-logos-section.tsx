@@ -4,23 +4,23 @@ const featuredLogos = ['The Telegraph', 'Social Enterprise UK', 'Financial Times
 
 export function LpaFeaturedLogosSection() {
     return (
-        <section className="bg-blue-50 py-14 px-6 max-w-6xl mx-auto">
-            <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+        <section className="bg-blue-50 py-14 px-4 max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="stat-card rounded-2xl p-6 text-center  cursor-default">
-                <p className="lg:text-4xl md:text-2xl font-black text-blue-700 font-semibold">15+</p>
-                <p className="text-sm text-gray-500 mt-1 font-medium">Years in Business</p>
+                <p className="text-3xl md:text-4xl xl:text-5xl font-sf-pro font-bold text-blue-700">15+</p>
+                <p className="text-base font-normal text-gray-500 mt-1 font-inter">Years in Business</p>
             </div>
             <div className="stat-card rounded-2xl p-6 text-center  cursor-default">
-                <p className="lg:text-4xl md:text-2xl font-black text-blue-700 font-semibold">500+</p>
-                <p className="text-sm text-gray-500 mt-1 font-medium">Bathrooms Completed</p>
+                <p className="text-3xl md:text-4xl xl:text-5xl font-sf-pro font-bold text-blue-700">500+</p>
+                <p className="text-base font-normal text-gray-500 mt-1 font-inter">Bathrooms Completed</p>
             </div>
             <div className="stat-card rounded-2xl p-6 text-center  cursor-default">
-                <p className="lg:text-4xl md:text-2xl font-black text-blue-700 font-semibold">98%</p>
-                <p className="text-sm text-gray-500 mt-1 font-medium">Customer Satisfaction</p>
+                <p className="text-3xl md:text-4xl xl:text-5xl font-sf-pro font-bold text-blue-700">98%</p>
+                <p className="text-base font-normal text-gray-500 mt-1 font-inter">Customer Satisfaction</p>
             </div>
             <div className="stat-card rounded-2xl p-6 text-center  cursor-default">
-                <p className="lg:text-4xl md:text-2xl font-black text-blue-700 font-semibold">4.9<span className="text-xl">/5</span></p>
-                <p className="text-sm text-gray-500 mt-1 font-medium">Average Rating</p>
+                <p className="text-3xl md:text-4xl xl:text-5xl font-sf-pro font-bold text-blue-700">4.9<span className="text-xl">/5</span></p>
+                <p className="text-base font-normal text-gray-500 mt-1 font-inter">Average Rating</p>
             </div>
             </div>
     </section>

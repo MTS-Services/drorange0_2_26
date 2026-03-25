@@ -7,9 +7,9 @@ export function AboutHeroSection({banner}: any ) {
     return (
         <section className="bg-white text-gray-800 antialiased">
         <div className="bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 text-white text-center py-16 px-6">
-          <div className="max-w-2xl mx-auto">
-            <h1 className="lg:text-4xl text-2xl font-black mb-4 fade-up fade-up-1 font-semibold">{banner?.title}</h1>
-            <p className="text-blue-100 leading-relaxed fade-up fade-up-2 font-inter text-base">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="lg:text-4xl xl:text-5xl text-2xl font-sf-pro mb-4 fade-up fade-up-1 font-semibold">{banner?.title}</h1>
+            <p className="text-blue-100 leading-relaxed fade-up fade-up-2 font-inter text-xl font-normal">
              {
               banner?.subtitle
              }

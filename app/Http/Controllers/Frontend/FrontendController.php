@@ -20,6 +20,7 @@ use App\Services\RemodelingOptionService;
 use App\Services\RemodelingWhatIncludeService;
 use App\Services\RemodelingWhyChooseService;
 use App\Services\HowItWorksService;
+use App\Services\ServiceTypeService;
 use App\Services\StayInformedService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -50,6 +51,7 @@ class FrontendController extends Controller
     protected ContactBannerService $contactBannerService,
     protected ContactFaqService $contactFaqService,
     protected MessageService $messageService,
+    protected ServiceTypeService $serviceTypeService,
    )
    {
   
@@ -232,7 +234,9 @@ class FrontendController extends Controller
     public function freeEstimate(): Response
     {
         
-        return Inertia::render('frontend/free-estimate');
+        $serviceTypes =  $this->serviceTypeService->getAll(); 
+
+        return Inertia::render('frontend/free-estimate', ['service_types'=> $serviceTypes]);
 
     }
 }

@@ -14,11 +14,11 @@ export default function Index({ formData, updateFormData, nextStep }: IndexProps
 
     const validate = (): boolean => {
         const newErrors: Record<string, string> = {};
-        
+
         if (!formData.orderId.trim()) {
             newErrors.orderId = 'Order ID is required';
         }
-        
+
         if (!formData.contact.trim()) {
             newErrors.contact = 'Phone number or email is required';
         } else {
@@ -26,12 +26,12 @@ export default function Index({ formData, updateFormData, nextStep }: IndexProps
             const phoneRegex = /^[\d\s\-()]+$/;
             const isValidEmail = emailRegex.test(formData.contact);
             const isValidPhone = phoneRegex.test(formData.contact) && formData.contact.replace(/\D/g, '').length >= 10;
-            
+
             if (!isValidEmail && !isValidPhone) {
                 newErrors.contact = 'Please enter a valid email or phone number';
             }
         }
-        
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -44,7 +44,7 @@ export default function Index({ formData, updateFormData, nextStep }: IndexProps
     };
     return (
         <div className="py-12 flex items-center justify-center font-sans lg:px-4 md:px-2 px-2">
-            <div className="w-full max-w-6xl bg-gray-50 rounded lg:px-8 lg:py-16  px-2 py-6">
+            <div className="w-full max-w-7xl bg-gray-50 rounded lg:px-8 lg:py-16  px-2 py-6">
                 {/* Header */}
                 <div className="flex flex-col items-center mb-10">
                     {/* Box Icon */}
@@ -64,10 +64,10 @@ export default function Index({ formData, updateFormData, nextStep }: IndexProps
                             <path d="M7.5 5.5l9 5" />
                         </svg>
                     </div>
-                    <h1 className="lg:text-5xl text-3xl font-extrabold text-gray-900 mb-2 font-inter">
+                    <h1 className="lg:text-5xl text-3xl font-semibold text-gray-900 mb-2 font-sf-pro">
                         Track Your Order
                     </h1>
-                    <p className="text-gray-500 text-lg text-center">
+                    <p className="text-gray-500 text-2xl font-normal font-inter text-center">
                         Enter your order ID and contact information to view your project status
                     </p>
                 </div>
@@ -76,7 +76,7 @@ export default function Index({ formData, updateFormData, nextStep }: IndexProps
                     <form onSubmit={handleSubmit}>
                         {/* Order ID */}
                         <div className="mb-5">
-                            <label className="block text-sm font-medium text-gray-800 mb-1">
+                            <label className="block text-base font-normal font-inter text-gray-800 mb-1">
                                 Order ID <span className="text-red-500">*</span>
                             </label>
                             <input
@@ -94,7 +94,7 @@ export default function Index({ formData, updateFormData, nextStep }: IndexProps
                         </div>
                         {/* Phone or Email */}
                         <div className="mb-6">
-                            <label className="block text-sm font-normal text-gray-800 mb-1">
+                            <label className="block text-base font-normal font-inter text-gray-800 mb-1">
                                 Phone Number or Email <span className="text-red-500">*</span>
                             </label>
                             <input

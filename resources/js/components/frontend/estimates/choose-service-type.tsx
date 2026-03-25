@@ -1,4 +1,5 @@
 import FileUpload from '@/components/file-upload';
+import { useForm } from '@inertiajs/react';
 import React, { useState } from 'react';
 
 interface ServiceType {
@@ -10,7 +11,17 @@ interface Props {
     serviceTypes: ServiceType[];
 }
 
+interface FormData {
+    files: File | File[] | null;
+}
+
 export default function ChooseServiceType({ serviceTypes }: Props) {
+
+    const { data, setData, post, processing, errors } = useForm<FormData>({
+        files: null,
+    });
+
+
     const getDefaultValue = () => {
         const queryParams = new URLSearchParams(window.location.search);
         return queryParams.get('service') ?? '';
@@ -19,10 +30,36 @@ export default function ChooseServiceType({ serviceTypes }: Props) {
     const [selectedService, setSelectedService] =
         useState<string>(getDefaultValue);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // handle submission logic here
+
+        if (!data.files) {
+            alert('Please select at least one file');
+            return;
+        }
+
+        const formData = new FormData();
+
+        // Handle both single and multiple files
+        if (Array.isArray(data.files)) {
+            data.files.forEach((file) => {
+                formData.append('files[]', file);
+            });
+        } else {
+            formData.append('file', data.files);
+        }
+
+        console.log(formData);
+        // Use post with FormData directly - no need for 'data' key
+        // post('/fileupload', {
+        //     // @ts-ignore - Inertia will handle FormData correctly
+        //     data: formData,
+        //     forceFormData: true,
+        // });
     };
+
 
     return (
         <div className="flex items-start justify-center bg-white px-4 py-10">
@@ -151,15 +188,13 @@ export default function ChooseServiceType({ serviceTypes }: Props) {
 
                             <div className="mb-3">
                                 <FileUpload
-                                    onChange={(file) =>
-                                        setData(
-                                            'background_image',
-                                            file as File,
-                                        )
-                                    }
-                                    existingFiles={background}
+                                    value={data.files}
+                                    onChange={(files) => setData('files', files)}
                                     multiple={true}
-                                    accept="image/*"
+                                    maxSize={10}
+                                    maxFiles={10}
+                                    accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.csv,.txt"
+                                    error={(errors as any).files || (errors as any).file}
                                 />
                             </div>
 

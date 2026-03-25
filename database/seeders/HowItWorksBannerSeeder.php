@@ -13,9 +13,9 @@ class HowItWorksBannerSeeder extends Seeder
     public function run(): void
     {
         HowItWorksBanner::create([
-            'title' => 'See How Our Process Works',
-            'subtitle' => 'From consultation to completion, transparency at every step.',
-            'additional_info' => 'Schedule your free consultation today and watch your project move forward with clear timelines and updates.',
+            'title' => 'How It Works',
+            'subtitle' => 'Our streamlined process makes bathroom remodeling simple, transparent, and stress-free. From estimate to completion in just a few easy steps.',
+            'additional_info' => '',
         ]);
     }
 }

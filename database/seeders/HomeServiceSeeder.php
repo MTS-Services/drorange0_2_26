@@ -17,22 +17,22 @@ class HomeServiceSeeder extends Seeder
             [
                 'title' => 'Complete Bathroom Remodeling',
                 'subtitle' => 'No bathroom renovation too big or small from start to completion.',
-                'icon' => 'default/images/icon/🛁.png',
+                'icon' => 'default/1.png',
             ],
             [
                 'title' => 'Tub to Shower Conversion',
                 'subtitle' => 'Transform your old tub into a custom, modern shower.',
-                'icon' => 'default/images/icon/🚿.png',
+                'icon' => 'default/2.png',
             ],  
             [
                 'title' => 'Vanity & Fixture Upgrades',
                 'subtitle' => 'New vanities, toilets, sinks, and fixtures to match your style.',
-                'icon' => 'default/images/icon/🪞.png',
+                'icon' => 'default/3.png',
             ],
             [
                 'title' => 'Tile & Flooring Installation',
                 'subtitle' => 'Specialty tile work and flooring with expert installation systems.',
-                'icon' => 'default/images/icon/🪞.png',
+                'icon' => 'default/4.png',
             ]
         ]);
     }

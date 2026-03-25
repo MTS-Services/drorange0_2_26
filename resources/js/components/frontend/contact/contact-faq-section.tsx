@@ -1,12 +1,12 @@
 export function ContactFaqSection({ faqs }: any) {
     return (
         <section>
-               <div className="max-w-5xl mx-auto">
+               <div className="max-w-7xl mx-auto px-4 md:mt-5 lg:mt-10 xl:mt-20">
             
 
             <div className="lg:py-12 py-4">
-            <h2 className="lg:text-4xl text-2xl font-display font-semibold text-center text-gray-900 mb-10">Common Questions</h2>
-            <div className="space-y-4 max-w-3xl mx-auto">
+            <h2 className="lg:text-4xl text-2xl font-bold font-sf-pro text-center text-gray-900 mb-10">Common Questions</h2>
+            <div className="space-y-4">
                 {
                     faqs.map((item:any, index:any)=>(
                         <div className="faq-item px-6 py-5 shadow-sm">

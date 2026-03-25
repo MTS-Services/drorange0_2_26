@@ -26,10 +26,10 @@ export default function Banner({banner}: any) {
         >
           <div className="relative max-w-7xl mx-auto lg:px-6 px-4 py-10 lg:py-32">
             <div className="max-w-3xl">
-              <h1 className="text-6xl font-bold leading-tight mb-5 fade-up delay-2 font-sf-pro">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold leading-tight mb-5 fade-up delay-2 font-sf-pro">
                {banner?.title}
               </h1>
-              <p className="text-2xl text-white/80 mb-8 font-inter font-normal">
+              <p className="text-base sm:text-2xl text-white/80 mb-8 font-inter font-normal">
                 {banner?.subtitle}
               </p>
               <div className="flex flex-wrap gap-3 mb-10 fade-up delay-4">

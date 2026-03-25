@@ -30,12 +30,12 @@ export function FrontendHeader() {
             <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
 
             {/* Logo */}
-            <Link href="/" className="text-lg font-bold text-blue-700 tracking-tight whitespace-nowrap">
+            <Link href="/" className="text-blue-700 tracking-tight whitespace-nowrap font-inter font-bold text-2xl">
                 BathPro Remodeling
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-gray-800">
+            <nav className="hidden md:flex items-center gap-7 text-base font-bold text-gray-800 font-inter ">
                 {navigationItems.map((item) => (
                     <Link
                         key={item.href}
@@ -54,7 +54,7 @@ export function FrontendHeader() {
             {/* CTA Button — desktop only */}
             <Link
                 href={route('free-estimate')}
-                className="hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold shadow-sm active:bg-blue-900 transition-colors duration-150 whitespace-nowrap"
+                className="hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white  text-base font-bold font-inter shadow-sm active:bg-blue-900 transition-colors duration-150 whitespace-nowrap"
             >
                 Get Free Estimates
             </Link>

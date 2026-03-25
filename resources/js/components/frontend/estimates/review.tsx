@@ -1,20 +1,7 @@
 import React from 'react'
 
-interface ReviewProps {
-    formData: {
-        orderId: string;
-        contact: string;
-        photos: File[];
-        options: Record<string, unknown>;
-        contactInfo: Record<string, unknown>;
-        verification: Record<string, unknown>;
-    };
-    updateFormData: (data: Partial<ReviewProps['formData']>) => void;
-    nextStep: () => void;
-    prevStep: () => void;
-}
 
-export default function Review({ formData, updateFormData, nextStep, prevStep }: ReviewProps) {
+export default function Review() {
     return (
        <div className=" flex flex-col items-center justify-start py-10 px-4 ">
   <div className="bg-gray-100 max-w-7xl mx-auto p-4">

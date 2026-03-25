@@ -19,6 +19,22 @@ Route::get("/terms-and-conditions", [FrontendController::class, "terms"])->name(
 Route::get("/consumer-rights-act-2015", [FrontendController::class, "consumerRights"])->name("consumer-rights");
 Route::get("/cookie-policy", [FrontendController::class, "cookiePolicy"])->name("cookies");
 Route::get("/track-orders", [FrontendController::class, "trackOrders"])->name("track-orders");
+// Free Estimate Routes
 Route::get("/free-estimate", [FrontendController::class, "freeEstimate"])->name("free-estimate");
+Route::post("/free-estimate/store/step1", [FrontendController::class, "freeEstimateStoreStep1"])->name("free-estimate.store.step1");
+
+// Free Estimate Step 2 Route
+Route::get("/free-estimate/step2/{serviceTypeId}", [FrontendController::class, "freeEstimateStep2"])->name("frontend.free-estimate-step2");
+Route::post("/free-estimate/store/step2", [FrontendController::class, "freeEstimateStoreStep2"])->name("free-estimate.store.step2");
+
+// Free Estimate Step 3 Route
+Route::get("/free-estimate/step3", [FrontendController::class, "freeEstimateStep3"])->name("frontend.free-estimate-step3");
+Route::post("/free-estimate/store/step3", [FrontendController::class, "freeEstimateStoreStep3"])->name("free-estimate.store.step3");
+
+// Free Estimate Step 4 Route
+Route::get("/free-estimate/step4", [FrontendController::class, "freeEstimateStep4"])->name("frontend.free-estimate-step4");
 
 
+// Free Estimate Resend OTP Route
+Route::post("/estimates/resend-otp", [FrontendController::class, "freeEstimateResendOtp"])->name("frontend.free-estimate-resend-otp");
+Route::post("/estimates/verify-otp", [FrontendController::class, "freeEstimateVerifyOtp"])->name("frontend.free-estimate-verify-otp");

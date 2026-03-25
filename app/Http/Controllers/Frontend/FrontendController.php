@@ -10,6 +10,7 @@ use App\Services\AboutServiceAreaService;
 use App\Services\AboutWhyChooseService;
 use App\Services\ContactBannerService;
 use App\Services\ContactFaqService;
+use App\Services\CurrentSetupService;
 use App\Services\HomePageHeroService;
 use App\Services\HomeServiceService;
 use App\Services\HowItWorkFaqService;
@@ -20,6 +21,8 @@ use App\Services\RemodelingOptionService;
 use App\Services\RemodelingWhatIncludeService;
 use App\Services\RemodelingWhyChooseService;
 use App\Services\HowItWorksService;
+use App\Services\OptionService;
+use App\Services\OtpService;
 use App\Services\ServiceTypeService;
 use App\Services\StayInformedService;
 use Illuminate\Http\Request;
@@ -52,6 +55,9 @@ class FrontendController extends Controller
     protected ContactFaqService $contactFaqService,
     protected MessageService $messageService,
     protected ServiceTypeService $serviceTypeService,
+    protected OptionService $optionService,
+    protected CurrentSetupService $currentSetupService,
+    protected OtpService $otpService
    )
    {
   
@@ -238,5 +244,102 @@ class FrontendController extends Controller
 
         return Inertia::render('frontend/free-estimate', ['service_types'=> $serviceTypes]);
 
+    }
+
+    public function freeEstimateStoreStep1(Request $request)
+    {
+
+       $request->validate([
+           'service_type' => 'required|exists:service_types,id',
+           'files' => 'required|nullable|array',
+           'files.*' => 'file|max:10240', // 10MB max per file
+       ]);
+        
+    //    dd($request->all());
+
+        return redirect()->route('frontend.free-estimate-step2', ['serviceTypeId' => $request->service_type]);
+
+    }
+    
+    public function freeEstimateStep2(int $serviceTypeId)
+    {
+        
+        $options = $this->optionService->getAll();
+        $currentSetups = $this->currentSetupService->getAll();
+
+
+        
+        return Inertia::render('frontend/free-estimate-step2', ['options' => $options, 'currentSetups' => $currentSetups, 'serviceTypeId' => $serviceTypeId]);
+    }
+
+    public function freeEstimateStoreStep2(Request $request)
+    {
+        $request->validate([
+            'options' => 'required|array',
+            'bathroom_size' => 'nullable|string',
+            'current_setup' => 'required|exists:current_setups,id',
+        ]);
+
+
+        // dd($request->all());
+        return redirect()->route('frontend.free-estimate-step3', ['serviceTypeId' => $request->service_type]);
+    }
+
+
+    // Step 3
+
+    public function freeEstimateStep3()
+    {
+        return Inertia::render('frontend/free-estimate-step3');
+    }
+
+    public function freeEstimateStoreStep3(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'zip' => 'required|string',
+        ]);
+
+        // dd($request->all());
+
+        $this->otpService->generateOtp($request->phone);
+
+        return redirect()->route('frontend.free-estimate-step4');
+       
+    }
+
+    // Step 4
+
+    public function freeEstimateStep4()
+    {
+        return Inertia::render('frontend/free-estimate-step4');
+    }
+
+    public function freeEstimateResendOtp(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|string',
+        ]);
+        
+        $this->otpService->resendOtp($request->phone);
+        
+        return back()->with('success', 'OTP has been resent.');
+    }
+
+    public function freeEstimateVerifyOtp(Request $request)
+    {
+        $request->validate([
+            'otp' => 'required|string',
+            'phone' => 'required|string',
+        ]);
+        
+        $this->otpService->verifyOtp($request->phone, $request->otp);
+        
+        return back()->with('success', 'OTP has been verified.');
     }
 }

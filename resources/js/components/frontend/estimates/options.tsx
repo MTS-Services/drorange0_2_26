@@ -1,31 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { router, useForm } from '@inertiajs/react';
+import InputError from '@/components/input-error';
 
-interface OptionsProps {
-    formData: {
-        options: Record<string, unknown>;
-    };
-    updateFormData: (data: Partial<OptionsProps['formData']>) => void;
-    nextStep: () => void;
-    prevStep: () => void;
+interface Props {
+    options: {
+        id: number;
+        name: string;
+        description: string;
+    }[];
+    currentSetups: {
+        id: number;
+        name: string;
+    }[];
+    serviceTypeId: number;
 }
 
-export default function Options({ formData, updateFormData, nextStep, prevStep }: OptionsProps) {
-    const options = formData.options || {};
+export default function Options({options, currentSetups, serviceTypeId}: Props) {
+    const [selectedOptions, setSelectedOptions] = useState<number[]>([]);
+    
+    const { data, setData, post, processing, errors } = useForm({
+        serviceTypeId: serviceTypeId,
+        options: [] as number[],
+        bathroom_size: '',
+        current_setup: '',
+    });
 
-    const toggleOption = (key: string) => {
-        const currentValue = options[key];
-        updateFormData({
-            options: {
-                ...options,
-                [key]: !currentValue,
-            },
-        });
+    const isOptionSelected = (optionId: number) => selectedOptions.includes(optionId);
+
+    const toggleOption = (optionId: number) => {
+        const newSelected = selectedOptions.includes(optionId)
+            ? selectedOptions.filter(item => item !== optionId)
+            : [...selectedOptions, optionId];
+        
+        setSelectedOptions(newSelected);
+        setData('options', newSelected);
     };
 
-    const isOptionSelected = (key: string): boolean => {
-        return !!options[key];
+    const nextStep = () => {
+      post('/free-estimate/store/step2') 
     };
 
+    const prevStep = () => {
+       router.visit('/free-estimate');
+
+    };
+   
     return (
         <div className="flex items-start justify-center py-10 px-4">
             <div className="w-full max-w-6xl bg-gray-100 p-6">
@@ -108,300 +127,46 @@ export default function Options({ formData, updateFormData, nextStep, prevStep }
                         </p>
                         {/* Option Cards */}
                         <div className="space-y-3 mb-7" id="optionsList">
-                            {/* New Vanity */}
-                            <div
-                                className={`option-card border rounded-xl px-5 py-4 flex items-start gap-4 cursor-pointer transition-colors ${
-                                    isOptionSelected('new_vanity')
-                                        ? 'border-blue-500 bg-blue-50'
-                                        : 'border-gray-200'
-                                }`}
-                                onClick={() => toggleOption('new_vanity')}
-                            >
-                                <div className={`check-box w-5 h-5 rounded border-2 flex-shrink-0 mt-0.5 flex items-center justify-center ${
-                                    isOptionSelected('new_vanity') ? 'bg-blue-500 border-blue-500' : 'border-gray-300'
-                                }`}>
-                                    {isOptionSelected('new_vanity') && (
-                                        <svg
-                                            className="check-icon w-3 h-3 text-white"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth={3}
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                    )}
+                            {errors.options && (
+                                <InputError message={errors.options} className="mb-4" />
+                            )}
+                            {options.map((option) => (
+                                <div
+                                    key={option.id}
+                                    className={`option-card border rounded-xl px-5 py-4 flex items-start gap-4 cursor-pointer transition-colors ${
+                                        selectedOptions.includes(option.id)
+                                            ? 'border-blue-500 bg-blue-50'
+                                            : 'border-gray-200'
+                                    }`}
+                                    onClick={() => toggleOption(option.id)}
+                                >
+                                    <div className={`check-box w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center ${
+                                        selectedOptions.includes(option.id) ? 'bg-blue-500 border-blue-500' : 'border-gray-300'
+                                    }`}>
+                                        {selectedOptions.includes(option.id) && (
+                                            <svg
+                                                className="check-icon w-3 h-3 text-white"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth={3}
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M5 13l4 4L19 7"
+                                                />
+                                            </svg>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-semibold text-gray-900">{option.name}</p>
+                                        <p className="text-xs text-gray-500 mt-0.5">
+                                            {option.description}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className="text-sm font-semibold text-gray-900">New Vanity</p>
-                                    <p className="text-xs text-gray-500 mt-0.5">
-                                        Replace your existing vanity with a new one, including sink and
-                                        faucet
-                                    </p>
-                                </div>
-                            </div>
-                            {/* New Toilet */}
-                            <div
-                                className={`option-card border rounded-xl px-5 py-4 flex items-start gap-4 cursor-pointer transition-colors ${
-                                    isOptionSelected('new_toilet')
-                                        ? 'border-blue-500 bg-blue-50'
-                                        : 'border-gray-200'
-                                }`}
-                                onClick={() => toggleOption('new_toilet')}
-                            >
-                                <div className={`check-box w-5 h-5 rounded border-2 flex-shrink-0 mt-0.5 flex items-center justify-center ${
-                                    isOptionSelected('new_toilet') ? 'bg-blue-500 border-blue-500' : 'border-gray-300'
-                                }`}>
-                                    {isOptionSelected('new_toilet') && (
-                                        <svg
-                                            className="check-icon w-3 h-3 text-white"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth={3}
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                    )}
-                                </div>
-                                <div>
-                                    <p className="text-sm font-semibold text-gray-900">New Toilet</p>
-                                    <p className="text-xs text-gray-500 mt-0.5">
-                                        Install a new modern, water-efficient toilet
-                                    </p>
-                                </div>
-                            </div>
-                            {/* New Flooring */}
-                            <div
-                                className={`option-card border rounded-xl px-5 py-4 flex items-start gap-4 cursor-pointer transition-colors ${
-                                    isOptionSelected('new_flooring')
-                                        ? 'border-blue-500 bg-blue-50'
-                                        : 'border-gray-200'
-                                }`}
-                                onClick={() => toggleOption('new_flooring')}
-                            >
-                                <div className={`check-box w-5 h-5 rounded border-2 flex-shrink-0 mt-0.5 flex items-center justify-center ${
-                                    isOptionSelected('new_flooring') ? 'bg-blue-500 border-blue-500' : 'border-gray-300'
-                                }`}>
-                                    {isOptionSelected('new_flooring') && (
-                                        <svg
-                                            className="check-icon w-3 h-3 text-white"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth={3}
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                    )}
-                                </div>
-                                <div>
-                                    <p className="text-sm font-semibold text-gray-900">
-                                        New Flooring
-                                    </p>
-                                    <p className="text-xs text-gray-500 mt-0.5">
-                                        Replace bathroom flooring with tile, vinyl, or your choice of
-                                        material
-                                    </p>
-                                </div>
-                            </div>
-                            {/* Convert Tub to Shower */}
-                            <div
-                                className={`option-card border rounded-xl px-5 py-4 flex items-start gap-4 cursor-pointer transition-colors ${
-                                    isOptionSelected('tub_to_shower')
-                                        ? 'border-blue-500 bg-blue-50'
-                                        : 'border-gray-200'
-                                }`}
-                                onClick={() => toggleOption('tub_to_shower')}
-                            >
-                                <div className={`check-box w-5 h-5 rounded border-2 flex-shrink-0 mt-0.5 flex items-center justify-center ${
-                                    isOptionSelected('tub_to_shower') ? 'bg-blue-500 border-blue-500' : 'border-gray-300'
-                                }`}>
-                                    {isOptionSelected('tub_to_shower') && (
-                                        <svg
-                                            className="check-icon w-3 h-3 text-white"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth={3}
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                    )}
-                                </div>
-                                <div>
-                                    <p className="text-sm font-semibold text-gray-900">
-                                        Convert Tub to Shower
-                                    </p>
-                                    <p className="text-xs text-gray-500 mt-0.5">
-                                        Remove existing tub and install a walk-in shower
-                                    </p>
-                                </div>
-                            </div>
-                            {/* Convert Shower to Tub */}
-                            <div
-                                className={`option-card border rounded-xl px-5 py-4 flex items-start gap-4 cursor-pointer transition-colors ${
-                                    isOptionSelected('shower_to_tub')
-                                        ? 'border-blue-500 bg-blue-50'
-                                        : 'border-gray-200'
-                                }`}
-                                onClick={() => toggleOption('shower_to_tub')}
-                            >
-                                <div className={`check-box w-5 h-5 rounded border-2 flex-shrink-0 mt-0.5 flex items-center justify-center ${
-                                    isOptionSelected('shower_to_tub') ? 'bg-blue-500 border-blue-500' : 'border-gray-300'
-                                }`}>
-                                    {isOptionSelected('shower_to_tub') && (
-                                        <svg
-                                            className="check-icon w-3 h-3 text-white"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth={3}
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                    )}
-                                </div>
-                                <div>
-                                    <p className="text-sm font-semibold text-gray-900">
-                                        Convert Shower to Tub
-                                    </p>
-                                    <p className="text-xs text-gray-500 mt-0.5">
-                                        Remove existing shower and install a bathtub
-                                    </p>
-                                </div>
-                            </div>
-                            {/* Install New Tub or Shower */}
-                            <div
-                                className={`option-card border rounded-xl px-5 py-4 flex items-start gap-4 cursor-pointer transition-colors ${
-                                    isOptionSelected('new_tub_or_shower')
-                                        ? 'border-blue-500 bg-blue-50'
-                                        : 'border-gray-200'
-                                }`}
-                                onClick={() => toggleOption('new_tub_or_shower')}
-                            >
-                                <div className={`check-box w-5 h-5 rounded border-2 flex-shrink-0 mt-0.5 flex items-center justify-center ${
-                                    isOptionSelected('new_tub_or_shower') ? 'bg-blue-500 border-blue-500' : 'border-gray-300'
-                                }`}>
-                                    {isOptionSelected('new_tub_or_shower') && (
-                                        <svg
-                                            className="check-icon w-3 h-3 text-white"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth={3}
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                    )}
-                                </div>
-                                <div>
-                                    <p className="text-sm font-semibold text-gray-900">
-                                        Install New Tub or Shower
-                                    </p>
-                                    <p className="text-xs text-gray-500 mt-0.5">
-                                        Replace your existing tub or shower with a new unit
-                                    </p>
-                                </div>
-                            </div>
-                            {/* Install Tile */}
-                            <div
-                                className={`option-card border rounded-xl px-5 py-4 flex items-start gap-4 cursor-pointer transition-colors ${
-                                    isOptionSelected('install_tile')
-                                        ? 'border-blue-500 bg-blue-50'
-                                        : 'border-gray-200'
-                                }`}
-                                onClick={() => toggleOption('install_tile')}
-                            >
-                                <div className={`check-box w-5 h-5 rounded border-2 flex-shrink-0 mt-0.5 flex items-center justify-center ${
-                                    isOptionSelected('install_tile') ? 'bg-blue-500 border-blue-500' : 'border-gray-300'
-                                }`}>
-                                    {isOptionSelected('install_tile') && (
-                                        <svg
-                                            className="check-icon w-3 h-3 text-white"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth={3}
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                    )}
-                                </div>
-                                <div>
-                                    <p className="text-sm font-semibold text-gray-900">
-                                        Install Tile
-                                    </p>
-                                    <p className="text-xs text-gray-500 mt-0.5">
-                                        Tile installation for walls, shower, or backsplash
-                                    </p>
-                                </div>
-                            </div>
-                            {/* Install Wall Panels */}
-                            <div
-                                className={`option-card border rounded-xl px-5 py-4 flex items-start gap-4 cursor-pointer transition-colors ${
-                                    isOptionSelected('wall_panels')
-                                        ? 'border-blue-500 bg-blue-50'
-                                        : 'border-gray-200'
-                                }`}
-                                onClick={() => toggleOption('wall_panels')}
-                            >
-                                <div className={`check-box w-5 h-5 rounded border-2 flex-shrink-0 mt-0.5 flex items-center justify-center ${
-                                    isOptionSelected('wall_panels') ? 'bg-blue-500 border-blue-500' : 'border-gray-300'
-                                }`}>
-                                    {isOptionSelected('wall_panels') && (
-                                        <svg
-                                            className="check-icon w-3 h-3 text-white"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth={3}
-                                            viewBox="0 0 24 24"
-                                        >
-0 24                                             <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                    )}
-                                </div>
-                                <div>
-                                    <p className="text-sm font-semibold text-gray-900">
-                                        Install Wall Panels
-                                    </p>
-                                    <p className="text-xs text-gray-500 mt-0.5">
-                                        Waterproof wall panels as an alternative to tile
-                                    </p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                         {/* Dropdowns Row */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -411,15 +176,20 @@ export default function Options({ formData, updateFormData, nextStep, prevStep }
                                     <span className="text-gray-400 font-normal">(Optional)</span>
                                 </label>
                                 <div className="relative">
-                                    <select className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-500 bg-white appearance-none transition-all pr-10">
-                                        <option value="" disabled>
-                                            Select Size
-                                        </option>
-                                        <option>small(5x8 OR SMALLER)</option>
-                                        <option>medium(5x8 TO 6x8)</option>
-                                        <option>large(6x8 TO 8x8)</option>
-                                        <option>extra large(8x8 OR LARGER)</option>
+                                    <select 
+                                        value={data.bathroom_size}
+                                        onChange={(e) => setData('bathroom_size', e.target.value)}
+                                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-500 bg-white appearance-none transition-all pr-10"
+                                    >
+                                        <option value="">Select Size</option>
+                                        <option value="small">small(5x8 OR SMALLER)</option>
+                                        <option value="medium">medium(5x8 TO 6x8)</option>
+                                        <option value="large">large(6x8 TO 8x8)</option>
+                                        <option value="extra_large">extra large(8x8 OR LARGER)</option>
                                     </select>
+                                    {errors.bathroom_size && (
+                                        <InputError message={errors.bathroom_size} className="mt-1" />
+                                    )}
                                     <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
                                         <svg
                                             className="w-4 h-4 text-gray-400"
@@ -443,15 +213,21 @@ export default function Options({ formData, updateFormData, nextStep, prevStep }
                                     <span className="text-gray-400 font-normal">(Optional)</span>
                                 </label>
                                 <div className="relative">
-                                    <select className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-500 bg-white appearance-none transition-all pr-10">
-                                        <option value="" disabled>
-                                            Select Current Setup
-                                        </option>
-                                        <option>Tub only</option>
-                                        <option>Shower only</option>
-                                        <option>Tub/Shower combo</option>
-                                        <option>Separate tub & shower</option>
+                                    <select 
+                                        value={data.current_setup}
+                                        onChange={(e) => setData('current_setup', e.target.value)}
+                                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-500 bg-white appearance-none transition-all pr-10"
+                                    >
+                                        <option value="">Select Current Setup</option>
+                                        {currentSetups.map((setup) => (
+                                            <option key={setup.id} value={setup.id}>
+                                                {setup.name}
+                                            </option>
+                                        ))}
                                     </select>
+                                    {errors.current_setup && (
+                                        <InputError message={errors.current_setup} className="mt-1" />
+                                    )}
                                     <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
                                         <svg
                                             className="w-4 h-4 text-gray-400"

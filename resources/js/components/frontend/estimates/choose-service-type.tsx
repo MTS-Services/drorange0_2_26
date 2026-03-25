@@ -1,4 +1,5 @@
 import FileUpload from '@/components/file-upload';
+import InputError from '@/components/input-error';
 import { useForm } from '@inertiajs/react';
 import React, { useState } from 'react';
 
@@ -13,22 +14,24 @@ interface Props {
 
 interface FormData {
     files: File | File[] | null;
+    service_type: string;
 }
 
 export default function ChooseServiceType({ serviceTypes }: Props) {
-
-    const { data, setData, post, processing, errors } = useForm<FormData>({
-        files: null,
-    });
-
 
     const getDefaultValue = () => {
         const queryParams = new URLSearchParams(window.location.search);
         return queryParams.get('service') ?? '';
     };
 
+    const { data, setData, post, processing, errors } = useForm<FormData>({
+        files: null,
+        service_type: getDefaultValue(),
+    });
+
+
     const [selectedService, setSelectedService] =
-        useState<string>(getDefaultValue);
+        useState<string>(getDefaultValue());
 
 
 
@@ -51,13 +54,15 @@ export default function ChooseServiceType({ serviceTypes }: Props) {
             formData.append('file', data.files);
         }
 
-        console.log(formData);
-        // Use post with FormData directly - no need for 'data' key
-        // post('/fileupload', {
-        //     // @ts-ignore - Inertia will handle FormData correctly
-        //     data: formData,
-        //     forceFormData: true,
-        // });
+      
+
+       
+        
+        // Uncomment and use the post call
+        post('/free-estimate/store/step1', {
+            // @ts-ignore - Inertia will handle FormData correctly
+            forceFormData: true,
+        });
     };
 
 
@@ -151,9 +156,10 @@ export default function ChooseServiceType({ serviceTypes }: Props) {
                                 <div className="relative">
                                     <select
                                         value={selectedService}
-                                        onChange={(e) =>
-                                            setSelectedService(e.target.value)
-                                        }
+                                        onChange={(e) => {
+                                            setSelectedService(e.target.value);
+                                            setData('service_type', e.target.value);
+                                        }}
                                         className="w-full appearance-none rounded-lg border border-gray-300 bg-white px-4 py-3 pr-10 text-sm text-gray-700 transition-all"
                                     >
                                         <option value="">
@@ -183,6 +189,9 @@ export default function ChooseServiceType({ serviceTypes }: Props) {
                                             />
                                         </svg>
                                     </div>
+                                    {errors.service_type && (
+                                       <InputError message={errors.service_type} />
+                                    )}
                                 </div>
                             </div>
 
@@ -193,7 +202,7 @@ export default function ChooseServiceType({ serviceTypes }: Props) {
                                     multiple={true}
                                     maxSize={10}
                                     maxFiles={10}
-                                    accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.csv,.txt"
+                                    accept="image/*"
                                     error={(errors as any).files || (errors as any).file}
                                 />
                             </div>
@@ -237,6 +246,49 @@ export default function ChooseServiceType({ serviceTypes }: Props) {
                             </div>
                         </div>
                     </div>
+                     {/* Card Footer */}
+                        <div className="flex justify-between border-t border-gray-100 bg-gray-50 px-8 py-5">
+                            <button
+                                type="button"
+                                disabled
+                               
+                                className="flex items-center gap-1.5 rounded-lg bg-gray-200 px-6 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-300"
+                            >
+                                <svg
+                                    className="h-4 w-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M15 19l-7-7 7-7"
+                                    />
+                                </svg>
+                                Back
+                            </button>
+                            <button
+                                type="submit"
+                                className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 active:bg-blue-800"
+                            >
+                                Continue
+                                <svg
+                                    className="h-4 w-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M9 5l7 7-7 7"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
                 </form>
             </div>
         </div>

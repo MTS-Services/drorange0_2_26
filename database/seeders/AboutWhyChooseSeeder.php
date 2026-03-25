@@ -13,19 +13,19 @@ class AboutWhyChooseSeeder extends Seeder
 
         AboutWhyChoose::insert([
             [
-                'title' => 'Licensed & insured team',
-                'subtitle' => 'Certified professionals who prioritize safety and compliance.',
-                'icon' => 'default/images/icon/certified.png',
+                'title' => 'Licensed & Insured',
+                'subtitle' => 'Fully licensed contractors with comprehensive insurance coverage for your complete protection and peace of mind.',
+                'icon' => 'default/Vector-6.png',
             ],
             [
-                'title' => 'Transparent estimates',
-                'subtitle' => 'Clear scopes, options, and pricing before any work begins.',
-                'icon' => 'default/images/icon/estimate.png',
+                'title' => 'Quality Craftsmanship',
+                'subtitle' => 'We use only premium materials and employ skilled professionals who take pride in every detail of their work.',
+                'icon' => 'default/Icon-4.png',
             ],
             [
-                'title' => 'On-time delivery',
-                'subtitle' => 'Schedules you can trust with proactive communication.',
-                'icon' => 'default/images/icon/ontime.png',
+                'title' => 'Customer-Focused',
+                'subtitle' => 'Your satisfaction is our priority. We listen to your needs, communicate clearly, and deliver on our promises.',
+                'icon' => 'default/Icon3.png',
             ],
         ]);
     }

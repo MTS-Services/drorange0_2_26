@@ -11,24 +11,24 @@ class RemodelingOptionSeeder extends Seeder
     {
         RemodelingOption::insert([
             [
-                'title' => 'Layout Planning',
-                'subtitle' => 'Smart space planning tailored to your remodel goals.',
-                'icon' => 'default/images/icon/layout.png',
+                'title' => 'Tub to Shower Conversion',
+                'subtitle' => 'Replace your old bathtub with a modern, accessible walk-in shower. Perfect for improving safety and creating more space.',
+                'icon' => 'default/2.png',
             ],
             [
-                'title' => 'Material Guidance',
-                'subtitle' => 'Durable finishes selected for your lifestyle and budget.',
-                'icon' => 'default/images/icon/material-guidance.png',
+                'title' => 'Complete Remodel',
+                'subtitle' => 'Full bathroom transformation including flooring, walls, fixtures, and lighting. Start fresh with a brand new bathroom.',
+                'icon' => 'default/5.png',
             ],
             [
-                'title' => 'Permits & Inspections',
-                'subtitle' => 'We handle approvals and schedule inspections.',
-                'icon' => 'default/images/icon/permits.png',
+                'title' => 'Vanity & Fixture Upgrade',
+                'subtitle' => 'Update your bathroom with new vanities, sinks, toilets, and faucets without a full remodel.',
+                'icon' => 'default/3.png',
             ],
             [
-                'title' => 'Skilled Craftsmanship',
-                'subtitle' => 'Licensed trades executing with precision and care.',
-                'icon' => 'default/images/icon/craftsmanship.png',
+                'title' => 'Tile Installation',
+                'subtitle' => 'Beautiful tile work for floors, shower walls, and backsplashes. Choose from countless styles and patterns.',
+                'icon' => 'default/4.png',
             ],
             [
                 'title' => 'Project Tracking',

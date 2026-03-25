@@ -62,7 +62,7 @@ export function TeamSection({options, whychooses}: any) {
               whychooses.map((whychoose:any, index:number) => {
                 return (
                   <div className="text-center px-4">
-              <div className="why-icon p-2 mx-auto inline-block">
+              <div className="why-icon p-4 mx-auto inline-block bg-white/10 rounded-full shadow-lg">
                 <img src={whychoose.icon_url} alt=""  className='h-6 w-6'/>
               </div>
               <h3 className="font-inter font-normal text-white text-2xl mb-2">{whychoose.title}</h3>

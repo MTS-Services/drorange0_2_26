@@ -23,7 +23,8 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
 
             <div className="mx-auto w-full max-w-md rounded-2xl border border-border/50 bg-card/50 p-8 shadow-xl backdrop-blur-sm">
                 <Form
-                    {...update.form()}
+                    action={update.url()}
+                    method="post"
                     transform={(data) => ({ ...data, token, email })}
                     resetOnSuccess={['password', 'password_confirmation']}
                 >

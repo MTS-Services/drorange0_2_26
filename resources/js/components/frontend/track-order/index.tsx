@@ -44,7 +44,7 @@ export default function Index({ formData, updateFormData, nextStep }: IndexProps
     };
     return (
         <div className="py-12 flex items-center justify-center font-sans lg:px-4 md:px-2 px-2">
-            <div className="w-full max-w-6xl bg-gray-50 rounded lg:px-8 lg:py-16  px-2 py-6">
+            <div className="w-full max-w-7xl bg-gray-50 rounded lg:px-8 lg:py-16  px-2 py-6">
                 {/* Header */}
                 <div className="flex flex-col items-center mb-10">
                     {/* Box Icon */}

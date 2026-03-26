@@ -21,7 +21,7 @@ export function StayInformedSection({ stayInforms }: { stayInforms: StayInform[]
 
                     {
                         stayInforms?.map((stayInform: StayInform, index: number) => (
-                            <div className="inform-card px-4">
+                            <div className="inform-card px-2! sm:px-4!">
                                 <div className="inform-icon py-2">
                                     <img src={stayInform.icon_url} />
                                 </div>

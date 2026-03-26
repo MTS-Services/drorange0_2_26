@@ -1,7 +1,7 @@
 export function ContactFaqSection({ faqs }: any) {
     return (
         <section>
-               <div className="max-w-7xl mx-auto px-4 md:mt-5 lg:mt-10 xl:mt-20">
+               <div className="max-w-7xl mx-auto px-4 sm:px-8 md:mt-5 lg:mt-10 xl:mt-20">
             
 
             <div className="lg:py-12 py-4">

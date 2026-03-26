@@ -64,7 +64,7 @@ export function EstateApproachSection() {
   const [listRef, listVisible] = useReveal<HTMLDivElement>(0.2);
 
   return (
-    <section className="max-w-7xl mx-auto lg:py-20 py-10 px-8 bg-gray-50">
+    <section className="max-w-7xl mx-auto lg:py-20 py-10 px-4 sm:px-8 bg-gray-50">
     <div className="">
       <div className="text-center mb-12"> 
         <h2 className="font-sf-pro font-semibold text-gray-900 text-3xl md:text-4xl xl:text-5xl">What Our Clients Say</h2>

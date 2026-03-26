@@ -73,10 +73,10 @@ export function FrontendFooter() {
                 <p className="text-white font-bold mb-4 text-xl font-inter">Get Started</p>
                 <ul className="space-y-2.5 text-md text-gray-400">
                   <li><a href={route('bathroom')} className="hover:text-white transition-colors">Bathroom Remodeling</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Tub to Shower Conversion</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Tile Installation</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Vanity Replacement</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Plumbing Updates</a></li>
+                  <li><a href={route('free-estimate')} className="hover:text-white transition-colors">Tub to Shower Conversion</a></li>
+                  <li><a href={route('free-estimate')} className="hover:text-white transition-colors">Tile Installation</a></li>
+                  <li><a href={route('free-estimate')} className="hover:text-white transition-colors">Vanity Replacement</a></li>
+                  <li><a href={route('track-orders')} className="hover:text-white transition-colors">Plumbing Updates</a></li>
                 </ul>
               </div>
         

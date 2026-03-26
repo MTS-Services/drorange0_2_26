@@ -56,7 +56,7 @@ export function ContactForm() {
     };
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-8 py-6 bg-[#F9FAFB] mt-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 sm:px-8 py-6 bg-[#F9FAFB] mt-5 md:mt-20">
  
             <div className="md:col-span-1">
                 <h2 className="text-2xl font-normal font-inter mb-6 text-gray-900">Get in Touch</h2>

@@ -1,6 +1,6 @@
 export function WhyChooseSection({ whyChoose }: any) {
     return (
-        <section className="mx-auto max-w-7xl px-6 py-20">
+        <section className="mx-auto max-w-7xl px-4 sm:px-8 py-20">
             <h2 className="mb-3 text-center text-3xl md:text-4xl xl:text-5xl font-sf-pro font-bold text-gray-900">
                 Why Choose Us
             </h2>

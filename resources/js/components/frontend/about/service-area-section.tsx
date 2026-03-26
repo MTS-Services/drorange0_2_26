@@ -33,7 +33,7 @@ export function ServiceAreaSection({ serviceArea }: any) {
                 Proudly serving homeowners throughout Ohio
             </p>
             <div className="rounded-2xl bg-blue-50 p-8">
-                <div className="mb-6 grid grid-cols-2 gap-3 text-sm text-gray-700 sm:grid-cols-4">
+                <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700 md:grid-cols-4">
                     {serviceArea?.map((item: any, index: number) => (
                         <div className="flex items-center gap-2 text-gray-900 font-inter font-normal text-base">
                             <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-100">

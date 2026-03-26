@@ -52,7 +52,7 @@ export function TeamSection({options, whychooses}: any) {
       </section>
     
       <section className="w-full max-w-7xl mx-auto bg-blue-600 lg:py-20 py-8 text-white px-4">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+        <div className="max-w-7xl mx-auto text-center">
           <h2 className="font-sf-pro font-semibold text-white text-3xl md:text-4xl xl:text-5xl mb-2">Why Choose BathPro Remodeling?</h2>
           <p className="mx-auto mt-3 text-white/75 font-inter font-normal text-xl mb-16">Professional service, quality craftsmanship, and customer
             satisfaction guaranteed.</p>
@@ -61,7 +61,7 @@ export function TeamSection({options, whychooses}: any) {
             {
               whychooses.map((whychoose:any, index:number) => {
                 return (
-                  <div className="text-center px-4">
+                  <div className="text-center px-0 sm:px-4">
               <div className="why-icon p-4 mx-auto inline-block bg-white/10 rounded-full shadow-lg">
                 <img src={whychoose.icon_url} alt=""  className='h-6 w-6'/>
               </div>

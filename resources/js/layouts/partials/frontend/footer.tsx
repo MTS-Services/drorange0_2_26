@@ -13,11 +13,11 @@ export function FrontendFooter() {
         
               {/* Col 1: Brand + contact */}
               <div className="max-w-xs">
-                <p className="text-base font-bold text-white mb-3" style={{ fontFamily: "'Inter', serif" }}>BathPro Remodeling</p>
-                <p className="text-gray-400 text-sm leading-relaxed mb-5">Professional bathroom remodeling services with quality craftsmanship.</p>
+                <p className="text-xl font-bold text-white mb-3" style={{ fontFamily: "'Inter', serif" }}>BathPro Remodeling</p>
+                <p className="text-gray-400 text-base leading-relaxed mb-5">Professional bathroom remodeling services with quality craftsmanship.</p>
                 <ul className="text-sm text-gray-400 space-y-2.5">
         
-                  <li className="flex items-center gap-2.5">
+                  <li className="flex items-center gap-2.5 text-base font-normal font-inter">
                     {/* Phone icon */}
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
                       <g clipPath="url(#clip_phone)">
@@ -31,7 +31,7 @@ export function FrontendFooter() {
                     (555) 123-4567
                   </li>
         
-                  <li className="flex items-center gap-2.5">
+                  <li className="flex items-center gap-2.5 text-base font-normal font-inter">
                     {/* Mail icon */}
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
                       <path d="M2.66667 2.66699H13.3333C14.0667 2.66699 14.6667 3.26699 14.6667 4.00033V12.0003C14.6667 12.7337 14.0667 13.3337 13.3333 13.3337H2.66667C1.93333 13.3337 1.33333 12.7337 1.33333 12.0003V4.00033C1.33333 3.26699 1.93333 2.66699 2.66667 2.66699Z"
@@ -42,7 +42,7 @@ export function FrontendFooter() {
                     info@bathproremodeling.com
                   </li>
         
-                  <li className="flex items-center gap-2.5">
+                  <li className="flex items-center gap-2.5 text-base font-normal font-inter">
                     {/* Location icon */}
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
                       <path d="M8.00033 1.33301C5.79333 1.33301 4.00033 3.12601 4.00033 5.33301C4.00033 8.33301 8.00033 14.6663 8.00033 14.6663C8.00033 14.6663 12.0003 8.33301 12.0003 5.33301C12.0003 3.12601 10.2073 1.33301 8.00033 1.33301Z"
@@ -58,21 +58,21 @@ export function FrontendFooter() {
         
               {/* Col 2: Quick Links */}
               <div>
-                <p className="text-white font-semibold mb-4 text-md font-inter">Quick Links</p>
+                <p className="text-white font-bold mb-4 text-xl font-inter">Quick Links</p>
                 <ul className="space-y-2.5 text-md text-gray-400">
-                  <li><a href="#" className="hover:text-white transition-colors">Home</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Bathroom Remodeling</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">How It Works</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                  <li><a href={route('home')} className="hover:text-white transition-colors">Home</a></li>
+                  <li><a href={route('bathroom')} className="hover:text-white transition-colors">Bathroom Remodeling</a></li>
+                  <li><a href={route('how-it-work')} className="hover:text-white transition-colors">How It Works</a></li>
+                  <li><a href={route('lpa')} className="hover:text-white transition-colors">About Us</a></li>
+                  <li><a href={route('contact')} className="hover:text-white transition-colors">Contact</a></li>
                 </ul>
               </div>
         
               {/* Col 3: Get Started */}
               <div>
-                <p className="text-white font-semibold mb-4 text-md font-inter">Get Started</p>
+                <p className="text-white font-bold mb-4 text-xl font-inter">Get Started</p>
                 <ul className="space-y-2.5 text-md text-gray-400">
-                  <li><a href="#" className="hover:text-white transition-colors">Bathroom Remodeling</a></li>
+                  <li><a href={route('bathroom')} className="hover:text-white transition-colors">Bathroom Remodeling</a></li>
                   <li><a href="#" className="hover:text-white transition-colors">Tub to Shower Conversion</a></li>
                   <li><a href="#" className="hover:text-white transition-colors">Tile Installation</a></li>
                   <li><a href="#" className="hover:text-white transition-colors">Vanity Replacement</a></li>
@@ -84,10 +84,10 @@ export function FrontendFooter() {
         
             {/* Bottom bar */}
             <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
-              <p className="text-gray-400 text-xs">© 2025 BathPro Remodeling. All Rights Reserved.</p>
+              <p className="text-gray-400 text-sm font-normal font-inter">© 2025 BathPro Remodeling. All Rights Reserved.</p>
               <div className="flex gap-5 text-xs">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-normal font-inter">Privacy Policy</a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-normal font-inter">Terms of Service</a>
               </div>
             </div>
         

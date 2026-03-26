@@ -13,17 +13,17 @@ class RemodelingWhyChooseSeeder extends Seeder
             [
                 'title' => 'Licensed & Insured',
                 'subtitle' => 'Fully licensed contractors with comprehensive insurance for your protection.',
-                'icon' => 'default/Vector-6.png',
+                'icon' => 'default/Vector (6).png',
             ],
             [
                 'title' => 'Fast Turnaround',
                 'subtitle' => 'Most bathroom remodels completed in 5-10 days, not weeks.',
-                'icon' => 'default/Icon3.png',
+                'icon' => 'default/Icon (3).png',
             ],
             [
                 'title' => '10-Year Warranty',
                 'subtitle' => 'Industry-leading warranty on all workmanship and materials.',
-                'icon' => 'default/Icon-4.png',
+                'icon' => 'default/Icon (4).png',
             ],
             [
                 'title' => 'On-Time Delivery',

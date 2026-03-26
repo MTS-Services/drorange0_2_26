@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FrontendLayout from '@/layouts/frontend-layout';
-import Index from '@/components/frontend/track-order';
+import Index from '@/components/frontend/estimates';
 
 export type TrackOrderFormData = {
     orderId: string;

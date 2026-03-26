@@ -1,8 +1,7 @@
-import { Link, router } from '@inertiajs/react';
 import { CircleCheckBig } from 'lucide-react';
 
 
-export default function Review() {
+export default function Review({estimateData, options, currentSetup, service, totalFile}: any) {
 
 
     return (
@@ -134,25 +133,51 @@ export default function Review() {
                            <h2 className="text-sm font-bold text-black font-inter">
                            Project Type
                            </h2>
-                           <p className="font-inter text-xs text-[#364153] mt-1 mb-1">Bathroom Remodel</p>
+                           <p className="font-inter text-xs text-[#364153] mt-1 mb-1">
+                            {service?.name}
+                           </p>
                             
                         </div> 
                          <div className="w-full  mb-6">
                            <h2 className="text-sm font-bold text-black font-inter">
                            Photos
                            </h2>
-                           <p className="font-inter text-xs text-[#364153] mt-1 mb-1">10 Photo Uploaded</p>
+                           <p className="font-inter text-xs text-[#364153] mt-1 mb-1">{totalFile} Photos Uploaded</p>
                             
                         </div> 
                         <div className="w-full  mb-6">
                            <h2 className="text-sm font-bold text-black font-inter">
                            Selected Options
                            </h2>
-                           <p className="font-inter text-xs text-[#364153] mt-1 mb-1">Mehedy Hasan</p>
-                           <p className="font-inter text-xs text-[#364153] mb-1">01712345678</p>
-                           <p className="font-inter text-xs text-[#364153] mb-1">mehed@gmail.com</p>
-                           <p className="font-inter text-xs text-[#364153] mb-1">Dhaka, Bangladesh</p>
-                           <p className="font-inter text-xs text-[#364153]">12345</p>
+                           {
+                            options?.map((option: any) => (
+                                <p className="font-inter text-xs text-[#364153] mt-1 mb-1">{option?.name}</p>
+                            ))
+                           }
+                            
+                        </div> 
+
+                        
+                        <div className="w-full  mb-6">
+                           <h2 className="text-sm font-bold text-black font-inter">
+                           Bathroom Size
+                           </h2>
+                           {
+                           
+                                <p className="font-inter text-xs text-[#364153] mt-1 mb-1">{estimateData?.bathroom_size}</p>
+                           }
+                            
+                        </div> 
+
+                        
+                        <div className="w-full  mb-6">
+                           <h2 className="text-sm font-bold text-black font-inter">
+                           Current Setup
+                           </h2>
+                           {
+                           
+                                <p className="font-inter text-xs text-[#364153] mt-1 mb-1">{currentSetup?.name}</p>
+                           }
                             
                         </div> 
                         
@@ -160,11 +185,12 @@ export default function Review() {
                            <h2 className="text-sm font-bold text-black font-inter">
                             Contact information
                            </h2>
-                           <p className="font-inter text-xs text-[#364153] mt-1 mb-1">Mehedy Hasan</p>
-                           <p className="font-inter text-xs text-[#364153] mb-1">01712345678</p>
-                           <p className="font-inter text-xs text-[#364153] mb-1">mehed@gmail.com</p>
-                           <p className="font-inter text-xs text-[#364153] mb-1">Dhaka, Bangladesh</p>
-                           <p className="font-inter text-xs text-[#364153]">12345</p>
+                           <p className="font-inter text-xs text-[#364153] mt-1 mb-1">{estimateData?.first_name + estimateData?.last_name}</p>
+                           <p className="font-inter text-xs text-[#364153] mb-1">{estimateData?.phone}</p>
+                           <p className="font-inter text-xs text-[#364153] mb-1">{estimateData?.email}</p>
+                           <p className="font-inter text-xs text-[#364153] mb-1">{estimateData?.address}</p>
+                           <p className="font-inter text-xs text-[#364153]">{estimateData?.city}</p>
+                           <p className="font-inter text-xs text-[#364153]">{estimateData?.zip}</p>
                             
                         </div>
 

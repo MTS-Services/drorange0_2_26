@@ -36,6 +36,8 @@ class OtpService
     public function verifyOtp(string $otp, string $phone): bool
     {
         $otpRecord = $this->otp->where('otp', $otp)->where('phone', $phone)->first();
+
+
         if (!$otpRecord) {
             return false;
         }

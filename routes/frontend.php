@@ -38,3 +38,9 @@ Route::get("/free-estimate/step4", [FrontendController::class, "freeEstimateStep
 // Free Estimate Resend OTP Route
 Route::post("/estimates/resend-otp", [FrontendController::class, "freeEstimateResendOtp"])->name("frontend.free-estimate-resend-otp");
 Route::post("/estimates/verify-otp", [FrontendController::class, "freeEstimateVerifyOtp"])->name("frontend.free-estimate-verify-otp");
+
+// Free Estimate Step 5 Route
+Route::get("/free-estimate/step5", [FrontendController::class, "freeEstimateStep5"])->name("frontend.free-estimate-step5");
+Route::post("/free-estimate/store/step5", [FrontendController::class, "freeEstimateStoreStep5"])->name("free-estimate.store.step5");
+// final Stepp
+Route::get("/free-estimate/step6", [FrontendController::class, "freeEstimateStep6"])->name("frontend.free-estimate-step6");

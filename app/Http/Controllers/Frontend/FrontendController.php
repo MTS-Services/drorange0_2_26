@@ -337,9 +337,32 @@ class FrontendController extends Controller
             'otp' => 'required|string',
             'phone' => 'required|string',
         ]);
+       
+       $otpVerified = $this->otpService->verifyOtp($request->otp, $request->phone, );
         
-        $this->otpService->verifyOtp($request->phone, $request->otp);
+       if($otpVerified) {
+        return redirect()->route('frontend.free-estimate-step5');
+       }
+     
+    }
+
+    public function freeEstimateStep5()
+    {
+        return Inertia::render('frontend/free-estimate-step5');
+    }
+
+    public function freeEstimateStoreStep5(Request $request)
+    {
+       
+       
+    //    Inertia::render('frontend/free-estimate-step6');
+    }
+
+
+    public function freeEstimateStep6(){
+
         
-        return back()->with('success', 'OTP has been verified.');
+       
+        Inertia::render('frontend/free-estimate-step6');
     }
 }

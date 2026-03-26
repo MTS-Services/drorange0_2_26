@@ -4,7 +4,7 @@ import FrontendLayout from '@/layouts/frontend-layout';
 import Options from '@/components/frontend/estimates/options';
 import Contact from '@/components/frontend/estimates/contact';
 import Verify from '@/components/frontend/estimates/verify';
-import Review from '@/components/frontend/estimates/review';
+import Review from '@/components/frontend/estimates/success';
 
 export type FreeEstimateFormData = {
     photos: File[];

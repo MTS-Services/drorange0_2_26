@@ -5,9 +5,9 @@ export function ServiceAreaSection({ serviceArea }: any) {
     return (
         <section className="mx-auto max-w-7xl px-6 py-20 text-center">
             <div className="mb-4 flex justify-center">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xs bg-blue-100">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xs">
                     <svg
-                        className="h-6 w-6 text-blue-600"
+                        className="h-10 w-10 text-blue-600"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="1.8"

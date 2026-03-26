@@ -19,7 +19,7 @@ class ContactFaqSeeder extends Seeder
             ],
             [
                 'question' => 'Can I schedule a consultation?',
-                'answer' => 'Yes, Yes! After submitting an estimate request, we can schedule an in-home consultation if needed. Most estimates can be completed accurately using your photos.',
+                'answer' => 'Yes! After submitting an estimate request, we can schedule an in-home consultation if needed. Most estimates can be completed accurately using your photos.',
             ],
             [
                 'question' => 'Do you offer emergency services?',

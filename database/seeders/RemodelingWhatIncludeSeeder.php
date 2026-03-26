@@ -12,32 +12,32 @@ class RemodelingWhatIncludeSeeder extends Seeder
         RemodelingWhatInclude::insert([
             [
                 'title' => 'Design Consultation',
-                'subtitle' => 'Personalized design guidance to shape your remodel.',
+                'subtitle' => 'Work with our experts to plan your perfect bathroom.',
                 'icon' => 'default/images/icon/design.png',
             ],
             [
-                'title' => 'Material Selection',
-                'subtitle' => 'Curated finishes sourced for durability and style.',
+                'title' => 'Quality Materials',
+                'subtitle' => 'Choose from premium fixtures, tiles, and finishes.',
                 'icon' => 'default/images/icon/materials.png',
             ],
             [
-                'title' => 'Permits & Approvals',
-                'subtitle' => 'We manage permits to keep your project compliant.',
+                'title' => 'Expert Installation',
+                'subtitle' => 'Licensed professionals handle every detail.',
                 'icon' => 'default/images/icon/permit.png',
             ],
             [
                 'title' => 'Project Management',
-                'subtitle' => 'Coordinated scheduling with progress tracking.',
+                'subtitle' => 'Track progress online and stay informed.',
                 'icon' => 'default/images/icon/management.png',
             ],
             [
-                'title' => 'Quality Craftsmanship',
-                'subtitle' => 'Licensed crews delivering precise installation.',
+                'title' => 'Clean-Up Service',
+                'subtitle' => 'We leave your home clean and ready to enjoy.',
                 'icon' => 'default/images/icon/craft.png',
             ],
             [
-                'title' => 'Cleanup & Handover',
-                'subtitle' => 'Thorough cleanup with a final walkthrough.',
+                'title' => '10-Year Warranty',
+                'subtitle' => 'Peace of mind with our comprehensive warranty.',
                 'icon' => 'default/images/icon/cleanup.png',
             ],
         ]);

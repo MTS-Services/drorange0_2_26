@@ -13,12 +13,28 @@ class AboutLicenseSeeder extends Seeder
 
         AboutLicense::insert([
             [
-                'title' => 'Licensed General Contractor',
-                'subtitle' => 'State-certified with full compliance documentation.',
+                'title' => 'Ohio State Contractor License',
+                'subtitle' => 'License #12345678.',
+            ],
+            [
+                'title' => 'General Liability Insurance',
+                'subtitle' => '$2M coverage',
+            ],
+            [
+                'title' => 'Workers\' Compensation',
+                'subtitle' => 'All employees covered',
+            ],
+            [
+                'title' => 'Better Business Bureau',
+                'subtitle' => 'A+ Rating',
             ],
             [
                 'title' => 'EPA Lead-Safe Certified',
-                'subtitle' => 'Trained and certified for safe renovation practices.',
+                'subtitle' => 'Firm #12345',
+            ],
+            [
+                'title' => '10-Year Warranty',
+                'subtitle' => 'On all workmanship',
             ],
         ]);
     }

@@ -10,6 +10,7 @@ use App\Services\AboutServiceAreaService;
 use App\Services\AboutWhyChooseService;
 use App\Services\ContactBannerService;
 use App\Services\ContactFaqService;
+use App\Services\CurrentSetupService;
 use App\Services\HomePageHeroService;
 use App\Services\HomeServiceService;
 use App\Services\HowItWorkFaqService;
@@ -20,6 +21,9 @@ use App\Services\RemodelingOptionService;
 use App\Services\RemodelingWhatIncludeService;
 use App\Services\RemodelingWhyChooseService;
 use App\Services\HowItWorksService;
+use App\Services\OptionService;
+use App\Services\OtpService;
+use App\Services\ServiceTypeService;
 use App\Services\StayInformedService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -31,35 +35,36 @@ use Inertia\Response;
 class FrontendController extends Controller
 {
 
-   public  function __construct(
-    protected HomePageHeroService $homePageHeroService,
-    protected HomeServiceService $serviceService,
-    protected RemodelingHeroService $remodelingHeroService,
-    protected RemodelingWhatIncludeService $remodelingWhatIncludeService,
-    protected RemodelingOptionService $remodelingOptionService,
-    protected RemodelingWhyChooseService $remodelingWhyChooseService,
-    protected HowItWorksService $howItWorksService,
-    protected StayInformedService $stayInformedService,
-    protected HowItWorkFaqService $howItWorkFaqService,
-    protected HowItWorksBannerService $howItWorksBannerService,
-    protected AboutBannerService $aboutBannerService,
-    protected AboutInformationService $aboutInfromationService,
-    protected AboutLicenseService $aboutLicenseService,
-    protected AboutServiceAreaService $aboutServiceAreaService,
-    protected AboutWhyChooseService $aboutWhyChooseService,
-    protected ContactBannerService $contactBannerService,
-    protected ContactFaqService $contactFaqService,
-    protected MessageService $messageService,
-   )
-   {
-  
-   }
+    public  function __construct(
+        protected HomePageHeroService $homePageHeroService,
+        protected HomeServiceService $serviceService,
+        protected RemodelingHeroService $remodelingHeroService,
+        protected RemodelingWhatIncludeService $remodelingWhatIncludeService,
+        protected RemodelingOptionService $remodelingOptionService,
+        protected RemodelingWhyChooseService $remodelingWhyChooseService,
+        protected HowItWorksService $howItWorksService,
+        protected StayInformedService $stayInformedService,
+        protected HowItWorkFaqService $howItWorkFaqService,
+        protected HowItWorksBannerService $howItWorksBannerService,
+        protected AboutBannerService $aboutBannerService,
+        protected AboutInformationService $aboutInfromationService,
+        protected AboutLicenseService $aboutLicenseService,
+        protected AboutServiceAreaService $aboutServiceAreaService,
+        protected AboutWhyChooseService $aboutWhyChooseService,
+        protected ContactBannerService $contactBannerService,
+        protected ContactFaqService $contactFaqService,
+        protected MessageService $messageService,
+        protected ServiceTypeService $serviceTypeService,
+        protected OptionService $optionService,
+        protected CurrentSetupService $currentSetupService,
+        protected OtpService $otpService
+    ) {}
     public function index(): Response
     {
         $services = $this->serviceService->latest(4);
-      
+
         $banner = $this->homePageHeroService->first();
-        
+
         return Inertia::render('frontend/home', [
             'banner' => $banner,
             'services' => $services,
@@ -72,7 +77,7 @@ class FrontendController extends Controller
         $includes = $this->remodelingWhatIncludeService->latest(6);
         $options = $this->remodelingOptionService->latest(4);
         $whychooses = $this->remodelingWhyChooseService->latest(3);
-        return Inertia::render('frontend/bathroom-remodeling',[
+        return Inertia::render('frontend/bathroom-remodeling', [
             'banner' => $banner,
             'includes' => $includes,
             'options' => $options,
@@ -113,13 +118,13 @@ class FrontendController extends Controller
     {
         return Inertia::render('frontend/will-writing');
     }
-    
+
     // public function willWritingStart(): Response
     // {
     //     return Inertia::render('frontend/will-writing-start');
     // }
 
- 
+
     public function lpaStart(): Response
     {
 
@@ -136,7 +141,7 @@ class FrontendController extends Controller
 
         $banner = $this->howItWorksBannerService->getFirst();
 
-        return Inertia::render('frontend/how-it-works',[
+        return Inertia::render('frontend/how-it-works', [
             'howItWorks' => $howItWorks,
             'stayInforms' => $stayInforms,
             'faqs' => $faqs,
@@ -166,14 +171,13 @@ class FrontendController extends Controller
     public function trackOrders(): Response
     {
         return Inertia::render('frontend/track-order');
-       
     }
 
     public function sendMessage(Request $request): RedirectResponse
     {
         // Get user identifier (IP address)
         $identifier = $request->ip();
-        
+
         // Check for successful submission block (1 hour)
         $successBlockKey = "message_success_block:{$identifier}";
         if (Cache::has($successBlockKey)) {
@@ -181,17 +185,17 @@ class FrontendController extends Controller
             $minutes = ceil($remainingTime / 60);
             return Redirect::back()->with('error', "You have already sent a response. Please try again after {$minutes} minutes.");
         }
-        
+
         // Check for failed attempts block (15 minutes after 5 failures)
         $failedAttemptsKey = "message_failed_attempts:{$identifier}";
         $failedBlockKey = "message_failed_block:{$identifier}";
-        
+
         if (Cache::has($failedBlockKey)) {
             $remainingTime = Cache::get($failedBlockKey) - time();
             $minutes = ceil($remainingTime / 60);
             return Redirect::back()->with('error', "Too many attempts. Please try again after {$minutes} minutes.");
         }
-        
+
         // Validate request
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -200,40 +204,155 @@ class FrontendController extends Controller
             'subject' => 'nullable|string|max:255',
             'message' => 'required|string|max:2000',
         ]);
-        
+
         try {
             // Store message using service
             $this->messageService->storeMessage($validated);
-            
+
             // Clear failed attempts on successful submission
             Cache::forget($failedAttemptsKey);
             Cache::forget($failedBlockKey);
-            
+
             // Block successful submissions for 1 hour
             Cache::put($successBlockKey, time() + 3600, 3600);
-            
+
             return Redirect::back()->with('success', 'Message sent successfully!');
-            
         } catch (\Exception $e) {
             // Increment failed attempts
             $failedAttempts = Cache::get($failedAttemptsKey, 0) + 1;
             Cache::put($failedAttemptsKey, $failedAttempts, 900); // Store for 15 minutes
-            
+
             // Block after 5 failed attempts
             if ($failedAttempts >= 5) {
                 Cache::put($failedBlockKey, time() + 900, 900); // Block for 15 minutes
                 return Redirect::back()->with('error', 'Too many attempts. Please try again after 15 minutes.');
             }
-            
+
             return Redirect::back()->with('error', 'Failed to send message. Please try again.');
         }
     }
 
     public function freeEstimate(): Response
     {
-        
-        return Inertia::render('frontend/free-estimate');
 
+        $serviceTypes =  $this->serviceTypeService->getAll();
+
+        return Inertia::render('frontend/free-estimate', ['service_types' => $serviceTypes]);
+    }
+
+    public function freeEstimateStoreStep1(Request $request)
+    {
+
+        $request->validate([
+            'service_type' => 'required|exists:service_types,id',
+            'files' => 'required|nullable|array',
+            'files.*' => 'file|max:10240', // 10MB max per file
+        ]);
+
+        //    dd($request->all());
+
+        return redirect()->route('frontend.free-estimate-step2', ['serviceTypeId' => $request->service_type]);
+    }
+
+    public function freeEstimateStep2(int $serviceTypeId)
+    {
+
+        $options = $this->optionService->getAll();
+        $currentSetups = $this->currentSetupService->getAll();
+
+
+
+        return Inertia::render('frontend/free-estimate-step2', ['options' => $options, 'currentSetups' => $currentSetups, 'serviceTypeId' => $serviceTypeId]);
+    }
+
+    public function freeEstimateStoreStep2(Request $request)
+    {
+        $request->validate([
+            'options' => 'required|array',
+            'bathroom_size' => 'nullable|string',
+            'current_setup' => 'required|exists:current_setups,id',
+        ]);
+
+
+        // dd($request->all());
+        return redirect()->route('frontend.free-estimate-step3', ['serviceTypeId' => $request->service_type]);
+    }
+
+
+    // Step 3
+
+    public function freeEstimateStep3()
+    {
+        return Inertia::render('frontend/free-estimate-step3');
+    }
+
+    public function freeEstimateStoreStep3(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'zip' => 'required|string',
+        ]);
+
+        // dd($request->all());
+
+        $this->otpService->generateOtp($request->phone);
+
+        return redirect()->route('frontend.free-estimate-step4');
+    }
+
+    // Step 4
+
+    public function freeEstimateStep4()
+    {
+        return Inertia::render('frontend/free-estimate-step4');
+    }
+
+    public function freeEstimateResendOtp(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|string',
+        ]);
+
+        $this->otpService->resendOtp($request->phone);
+
+        return back()->with('success', 'OTP has been resent.');
+    }
+
+    public function freeEstimateVerifyOtp(Request $request)
+    {
+        $request->validate([
+            'otp' => 'required|string',
+            'phone' => 'required|string',
+        ]);
+
+        $otpVerified = $this->otpService->verifyOtp($request->otp, $request->phone,);
+
+        if ($otpVerified) {
+            return redirect()->route('frontend.free-estimate-step5');
+        }
+    }
+
+    public function freeEstimateStep5()
+    {
+        return Inertia::render('frontend/free-estimate-step5');
+    }
+
+    public function freeEstimateStoreStep5(Request $request)
+    {
+
+
+        //    Inertia::render('frontend/free-estimate-step6');
+    }
+
+
+    public function freeEstimateStep6()
+    {
+        return Inertia::render('frontend/free-estimate-step6');
     }
 
     public function trackOrderDetails(): Response

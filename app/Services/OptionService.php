@@ -20,6 +20,11 @@ class OptionService
         return $this->model->with('serviceType')->where($column, $id);
     }
 
+    public function findByIds(array $ids)
+    {
+        return $this->model->whereIn('id', $ids)->get();
+    }
+
     public function create(array $data)
     {
         return $this->model->create($data);

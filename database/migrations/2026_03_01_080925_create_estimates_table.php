@@ -15,13 +15,21 @@ return new class extends Migration
             $table->id();
             $table->string('estimate_id', 255)->unique();
             $table->unsignedBigInteger('service_type_id');
-            $table->unsignedBigInteger('option_id');
-            $table->unsignedBigInteger('diemension_id');
+            $table->string('option_ids');
+            $table->string('bathroom_size');
             $table->unsignedBigInteger('current_setup_id');
-            $table->dateTime('otp_verification_at')->nullable();
+
+            // Contanct Information Field
+
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('city');
+            $table->string('zip');
+
             $table->foreign('service_type_id')->references('id')->on('service_types')->onDelete('cascade');
-            $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade');
-            $table->foreign('diemension_id')->references('id')->on('diemensions')->onDelete('cascade');
             $table->foreign('current_setup_id')->references('id')->on('current_setups')->onDelete('cascade');
             $table->timestamps();
         });

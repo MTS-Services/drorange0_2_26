@@ -9,11 +9,19 @@ class Estimate extends Model
     protected $fillable = [
         'estimate_id',
         'service_type_id',
-        'option_id',
-        'diemension_id',
+        'option_ids',
+        'bathroom_size',
         'current_setup_id',
         'otp_verification_at',
         'estimate_status',
+
+        'first_name',
+        'last_name',
+        'email',
+        'phone',
+        'address',
+        'city',
+        'zip',
     ];
 
     public function EstimateImage()

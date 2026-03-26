@@ -18,17 +18,6 @@ return new class extends Migration
             $table->string('option_ids');
             $table->string('bathroom_size');
             $table->unsignedBigInteger('current_setup_id');
-
-            // Contanct Information Field
-
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('city');
-            $table->string('zip');
-
             $table->foreign('service_type_id')->references('id')->on('service_types')->onDelete('cascade');
             $table->foreign('current_setup_id')->references('id')->on('current_setups')->onDelete('cascade');
             $table->timestamps();

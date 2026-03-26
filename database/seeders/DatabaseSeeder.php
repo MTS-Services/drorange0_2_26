@@ -48,13 +48,7 @@ class DatabaseSeeder extends Seeder
             ContactSeeder::class,
             ServiceTypeSeeder::class,
             OptionSeeder::class,
-            DiemensionSeeder::class,
             CurrentSetupSeeder::class,
-            EstimateSeeder::class,
-            ContactInformationSeeder::class,
-            OtpVerificationSeeder::class,
-            EstimateImageSeeder::class,
-            EstimateStatusSeeder::class,
         ]);
     }
 }

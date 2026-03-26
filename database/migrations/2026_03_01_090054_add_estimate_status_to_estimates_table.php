@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('estimates', function (Blueprint $table) {
-            $table->enum('estimate_status', ['pending', 'review', 'estimate'])->default('pending')->after('otp_verification_at');
+            $table->enum('estimate_status', ['pending', 'review', 'estimate'])->default('pending')->after('current_setup_id');
         });
     }
 

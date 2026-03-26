@@ -11,6 +11,7 @@ use App\Services\AboutWhyChooseService;
 use App\Services\ContactBannerService;
 use App\Services\ContactFaqService;
 use App\Services\CurrentSetupService;
+use App\Services\EstimateService;
 use App\Services\HomePageHeroService;
 use App\Services\HomeServiceService;
 use App\Services\HowItWorkFaqService;
@@ -58,7 +59,8 @@ class FrontendController extends Controller
         protected ServiceTypeService $serviceTypeService,
         protected OptionService $optionService,
         protected CurrentSetupService $currentSetupService,
-        protected OtpService $otpService
+        protected OtpService $otpService,
+        protected EstimateService $estimateService
     ) {}
     public function index(): Response
     {
@@ -236,6 +238,7 @@ class FrontendController extends Controller
     public function freeEstimate(): Response
     {
 
+        
         $serviceTypes =  $this->serviceTypeService->getAll();
 
         return Inertia::render('frontend/free-estimate', ['service_types' => $serviceTypes]);
@@ -390,22 +393,15 @@ class FrontendController extends Controller
     public function freeEstimateStep6()
     {
        if(!session()->has('estimate_data')) {
-            return redirect()->route('frontend.free-estimate');
+            return redirect()->route('free-estimate');
         }
         $estimateData = session()->get('estimate_data');
 
-        dd($estimateData);
+     
 
-        // $service = $this->serviceTypeService->find($estimateData['service_type_id'])->first();
+       $estimate =  $this->estimateService->create($estimateData);
 
-        // $totalFile = count($estimateData['files']);
-
-        // $currentSetup = $this->currentSetupService->find($estimateData['current_setup'])->first();
-
-        // $options = $this->optionService->findByIds($estimateData['options']);
-
-
-        return Inertia::render('frontend/free-estimate-step6');
+        return Inertia::render('frontend/free-estimate-step6', compact('estimate'));
     }
 
     public function trackOrderDetails(): Response

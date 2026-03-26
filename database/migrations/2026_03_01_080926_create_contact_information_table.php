@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('city');
-            $table->string('zip_code');
+            $table->string('zip');
             $table->unsignedBigInteger('estimate_id');
             $table->foreign('estimate_id')->references('id')->on('estimates')->onDelete('cascade');
             $table->timestamps();

@@ -41,7 +41,7 @@ export default function Banner({banner}: any) {
                   {banner?.button2_text}
                 </Link>
               </div>
-              <div className="flex flex-wrap gap-3 text-sm text-white/75 fade-up delay-4">
+              {/* <div className="flex flex-wrap gap-3 text-sm text-white/75 fade-up delay-4">
                 
                   <CircleCheckBig className="w-6 h-6 text-white" />
                 
@@ -50,14 +50,14 @@ export default function Banner({banner}: any) {
                 <span className="flex items-center gap-1.5 text-base font-inter font-normal text-white">Free Estimates</span>
                 <CircleCheckBig className="w-6 h-6 text-white" />
                 <span className="flex items-center gap-1.5 text-base font-inter font-normal text-white">Quick Turnaround</span>
-              </div>
+              </div> */}
 
-              {/* {banner?.aditional_information ? (
+              {banner?.aditional_information ? (
                 <div
-                  className="flex flex-wrap gap-3  mt-3 text-sm text-white/75 fade-up delay-4"
+                  className="prose prose-invert prose-sm max-w-none mt-3 text-white/75 fade-up delay-4 [&_p]:text-white/75 [&_h1]:text-white [&_h2]:text-white [&_h3]:text-white [&_ul]:text-white/75 [&_ol]:text-white/75 [&_li]:text-white/75 [&_strong]:text-white [&_em]:text-white [&_pre]:bg-gray-900 [&_pre]:text-white [&_pre]:p-4 [&_pre]:rounded-lg [&_code]:bg-gray-800 [&_code]:text-white [&_code]:px-2 [&_code]:py-1 [&_code]:rounded font-mono text-sm"
                   dangerouslySetInnerHTML={{ __html: banner.aditional_information || '' }}
                 ></div>
-              ) : null} */}
+              ) : null}
 
             </div>
           </div>

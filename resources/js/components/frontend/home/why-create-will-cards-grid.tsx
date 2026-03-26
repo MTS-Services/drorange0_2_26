@@ -19,7 +19,7 @@ export function WhyCreateWillCardsGrid({ services }: any) {
         <section className="overflow-hidden bg-white">
             {/* Services */}
             <section id="services" className=" ">
-                <div className= "max-w-7xl mx-auto px-8 py-10 lg:py-20 bg-gray-50">
+                <div className= "max-w-7xl mx-auto px-4 sm:px-8 py-10 lg:py-20 bg-gray-50">
                     <div className="mb-12 text-center">
                         <h2 className="font-sf-pro font-semibold text-gray-900 text-3xl md:text-4xl xl:text-5xl">
                             Our Services

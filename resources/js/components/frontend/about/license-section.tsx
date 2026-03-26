@@ -20,7 +20,7 @@ const willSteps = [
 
 export function LicenseSection({ licenses }: any) {
     return (
-        <section className="bg-gray-50 px-8 py-20 max-w-7xl mx-auto">
+        <section className="bg-gray-50 px-4 sm:px-8 py-20 max-w-7xl mx-auto">
             <div className="">
                 <h2 className="mb-2 text-center text-2xl sm:text-[32px] font-bold font-inter  text-gray-900">
                     Licenses &amp; Certifications

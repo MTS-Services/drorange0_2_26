@@ -18,8 +18,8 @@ export function HowItWorksList({ howItWorks }: any) {
                                     {index + 1}
                                 </div>
                             </div>
-                            <div className="flex flex-1 items-start justify-between gap-4">
-                                <div className="flex-1">
+                            <div className="flex flex-1 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                                <div className="min-w-0 flex-1">
                                     <h3 className="mb-0.5 font-inter font-normal text-xl sm:text-2xl text-gray-900">
                                         {howItWork.title}
                                     </h3>
@@ -44,10 +44,12 @@ export function HowItWorksList({ howItWorks }: any) {
                                         {howItWork.subtitle}
                                     </p>
                                 </div>
-                                <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-blue-50 p-2">
-                                 
-                                  <img src={howItWork.icon_url} alt="" />
-                                  
+                                <div className="mx-auto flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-blue-50 p-2 md:mx-0">
+                                    <img
+                                        src={howItWork.icon_url}
+                                        alt={howItWork.title}
+                                        className="mx-auto block max-h-full max-w-full object-contain"
+                                    />
                                 </div>
                             </div>
                         </div>

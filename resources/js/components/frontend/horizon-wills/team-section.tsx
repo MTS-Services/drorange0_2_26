@@ -54,7 +54,7 @@ export function TeamSection({options, whychooses}: any) {
       <section className="w-full max-w-7xl mx-auto bg-blue-600 lg:py-20 py-8 text-white px-4">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="font-sf-pro font-semibold text-white text-3xl md:text-4xl xl:text-5xl mb-2">Why Choose BathPro Remodeling?</h2>
-          <p className="mx-auto mt-3 max-w-2xl text-white/75 font-inter font-normal text-xl mb-16">Professional service, quality craftsmanship, and customer
+          <p className="mx-auto mt-3 text-white/75 font-inter font-normal text-xl mb-16">Professional service, quality craftsmanship, and customer
             satisfaction guaranteed.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
     

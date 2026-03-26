@@ -26,7 +26,7 @@ export function LicenseSection({ licenses }: any) {
                     Licenses &amp; Certifications
                 </h2>
                 <p className="mb-10 text-center font-inter font-normal text-xl text-gray-500">
-                    We're committed to delivering exceptional results on every project
+                    Fully licensed, bonded, and insured for your protection
                 </p>
                 <div className="grid gap-5 rounded-2xl border border-gray-100 bg-white p-8 shadow-sm sm:grid-cols-2">
                     {licenses?.map((license: any, index: number) => (
@@ -35,9 +35,9 @@ export function LicenseSection({ licenses }: any) {
                                 <CircleCheckBig className="w-6 h-6 text-green-600 bg-white" />
                             </div>
                             <div>
-                                <p className="text-base font-normal font-inter text-gray-900">
+                                <h3 className="text-base font-normal font-inter text-gray-900 mb-1">
                                     {license.title}
-                                </p>
+                                </h3>
                                 <p className="text-sm font-normal font-inter text-gray-500">
                                     {license.subtitle}
                                 </p>

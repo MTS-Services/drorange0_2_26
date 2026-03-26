@@ -14,7 +14,7 @@ export function WhyChooseSection({ whyChoose }: any) {
                     whyChoose?.map((item:any,   index:number)=>(
                             <div className="feature-card cursor-default rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-sm">
                     <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100">
-                        <img src={item.icon_url} alt="" className="p-2"/>
+                        <img src={item.icon_url} alt="" className="p-2 "/>
                     </div>
                     <h3 className="mb-3 text-xl font-normal font-inter text-gray-900">
                             {item.title}

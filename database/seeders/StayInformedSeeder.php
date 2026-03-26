@@ -12,23 +12,23 @@ class StayInformedSeeder extends Seeder
         $items = [
             [
                 'title' => 'Track Your Project Online',
-                'subtitle' => 'Check project status and review your estimate at any time via the link or app.',
-                'icon' => null,
+                'subtitle' => 'Use your unique order ID to check project status anytime, view updates, and see what stage your remodel is in.',
+                'icon' => 'default/10.png',
             ],
             [
-                'title' => 'Missing Item Reminders',
-                'subtitle' => 'We remind you automatically if information or documents are still needed.',
-                'icon' => null,
+                'title' => 'Missing Items Reminders',
+                'subtitle' => 'If we need additional photos or information, you\'ll see it clearly on your tracking page with easy ways to provide what we need.',
+                'icon' => 'default/13.png',
             ],
             [
                 'title' => 'SMS Updates',
-                'subtitle' => 'Get text notifications for key milestones like estimate ready and progress updates.',
-                'icon' => null,
+                'subtitle' => 'Get text message notifications at key milestones: estimate sent, project scheduled, work started, and completion.',
+                'icon' => 'default/12.png',
             ],
             [
                 'title' => 'No Surprises',
-                'subtitle' => 'Detailed estimates keep costs transparent—no hidden fees or unexpected charges.',
-                'icon' => null,
+                'subtitle' => 'Our detailed estimates include everything, so you know exactly what to expect. No hidden fees or surprise charges.',
+                'icon' => 'default/11.png',
             ],
         ];
 

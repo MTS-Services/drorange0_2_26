@@ -12,9 +12,13 @@ class AboutServiceAreaSeeder extends Seeder
         AboutServiceArea::query()->delete();
 
         AboutServiceArea::insert([
-            ['title' => 'Los Angeles Metro'],
-            ['title' => 'Orange County'],
-            ['title' => 'San Diego County'],
+            ['title' => 'Columbus, OH'],
+            ['title' => 'Cleveland, OH'],
+            ['title' => 'Cincinnati, OH'],
+            ['title' => 'Akron, OH'],
+            ['title' => 'Dayton, OH'],
+            ['title' => 'Toledo, OH'],
+            ['title' => 'And surrounding areas'],
         ]);
     }
 }

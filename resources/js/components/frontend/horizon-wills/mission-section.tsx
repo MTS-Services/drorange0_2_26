@@ -28,7 +28,7 @@ export function MissionSection() {
 
     return (
 
-        <section className="lg:py-20 p-8 bg-white">
+        <section className="lg:py-20 bg-white">
             <div className="max-w-7xl mx-auto px-4 text-center">
                 <h2 className="font-sf-pro font-semibold text-gray-900 text-3xl md:text-4xl xl:text-5xl mb-2">Why Remodel Your Bathroom?
                 </h2>

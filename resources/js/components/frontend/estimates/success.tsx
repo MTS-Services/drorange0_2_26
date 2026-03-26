@@ -1,4 +1,6 @@
-export default function Success() {
+import { Link } from "@inertiajs/react";
+
+export default function Success({ estimate }: { estimate: any }) {
     return (
         <div className="flex flex-col items-center justify-start px-4 py-10">
             <div className="mx-auto max-w-7xl bg-gray-100 p-4">
@@ -37,7 +39,7 @@ export default function Success() {
                                 Your Order ID
                             </p>
                             <p className="mb-1 text-2xl font-extrabold text-blue-600">
-                                BR02140610
+                               {estimate?.estimate_id}
                             </p>
                             <p className="text-xs text-blue-500">
                                 Save this ID to track your project status
@@ -115,7 +117,7 @@ export default function Success() {
                         </div>
                         {/* Action Buttons */}
                         <div className="mb-8 flex flex-col items-stretch justify-center gap-3 px-2 sm:flex-row sm:items-center sm:px-0">
-                            <button className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 sm:w-auto">
+                            <Link href={route('track-orders')} className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 sm:w-auto">
                                 <svg
                                     className="h-4 w-4 flex-shrink-0"
                                     fill="none"
@@ -140,8 +142,8 @@ export default function Success() {
                                     />
                                 </svg>
                                 Track Your Order
-                            </button>
-                            <button className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 sm:w-auto">
+                            </Link>
+                            <Link href={route('home')} className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 sm:w-auto">
                                 Return Home
                                 <svg
                                     className="h-4 w-4 flex-shrink-0"
@@ -156,7 +158,7 @@ export default function Success() {
                                         d="M9 5l7 7-7 7"
                                     />
                                 </svg>
-                            </button>
+                            </Link>
                         </div>
                         {/* Questions */}
                         <div className="flex flex-col items-center gap-2 px-4 text-center sm:gap-1 sm:px-0 sm:text-left">

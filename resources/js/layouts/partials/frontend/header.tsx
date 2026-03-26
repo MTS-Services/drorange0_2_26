@@ -30,17 +30,17 @@ export function FrontendHeader() {
             <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
 
             {/* Logo */}
-            <Link href="/" className="text-lg font-bold text-blue-700 tracking-tight whitespace-nowrap">
+            <Link href="/" className="text-blue-700 tracking-tight whitespace-nowrap font-inter font-bold text-2xl">
                 BathPro Remodeling
             </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-gray-800">
+            {/* Desktop Nav (>= 992px) */}
+            <nav className="hidden min-[992px]:flex items-center gap-2 lg:gap-5 xl:gap-7 text-base font-bold text-gray-800 font-inter ">
                 {navigationItems.map((item) => (
                     <Link
                         key={item.href}
                         href={item.href}
-                        className={`transition-colors duration-150 text-sm font-medium ${
+                        className={`transition-colors duration-150 text-sm font-normal ${
                             isActive(item.href)
                                 ? 'text-blue-600'
                                 : 'text-gray-900 hover:text-blue-600'
@@ -54,7 +54,7 @@ export function FrontendHeader() {
             {/* CTA Button — desktop only */}
             <Link
                 href={route('free-estimate')}
-                className="hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold shadow-sm active:bg-blue-900 transition-colors duration-150 whitespace-nowrap"
+                className="hidden min-[992px]:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white  text-base font-bold font-inter shadow-sm active:bg-blue-900 transition-colors duration-150 whitespace-nowrap"
             >
                 Get Free Estimates
             </Link>
@@ -64,7 +64,7 @@ export function FrontendHeader() {
                 type="button"
                 aria-label="Toggle menu"
                 aria-expanded={mobileMenuOpen}
-                className="md:hidden p-1.5 rounded-md text-gray-700 hover:bg-gray-100 transition-colors duration-150"
+                className="min-[992px]:hidden p-1.5 rounded-md text-gray-700 hover:bg-gray-100 transition-colors duration-150"
                 onClick={() => setMobileMenuOpen((open) => !open)}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${mobileMenuOpen ? 'hidden' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,7 +77,7 @@ export function FrontendHeader() {
             </div>
 
             {/* Mobile Menu */}
-            <div className={`md:hidden border-t border-gray-100 bg-white px-6 pb-5 pt-3 flex flex-col gap-1 ${mobileMenuOpen ? '' : 'hidden'}`}>
+            <div className={`min-[992px]:hidden border-t border-gray-100 bg-white px-6 pb-5 pt-3 flex flex-col gap-1 ${mobileMenuOpen ? '' : 'hidden'}`}>
                 {navigationItems.map((item) => (
                     <Link
                         key={item.href}

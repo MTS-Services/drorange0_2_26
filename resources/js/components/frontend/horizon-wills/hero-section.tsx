@@ -6,22 +6,22 @@ import { Link } from '@inertiajs/react';
 export function HorizonHeroSection({banner}: any) {
     return (
         <section className="hero">
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-8 lg:px-16 lg:py-16 py-4 flex flex-col md:flex-row items-center justify-between">
+            <div className="relative z-10 w-full max-w-7xl mx-auto lg:py-16 py-4 px-4 flex flex-col md:flex-row items-center justify-between">
                 <div className="flex-1 py-4">
-                <h1 className="text-white font-bold leading-tight mb-5 text-5xl">
+                <h1 className="text-white font-sf-pro font-bold leading-tight mb-5 text-3xl sm:text-4xl md:text-5xl xl:text-6xl">
                     {banner.title}
                 </h1>
-                <p className="text-white/80 mb-9 leading-relaxed text-base" style={{ maxWidth: '400px' }}>
+                <p className="text-white/80 mb-9 leading-relaxed text-base sm:text-2xl font-inter font-normal" style={{ maxWidth: '400px' }}>
                     {banner.subtitle}
                 </p>
                 <div className="flex lg:flex-wrap flex-col md:flex-row items-center gap-4">
-                    <Link className="btn-white">
+                    <Link className="btn-primary inline-flex items-center gap-2 font-inter font-bold text-xl">
                     {banner.button1_text}
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/>
                     </svg>
                     </Link>
-                    <Link href={banner.button2_url} className="btn-outline">{banner.button2_text}</Link>
+                    <Link href={banner.button2_url} className="btn-outline-white inline-flex items-center gap-2 font-inter font-bold text-xl">{banner.button2_text}</Link>
                 </div>
                 
               {banner?.aditional_information ? (

@@ -354,4 +354,9 @@ class FrontendController extends Controller
     {
         return Inertia::render('frontend/free-estimate-step6');
     }
+
+    public function trackOrderDetails(): Response
+    {
+        return Inertia::render('frontend/track-order-details');
+    }
 }

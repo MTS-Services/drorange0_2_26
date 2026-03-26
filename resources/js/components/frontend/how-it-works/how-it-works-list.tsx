@@ -1,8 +1,8 @@
 export function HowItWorksList({ howItWorks }: any) {
 
     return (
-        <section className="bg-gray-50 px-4 py-12">
-            <div className="mx-auto max-w-6xl">
+        <section className="px-4 py-12">
+            <div className="mx-auto max-w-7xl">
                 {/* Steps */}
                 <div className="space-y-3" id="steps-container">
                     {/* Step 1 */}
@@ -14,16 +14,16 @@ export function HowItWorksList({ howItWorks }: any) {
                             onClick={() => {}}
                         >
                             <div className="flex flex-shrink-0 flex-col items-center">
-                                <div className="z-10 flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
+                                <div className="z-10 flex h-8 sm:h-12 w-8 sm:w-12 font-inter font-bold text-xl sm:text-2xl items-center justify-center rounded-full bg-blue-600 text-white">
                                     {index + 1}
                                 </div>
                             </div>
                             <div className="flex flex-1 items-start justify-between gap-4">
                                 <div className="flex-1">
-                                    <h3 className="mb-0.5 text-sm font-semibold text-gray-900">
+                                    <h3 className="mb-0.5 font-inter font-normal text-xl sm:text-2xl text-gray-900">
                                         {howItWork.title}
                                     </h3>
-                                    <p className="mb-3 flex items-center gap-1 text-xs text-gray-400">
+                                    <p className="mb-3 flex items-center gap-1 font-inter font-normal text-sm text-gray-400">
                                         <svg
                                             className="h-3 w-3"
                                             fill="none"
@@ -40,11 +40,11 @@ export function HowItWorksList({ howItWorks }: any) {
                                         </svg>
                                         {howItWork.time}
                                     </p>
-                                    <p className="desc text-sm leading-relaxed text-gray-500">
+                                    <p className="desc font-inter font-normal text-lg leading-relaxed text-gray-500">
                                         {howItWork.subtitle}
                                     </p>
                                 </div>
-                                <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-blue-50">
+                                <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-blue-50 p-2">
                                  
                                   <img src={howItWork.icon_url} alt="" />
                                   

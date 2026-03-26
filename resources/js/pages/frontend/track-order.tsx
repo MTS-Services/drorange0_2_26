@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { router } from '@inertiajs/react';
 import FrontendLayout from '@/layouts/frontend-layout';
 import Index from '@/components/frontend/estimates';
 
@@ -14,7 +15,8 @@ export default function TrackOrder() {
     });
 
     const nextStep = () => {
-        // Handle next step logic if needed
+        // Navigate to the order details page after validation.
+        router.visit('/track-order-details');
     };
 
     const updateFormData = <K extends keyof TrackOrderFormData>(data: Partial<Pick<TrackOrderFormData, K>>) => 

@@ -12,18 +12,18 @@ class RemodelingWhyChooseSeeder extends Seeder
         RemodelingWhyChoose::insert([
             [
                 'title' => 'Licensed & Insured',
-                'subtitle' => 'Fully licensed teams with comprehensive coverage.',
-                'icon' => 'default/images/icon/licensed.png',
+                'subtitle' => 'Fully licensed contractors with comprehensive insurance for your protection.',
+                'icon' => 'default/Vector (6).png',
             ],
             [
-                'title' => 'Transparent Pricing',
-                'subtitle' => 'Clear estimates with no surprise add-ons.',
-                'icon' => 'default/images/icon/pricing.png',
+                'title' => 'Fast Turnaround',
+                'subtitle' => 'Most bathroom remodels completed in 5-10 days, not weeks.',
+                'icon' => 'default/Icon (3).png',
             ],
             [
-                'title' => 'Quality Craftsmanship',
-                'subtitle' => 'Skilled trades delivering precise finishes.',
-                'icon' => 'default/images/icon/craft.png',
+                'title' => '10-Year Warranty',
+                'subtitle' => 'Industry-leading warranty on all workmanship and materials.',
+                'icon' => 'default/Icon (4).png',
             ],
             [
                 'title' => 'On-Time Delivery',

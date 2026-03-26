@@ -19,7 +19,7 @@ Route::get("/terms-and-conditions", [FrontendController::class, "terms"])->name(
 Route::get("/consumer-rights-act-2015", [FrontendController::class, "consumerRights"])->name("consumer-rights");
 Route::get("/cookie-policy", [FrontendController::class, "cookiePolicy"])->name("cookies");
 Route::get("/track-orders", [FrontendController::class, "trackOrders"])->name("track-orders");
-// Free Estimate Routes
+Route::get("/track-order-details", [FrontendController::class, "trackOrderDetails"])->name("track-order-details");
 Route::get("/free-estimate", [FrontendController::class, "freeEstimate"])->name("free-estimate");
 Route::post("/free-estimate/store/step1", [FrontendController::class, "freeEstimateStoreStep1"])->name("free-estimate.store.step1");
 

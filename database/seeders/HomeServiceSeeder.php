@@ -16,23 +16,23 @@ class HomeServiceSeeder extends Seeder
         HomeService::insert([
             [
                 'title' => 'Complete Bathroom Remodeling',
-                'subtitle' => 'No bathroom renovation too big or small from start to completion.',
-                'icon' => 'default/images/icon/🛁.png',
+                'subtitle' => 'Full bathroom renovations from floor to ceiling with expert craftsmanship.',
+                'icon' => 'default/1.png',
             ],
             [
                 'title' => 'Tub to Shower Conversion',
-                'subtitle' => 'Transform your old tub into a custom, modern shower.',
-                'icon' => 'default/images/icon/🚿.png',
+                'subtitle' => 'Transform your old tub into a modern, accessible shower.',
+                'icon' => 'default/2.png',
             ],  
             [
                 'title' => 'Vanity & Fixture Upgrades',
                 'subtitle' => 'New vanities, toilets, sinks, and fixtures to match your style.',
-                'icon' => 'default/images/icon/🪞.png',
+                'icon' => 'default/3.png',
             ],
             [
                 'title' => 'Tile & Flooring Installation',
-                'subtitle' => 'Specialty tile work and flooring with expert installation systems.',
-                'icon' => 'default/images/icon/🪞.png',
+                'subtitle' => 'Beautiful tile work and durable flooring options.',
+                'icon' => 'default/4.png',
             ]
         ]);
     }

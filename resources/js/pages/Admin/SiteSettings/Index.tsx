@@ -162,7 +162,7 @@ export default function Index({SiteSetting}: Props) {
                                 </CardContent>
                             </Card>
 
-                            <Card>
+                            {/* <Card>
                                 <CardHeader>
                                     <CardTitle className="text-lg">
                                         Application Logo
@@ -185,9 +185,9 @@ export default function Index({SiteSetting}: Props) {
                                         <InputError message={errors.site_logo} />
                                     </div>
                                 </CardContent>
-                            </Card>
+                            </Card> */}
 
-                            <Card>
+                            {/* <Card>
                                 <CardHeader>
                                     <CardTitle className="text-lg">
                                         Application Icon
@@ -210,7 +210,7 @@ export default function Index({SiteSetting}: Props) {
                                         <InputError message={errors.site_favicon} />
                                     </div>
                                 </CardContent>
-                            </Card>
+                            </Card> */}
                         </div>
 
                         <div className="space-y-6">

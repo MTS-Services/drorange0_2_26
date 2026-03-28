@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { Link } from '@inertiajs/react';
 
 interface AppLogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
     className?: string;
@@ -7,7 +8,9 @@ interface AppLogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 export default function AppLogo({ className, ...props }: AppLogoProps) {
     return (
         <>
-            <img src='/logo.png' alt="App Logo" className={cn("w-auto max-w-[420px] object-contain", className)} {...props} />
+          <p  className="text-blue-700 tracking-tight whitespace-nowrap font-inter font-bold text-2xl">
+                BathPro Remodeling
+            </p>
         </>
     );
 }

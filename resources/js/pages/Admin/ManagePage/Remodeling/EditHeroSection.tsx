@@ -51,6 +51,7 @@ export default function Index({ hero }: Props) {
             forceFormData: true,
             onSuccess: () => {
                 toast.success('Remodeling hero updated successfully');
+                window.location.reload();
             },
 
             onError: () => {

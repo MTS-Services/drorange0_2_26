@@ -1,4 +1,5 @@
 import InputError from '@/components/input-error'
+import TiptapEditor from '@/components/TipTapEditor'
 import { ActionButton } from '@/components/ui/action-button'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -79,7 +80,7 @@ export default function EditBanner({ banner }: Props) {
                                                 <InputError message={errors.subtitle} />
                                             </div>
 
-                                            <div className="grid gap-2">
+                                            {/* <div className="grid gap-2">
                                                 <Label htmlFor="additionalInfo">Additional Info</Label>
                                                 <Textarea
                                                     id="additionalInfo"
@@ -87,6 +88,28 @@ export default function EditBanner({ banner }: Props) {
                                                     onChange={(e) => setData('additionalInfo', e.target.value)}
                                                 />
                                                 <InputError message={errors.additionalInfo} />
+                                            </div> */}
+                                            <div className="grid gap-2">
+                                                <TiptapEditor
+                                                    value={
+                                                        data.additionalInfo
+                                                    }
+                                                    onChange={(val: string) =>
+                                                        setData(
+                                                            'additionalInfo',
+                                                            val,
+                                                        )
+                                                    }
+                                                    placeholder="Enter additional information..."
+                                                    height="300px"
+                                                />
+                                                {errors.additionalInfo && (
+                                                    <p className="mt-1 text-sm text-red-500">
+                                                        {
+                                                            errors.additionalInfo
+                                                        }
+                                                    </p>
+                                                )}
                                             </div>
                                         </CardContent>
                                     </Card>

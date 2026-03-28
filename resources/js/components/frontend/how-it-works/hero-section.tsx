@@ -10,7 +10,14 @@ export function HeroSection({banner}: any) {
         {banner.subtitle}
       </p>
       <div className="max-w-2xl mx-auto ">
-        {banner.additional_info}
+        {/* {banner.additional_info} */}
+
+        {banner?.additional_info ? (
+                <div
+                  className="flex flex-wrap gap-3  mt-5 text-sm text-white/75 fade-up delay-4"
+                  dangerouslySetInnerHTML={{ __html: banner.additional_info || '' }}
+                ></div>
+              ) : null}
       </div>
     </div>
     );

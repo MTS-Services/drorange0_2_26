@@ -26,7 +26,7 @@ export default function Show({ item }: Props) {
       <div className="flex justify-between mb-6">
         <h1 className="text-2xl font-bold text-primary">License / Certification Details</h1>
         <Link href={route('admin.pm.about-license.index')}>
-          <Button variant="secondary">Back</Button>
+          <Button>Back</Button>
         </Link>
       </div>
 

@@ -165,7 +165,7 @@ export default function Edit({ service }: Props) {
                         <Button
                           type="submit"
                           disabled={processing}
-                          className="flex h-auto w-full items-center justify-center bg-secondary px-6 py-0! hover:bg-secondary/80"
+                          className="flex h-auto w-full cursor-pointer items-center justify-center px-6 py-0!"
                         >
                           <Save className="mr-2 h-4 w-4" />
                           {processing ? 'Updating...' : 'Update Service'}
@@ -173,6 +173,7 @@ export default function Edit({ service }: Props) {
                         <ActionButton
                           IconNode={PencilOff}
                           href={route('admin.pm.service-section.index')}
+                          className="cursor-pointer"
                         >
                           Cancel
                         </ActionButton>

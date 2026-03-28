@@ -25,7 +25,7 @@ export default function Show({ item }: Props) {
       <div className="flex justify-between mb-6">
         <h1 className="text-2xl font-bold text-primary">Service Area Details</h1>
         <Link href={route('admin.pm.about-service-area.index')}>
-          <Button variant="secondary">Back</Button>
+          <Button>Back</Button>
         </Link>
       </div>
 

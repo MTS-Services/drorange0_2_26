@@ -170,12 +170,12 @@ const adminNavItems: NavItem[] = [
                 slug: 'option',
                 href: route('admin.sm.option.index'),
             },
-            {
-                title: 'Dimensions',
-                icon: LayoutGrid,
-                slug: 'diemension',
-                href: route('admin.sm.diemension.index'),
-            },
+            // {
+            //     title: 'Dimensions',
+            //     icon: LayoutGrid,
+            //     slug: 'diemension',
+            //     href: route('admin.sm.diemension.index'),
+            // },
             {
                 title: 'Current Setup',
                 icon: LayoutGrid,

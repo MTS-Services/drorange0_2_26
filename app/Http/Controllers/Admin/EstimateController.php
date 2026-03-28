@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateEstimateStatusRequest;
 use App\Services\EstimateService;
 use App\Services\DataTableService;
+use App\Services\OptionService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -15,7 +16,8 @@ class EstimateController extends Controller
 {
     public function __construct(
         protected EstimateService $service,
-        protected DataTableService $dataTableService
+        protected DataTableService $dataTableService,
+        protected OptionService $optionService
     ) {
     }
 
@@ -53,10 +55,15 @@ class EstimateController extends Controller
     {
         $estimate = $this->service->find($id)->firstOrFail();
         $statusHistory = $this->service->getStatusHistory($id);
+        $images = $estimate->estimateImages; // Load images with relationship
+
+        $options = $this->optionService->findByIds(json_decode($estimate->option_ids));
 
         return Inertia::render('Admin/ManagePage/Estimates/Show', [
             'estimate' => $estimate,
             'statusHistory' => $statusHistory,
+            'images' => $images, // Pass images to view
+            'options' => $options ?? [],
             'statusOptions' => collect(EstimateStatus::cases())->map(fn($status) => [
                 'value' => $status->value,
                 'label' => $status->getLabel(),

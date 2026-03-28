@@ -5,8 +5,8 @@ export default function Success({ estimate }: { estimate: any }) {
         <div className="flex flex-col items-center justify-start px-4 py-10">
             <div className="mx-auto max-w-7xl bg-gray-100 p-4">
                 {/* Main Card */}
-                <div className="mb-6 w-full overflow-hidden rounded-2xl bg-white p-4 shadow-md">
-                    <div className="px-6 text-center lg:px-28">
+                <div className="mb-6 w-full overflow-hidden rounded-2xl bg-white p-4 sm:p-6 shadow-md">
+                    <div className="px-0 sm:px-6 text-center lg:px-28">
                         {/* Success Icon */}
                         <div className="mb-5 flex justify-center">
                             <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-green-200 bg-green-50">
@@ -34,11 +34,11 @@ export default function Success({ estimate }: { estimate: any }) {
                             request and will review it shortly.
                         </p>
                         {/* Order ID Box */}
-                        <div className="mx-auto mb-8 max-w-sm rounded-xl border border-blue-100 bg-blue-50 px-6 py-5">
+                        <div className="mx-auto mb-8 max-w-sm rounded-xl border border-blue-100 bg-blue-50 px-4 sm:px-6 py-4 sm:py-5">
                             <p className="mb-1 text-xs font-semibold tracking-wide text-gray-500 uppercase">
                                 Your Order ID
                             </p>
-                            <p className="mb-1 text-2xl font-extrabold text-blue-600">
+                            <p className="mb-1 text-xl sm:text-2xl font-extrabold text-blue-600">
                                {estimate?.estimate_id}
                             </p>
                             <p className="text-xs text-blue-500">
@@ -49,7 +49,7 @@ export default function Success({ estimate }: { estimate: any }) {
                         <h2 className="mb-6 text-lg font-bold text-gray-900">
                             What Happens Next?
                         </h2>
-                        <div className="mx-auto mb-8 max-w-md space-y-5 text-left">
+                        <div className="mx-auto mb-8 max-w-md space-y-5 text-left px-2 sm:px-0">
                             {/* Step 1 */}
                             <div className="flex items-start gap-4">
                                 <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">

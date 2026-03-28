@@ -247,12 +247,12 @@ export default function ChooseServiceType({ serviceTypes }: Props) {
                         </div>
                     </div>
                      {/* Card Footer */}
-                        <div className="flex justify-between border-t border-gray-100 bg-gray-50 px-8 py-5">
+                        <div className="flex flex-col sm:flex-row justify-between border-t border-gray-100 bg-gray-50 px-8 py-5 gap-3 sm:gap-0">
                             <button
                                 type="button"
                                 disabled
                                
-                                className="flex items-center gap-1.5 rounded-lg bg-gray-200 px-6 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-300"
+                                className="flex items-center justify-center gap-1.5 rounded-lg bg-gray-200 px-6 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-300 w-full sm:w-auto"
                             >
                                 <svg
                                     className="h-4 w-4"
@@ -271,7 +271,7 @@ export default function ChooseServiceType({ serviceTypes }: Props) {
                             </button>
                             <button
                                 type="submit"
-                                className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 active:bg-blue-800"
+                                className="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 active:bg-blue-800 w-full sm:w-auto"
                             >
                                 Continue
                                 <svg

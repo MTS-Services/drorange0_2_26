@@ -117,7 +117,7 @@ export default function Options({options, currentSetups, serviceTypeId}: Props) 
                 {/* Card */}
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                     {/* Card Body */}
-                    <div className="px-8 py-8">
+                    <div className="px-4 sm:px-8 py-8">
                         <h2 className="text-xl font-medium text-gray-900 mb-1">
                             Select Your Options
                         </h2>
@@ -133,7 +133,7 @@ export default function Options({options, currentSetups, serviceTypeId}: Props) 
                             {options.map((option) => (
                                 <div
                                     key={option.id}
-                                    className={`option-card border rounded-xl px-5 py-4 flex items-start gap-4 cursor-pointer transition-colors ${
+                                    className={`option-card border rounded-xl px-2.5! sm:px-5! py-2! sm:py-4! flex items-start gap-4 cursor-pointer transition-colors ${
                                         selectedOptions.includes(option.id)
                                             ? 'border-blue-500 bg-blue-50'
                                             : 'border-gray-200'
@@ -248,10 +248,10 @@ export default function Options({options, currentSetups, serviceTypeId}: Props) 
                         </div>
                     </div>
                     {/* Card Footer */}
-                    <div className="border-t border-gray-100 px-8 py-5 flex justify-between items-center bg-gray-50">
+                    <div className="flex flex-col sm:flex-row justify-between border-t border-gray-100 bg-gray-50 px-8 py-5 gap-3 sm:gap-0">
                         <button
                             onClick={prevStep}
-                            className="border border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold px-5 py-2.5 rounded-lg text-sm flex items-center gap-1.5 transition-colors"
+                            className="flex items-center justify-center gap-1.5 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold px-5 py-2.5 text-sm transition-colors w-full sm:w-auto"
                         >
                             <svg
                                 className="w-4 h-4"
@@ -270,7 +270,7 @@ export default function Options({options, currentSetups, serviceTypeId}: Props) 
                         </button>
                         <button
                             onClick={nextStep}
-                            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold px-6 py-2.5 rounded-lg text-sm flex items-center gap-1.5 transition-colors"
+                            className="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold px-6 py-2.5 text-sm transition-colors w-full sm:w-auto"
                         >
                             Continue
                             <svg

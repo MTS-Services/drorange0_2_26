@@ -20,7 +20,7 @@ interface Props {
 
 export default function Show({ item }: Props) {
   return (
-    <AdminLayout activeSlug="how-it-works">
+    <AdminLayout activeSlug="how-it-work">
       <Head title="How It Works Details" />
 
       <div className="flex justify-between mb-6">

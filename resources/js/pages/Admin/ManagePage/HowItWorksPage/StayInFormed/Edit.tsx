@@ -76,7 +76,7 @@ export default function Edit({ item }: Props) {
     }
 
     return (
-        <AdminLayout>
+        <AdminLayout activeSlug="stay-informed">
             <>
                 <Head title="Stay Informed" />
 

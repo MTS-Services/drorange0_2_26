@@ -42,7 +42,7 @@ export default function EditBanner({ banner }: Props) {
     }
 
     return (
-        <AdminLayout>
+        <AdminLayout activeSlug="contact-banner">
             <>
                 <Head title="Contact Banner" />
 

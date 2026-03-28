@@ -41,7 +41,7 @@ export default function EditBanner({ banner }: Props) {
     };
 
     return (
-        <AdminLayout>
+        <AdminLayout activeSlug="how-it-works-banner">
             <>
                 <Head title="How It Works Banner" />
 

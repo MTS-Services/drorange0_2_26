@@ -93,6 +93,9 @@ class StayInformedController extends Controller
                 Storage::disk('public')->delete($item->icon);
             }
             $data['icon'] = null;
+        } else {
+            // Keep existing icon if no new file uploaded and not marked for deletion
+            unset($data['icon']);
         }
 
         unset($data['delete_existing_icon']);

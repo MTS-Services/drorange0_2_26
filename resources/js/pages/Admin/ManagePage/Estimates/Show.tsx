@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, router, useForm } from '@inertiajs/react';
 import { ArrowLeft, Save, User, Mail, Phone, MapPin, Calendar, Package, Settings, Image } from 'lucide-react';
 import React from 'react';
 
@@ -46,9 +46,11 @@ interface Props {
     estimate: Estimate;
     statusHistory: EstimateStatus[];
     statusOptions: Array<{ value: string; label: string }>;
+    options: any;
+    images: any; 
 }
 
-export default function Show({ estimate, statusHistory, statusOptions }: Props) {
+export default function Show({ estimate, statusHistory, statusOptions, options, images }: Props) {
     const { data, setData, patch, processing, errors, reset } = useForm({
         estimate_status: estimate.estimate_status,
         message: '',
@@ -120,11 +122,16 @@ export default function Show({ estimate, statusHistory, statusOptions }: Props) 
                                 </div>
                                 <div>
                                     <Label className="text-sm text-muted-foreground">Option</Label>
-                                    <p className="font-medium">{estimate.option?.name || 'N/A'}</p>
+                                    {
+                                        options.map((option: any) => (
+                                            <p key={option.id} className="font-medium">{option.name}</p>
+                                        ))
+                                    }
+                                    
                                 </div>
                                 <div>
                                     <Label className="text-sm text-muted-foreground">Dimension</Label>
-                                    <p className="font-medium">{estimate.diemension?.name || 'N/A'}</p>
+                                    <p className="font-medium">{estimate.bathroom_size || 'N/A'}</p>
                                 </div>
                                 <div>
                                     <Label className="text-sm text-muted-foreground">Current Setup</Label>
@@ -257,41 +264,20 @@ export default function Show({ estimate, statusHistory, statusOptions }: Props) 
                         </CardContent>
                     </Card>
 
-                    {/* OTP Information */}
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="text-lg">OTP Information</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-3 text-sm">
-                            <div>
-                                <div>OTP Code</div>
-                                <div className="font-medium text-foreground">
-                                    {estimate.otp_verification?.otp || 'N/A'}
-                                </div>
-                            </div>
-                            <div>
-                                <div>Expires In</div>
-                                <div className="font-medium text-foreground">
-                                    {estimate.otp_verification?.expire_in || 0} minutes
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
                     {/* Images */}
-                    {estimate.estimate_images?.length > 0 && (
+                    {images?.length > 0 && (
                         <Card>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
                                     <Image className="h-5 w-5" />
-                                    Images ({estimate.estimate_images.length})
+                                    Images ({images.length})
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <div className="grid grid-cols-2 gap-2">
-                                    {estimate.estimate_images.map((img, index) => (
+                                    {images.map((img: any, index: number) => (
                                         <div key={index} className="border rounded-lg p-2">
-                                            <p className="text-xs text-gray-500 truncate">{img.image}</p>
+                                            <img src={img.image_url} alt="" className='h-auto w-100 cursor-pointer' onClick={() => window.open(img.image_url, "_blank")} />
                                         </div>
                                     ))}
                                 </div>

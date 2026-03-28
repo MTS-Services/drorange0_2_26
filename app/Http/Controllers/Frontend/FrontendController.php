@@ -175,6 +175,31 @@ class FrontendController extends Controller
     {
         return Inertia::render('frontend/track-order');
     }
+        public function trackOrderDetails(Request $request): Response
+    {
+        $estimateId = $request->get('estimate_id');
+        $contact = $request->get('contact');
+        
+        $estimate = null;
+        $error = null;
+        
+        if ($estimateId && $contact) {
+            $estimate = $this->estimateService->searchEstimate($estimateId, $contact);
+            
+            if (!$estimate) {
+                $error = 'No estimate found with the provided ID and contact information.';
+            }
+        }
+        
+        return Inertia::render('frontend/track-order-details', [
+            'estimate' => $estimate,
+            'error' => $error,
+            'searchParams' => [
+                'estimate_id' => $estimateId,
+                'contact' => $contact,
+            ]
+        ]);
+    }
 
     public function sendMessage(Request $request): RedirectResponse
     {
@@ -465,8 +490,5 @@ class FrontendController extends Controller
         return Inertia::render('frontend/free-estimate-step6', compact('estimate'));
     }
 
-    public function trackOrderDetails(): Response
-    {
-        return Inertia::render('frontend/track-order-details');
-    }
+
 }

@@ -152,4 +152,15 @@ class EstimateService
             ->orderBy('created_at', 'desc')
             ->get();
     }
+
+    public function searchEstimate(string $estimateId, string $contact)
+    {
+        return $this->getQuery()
+            ->where('estimate_id', $estimateId)
+            ->whereHas('contactInformation', function ($query) use ($contact) {
+                $query->where('email', $contact)
+                      ->orWhere('phone', $contact);
+            })
+            ->first();
+    }
 }

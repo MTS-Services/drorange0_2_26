@@ -1,16 +1,16 @@
-import FileUpload from '@/components/file-upload'
-import InputError from '@/components/input-error'
-import { ActionButton } from '@/components/ui/action-button'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import AdminLayout from '@/layouts/admin-layout'
-import { Head, useForm } from '@inertiajs/react'
-import { Label } from '@/components/ui/label'
-import { ArrowLeft, PencilOff, Save } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
-import { toast } from 'sonner'
-import { Textarea } from '@/components/ui/textarea'
+import FileUpload from '@/components/file-upload';
+import InputError from '@/components/input-error';
+import TipTapEditor from '@/components/TipTapEditor';
+import { ActionButton } from '@/components/ui/action-button';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import AdminLayout from '@/layouts/admin-layout';
+import { Head, useForm } from '@inertiajs/react';
+import { PencilOff, Save } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 interface Props {
     hero?: {
@@ -66,7 +66,9 @@ export default function Index({ hero }: Props) {
                 {
                     id: record.id,
                     url: record.background_image_url,
-                    name: record.background_image?.split('/').pop() || 'background',
+                    name:
+                        record.background_image?.split('/').pop() ||
+                        'background',
                     mime_type: 'image/*',
                     path: record.background_image_url,
                 },
@@ -104,81 +106,151 @@ export default function Index({ hero }: Props) {
                                     <Card>
                                         <CardContent className="space-y-4">
                                             <div className="grid gap-2">
-                                                <Label htmlFor="title">Title</Label>
+                                                <Label htmlFor="title">
+                                                    Title
+                                                </Label>
                                                 <Input
                                                     id="title"
                                                     type="text"
                                                     value={data.title}
-                                                    onChange={(e) => setData('title', e.target.value)}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            'title',
+                                                            e.target.value,
+                                                        )
+                                                    }
                                                     required
                                                 />
-                                                <InputError message={errors.title} />
+                                                <InputError
+                                                    message={errors.title}
+                                                />
                                             </div>
 
                                             <div className="grid gap-2">
-                                                <Label htmlFor="subtitle">Subtitle</Label>
+                                                <Label htmlFor="subtitle">
+                                                    Subtitle
+                                                </Label>
                                                 <Input
                                                     id="subtitle"
                                                     type="text"
                                                     value={data.subtitle}
-                                                    onChange={(e) => setData('subtitle', e.target.value)}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            'subtitle',
+                                                            e.target.value,
+                                                        )
+                                                    }
                                                 />
-                                                <InputError message={errors.subtitle} />
+                                                <InputError
+                                                    message={errors.subtitle}
+                                                />
                                             </div>
 
                                             <div className="grid gap-2">
-                                                <Label htmlFor="button1_text">Primary Button Text</Label>
+                                                <Label htmlFor="button1_text">
+                                                    Primary Button Text
+                                                </Label>
                                                 <Input
                                                     id="button1_text"
                                                     type="text"
                                                     value={data.button1_text}
-                                                    onChange={(e) => setData('button1_text', e.target.value)}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            'button1_text',
+                                                            e.target.value,
+                                                        )
+                                                    }
                                                 />
-                                                <InputError message={errors.button1_text} />
+                                                <InputError
+                                                    message={
+                                                        errors.button1_text
+                                                    }
+                                                />
                                             </div>
 
                                             <div className="grid gap-2">
-                                                <Label htmlFor="button1_url">Primary Button URL</Label>
+                                                <Label htmlFor="button1_url">
+                                                    Primary Button URL
+                                                </Label>
                                                 <Input
                                                     id="button1_url"
                                                     type="text"
                                                     value={data.button1_url}
-                                                    onChange={(e) => setData('button1_url', e.target.value)}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            'button1_url',
+                                                            e.target.value,
+                                                        )
+                                                    }
                                                 />
-                                                <InputError message={errors.button1_url} />
+                                                <InputError
+                                                    message={errors.button1_url}
+                                                />
                                             </div>
 
                                             <div className="grid gap-2">
-                                                <Label htmlFor="button2_text">Secondary Button Text</Label>
+                                                <Label htmlFor="button2_text">
+                                                    Secondary Button Text
+                                                </Label>
                                                 <Input
                                                     id="button2_text"
                                                     type="text"
                                                     value={data.button2_text}
-                                                    onChange={(e) => setData('button2_text', e.target.value)}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            'button2_text',
+                                                            e.target.value,
+                                                        )
+                                                    }
                                                 />
-                                                <InputError message={errors.button2_text} />
+                                                <InputError
+                                                    message={
+                                                        errors.button2_text
+                                                    }
+                                                />
                                             </div>
 
                                             <div className="grid gap-2">
-                                                <Label htmlFor="button2_url">Secondary Button URL</Label>
+                                                <Label htmlFor="button2_url">
+                                                    Secondary Button URL
+                                                </Label>
                                                 <Input
                                                     id="button2_url"
                                                     type="text"
                                                     value={data.button2_url}
-                                                    onChange={(e) => setData('button2_url', e.target.value)}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            'button2_url',
+                                                            e.target.value,
+                                                        )
+                                                    }
                                                 />
-                                                <InputError message={errors.button2_url} />
+                                                <InputError
+                                                    message={errors.button2_url}
+                                                />
                                             </div>
 
                                             <div className="grid gap-2">
-                                                <Label htmlFor="aditional_information">Additional Information</Label>
-                                                <Textarea
-                                                    id="aditional_information"
-                                                   
-                                                    value={data.aditional_information}
-                                                    onChange={(e) => setData('aditional_information', e.target.value)}
+                                                <TipTapEditor
+                                                    value={
+                                                        data.aditional_information
+                                                    }
+                                                    onChange={(val: string) =>
+                                                        setData(
+                                                            'aditional_information',
+                                                            val,
+                                                        )
+                                                    }
+                                                    placeholder="Enter additional information..."
+                                                    height="300px"
                                                 />
-                                                <InputError message={errors.aditional_information} />
+                                                {errors.aditional_information && (
+                                                    <p className="mt-1 text-sm text-red-500">
+                                                        {
+                                                            errors.aditional_information
+                                                        }
+                                                    </p>
+                                                )}
                                             </div>
                                         </CardContent>
                                     </Card>
@@ -193,14 +265,23 @@ export default function Index({ hero }: Props) {
                                             <div className="grid gap-2">
                                                 <FileUpload
                                                     onChange={(file) =>
-                                                        setData('background_image', file as File)
+                                                        setData(
+                                                            'background_image',
+                                                            file as File,
+                                                        )
                                                     }
                                                     existingFiles={background}
-                                                    onRemoveExisting={handleRemoveBackgroundExisting}
+                                                    onRemoveExisting={
+                                                        handleRemoveBackgroundExisting
+                                                    }
                                                     multiple={false}
                                                     accept="image/*"
                                                 />
-                                                <InputError message={errors.background_image} />
+                                                <InputError
+                                                    message={
+                                                        errors.background_image
+                                                    }
+                                                />
                                             </div>
                                         </CardContent>
                                     </Card>
@@ -220,7 +301,9 @@ export default function Index({ hero }: Props) {
                                                 </Label>
                                                 <p className="mt-1 text-sm font-medium">
                                                     {record.created_at
-                                                        ? new Date(record.created_at).toLocaleDateString()
+                                                        ? new Date(
+                                                              record.created_at,
+                                                          ).toLocaleDateString()
                                                         : 'N/A'}
                                                 </p>
                                             </div>
@@ -231,7 +314,9 @@ export default function Index({ hero }: Props) {
                                                 </Label>
                                                 <p className="mt-1 text-sm font-medium">
                                                     {record.updated_at
-                                                        ? new Date(record.updated_at).toLocaleDateString()
+                                                        ? new Date(
+                                                              record.updated_at,
+                                                          ).toLocaleDateString()
                                                         : 'N/A'}
                                                 </p>
                                             </div>
@@ -247,7 +332,9 @@ export default function Index({ hero }: Props) {
                                                     className="flex h-auto w-full items-center justify-center bg-secondary px-6 py-0! hover:bg-secondary/80"
                                                 >
                                                     <Save className="mr-2 h-4 w-4" />
-                                                    {processing ? 'Updating...' : 'Update Hero'}
+                                                    {processing
+                                                        ? 'Updating...'
+                                                        : 'Update Hero'}
                                                 </Button>
                                                 <ActionButton
                                                     IconNode={PencilOff}

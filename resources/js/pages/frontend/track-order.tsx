@@ -15,8 +15,11 @@ export default function TrackOrder() {
     });
 
     const nextStep = () => {
-        // Navigate to the order details page after validation.
-        router.visit('/track-order-details');
+        // Navigate to the order details page with search parameters
+        router.get('/track-order-details', {
+            estimate_id: formData.orderId,
+            contact: formData.contact
+        });
     };
 
     const updateFormData = <K extends keyof TrackOrderFormData>(data: Partial<Pick<TrackOrderFormData, K>>) => 

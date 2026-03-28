@@ -90,7 +90,7 @@ export default function Index({ hero }: Props) {
     };
 
     return (
-        <AdminLayout>
+        <AdminLayout activeSlug="hero-section">
             <>
                 <Head title="Hero Section" />
 

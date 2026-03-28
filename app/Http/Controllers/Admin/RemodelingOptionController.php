@@ -103,6 +103,9 @@ class RemodelingOptionController extends Controller
                 Storage::disk('public')->delete($option->icon);
             }
             $data['icon'] = null;
+        } else {
+            // Keep existing icon if no new file uploaded and not marked for deletion
+            unset($data['icon']);
         }
 
         $option->update($data);

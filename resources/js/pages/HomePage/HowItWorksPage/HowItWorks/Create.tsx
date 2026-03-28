@@ -28,7 +28,7 @@ export default function Create() {
   };
 
   return (
-    <AdminLayout activeSlug="how-it-works">
+    <AdminLayout activeSlug="how-it-work">
       <Head title="Create How It Works Item" />
 
       <div className="flex justify-between mb-6">

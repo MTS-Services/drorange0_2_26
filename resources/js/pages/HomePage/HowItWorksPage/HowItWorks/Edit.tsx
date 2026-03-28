@@ -63,7 +63,7 @@ export default function Edit({ item }: Props) {
   };
 
   return (
-    <AdminLayout activeSlug="how-it-works">
+    <AdminLayout activeSlug="how-it-work">
       <Head title="Edit How It Works Item" />
 
       <div className="flex justify-between mb-6">

@@ -88,7 +88,7 @@ export default function Index({ hero }: Props) {
     }
 
     return (
-        <AdminLayout>
+        <AdminLayout activeSlug="remodeling-hero">
             <>
                 <Head title="Remodeling Hero" />
 

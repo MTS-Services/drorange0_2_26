@@ -131,7 +131,7 @@ export default function Verify({ phone }: { phone: string }) {
                 {/* Card */}
                 <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
                     {/* Card Body */}
-                    <div className="px-8 py-10 text-center">
+                    <div className="px-4 sm:px-8 py-10 text-center">
                         {/* Success Message */}
                         {flash?.success && (
                             <div className="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3">
@@ -184,10 +184,10 @@ export default function Verify({ phone }: { phone: string }) {
                         </div> */}
                     </div>
                     {/* Card Footer */}
-                    <div className="flex items-center justify-between border-t border-gray-100 bg-gray-50 px-8 py-5">
+                    <div className="flex flex-col sm:flex-row justify-between items-center border-t border-gray-100 bg-gray-50 px-8 py-5 gap-3 sm:gap-0">
                         <button
                         onClick={stepPrev}
-                        className="flex items-center gap-1.5 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-100">
+                        className="flex items-center justify-center gap-1.5 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-100 w-full sm:w-auto">
                             <svg
                                 className="h-4 w-4"
                                 fill="none"
@@ -205,7 +205,7 @@ export default function Verify({ phone }: { phone: string }) {
                         </button>
                         <button 
                        onClick={sumbitOtp}
-                        className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 active:bg-blue-800">
+                        className="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 active:bg-blue-800 w-full sm:w-auto">
                             Continue
                             <svg
                                 className="h-4 w-4"

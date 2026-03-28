@@ -124,7 +124,7 @@ export default function Review({estimateData, options, currentSetup, service, to
                 </div>
                 {/* Card */}
                 <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-                    <div className="px-8 py-8">
+                    <div className="px-4 sm:px-8 py-8">
                         <div className="w-full  mb-6">
                            <h2 className="text-2xl font-normal text-[#0A0A0A] font-inter">
                           Review Your Request
@@ -224,11 +224,11 @@ export default function Review({estimateData, options, currentSetup, service, to
                         </div>
                     </div>
 
-                    <div className="border-t border-gray-100 px-8 py-5 flex justify-between items-center bg-gray-50">
+                    <div className="flex flex-col sm:flex-row justify-between items-center border-t border-gray-100 bg-gray-50 px-8 py-5 gap-3 sm:gap-0">
                         <button
                           
                            onClick={stepPrev}
-                            className="border border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold px-5 py-2.5 rounded-lg text-sm flex items-center gap-1.5 transition-colors"
+                            className="flex items-center justify-center gap-1.5 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold px-5 py-2.5 text-sm transition-colors w-full sm:w-auto"
                         >
                             <svg
                                 className="w-4 h-4"
@@ -247,7 +247,7 @@ export default function Review({estimateData, options, currentSetup, service, to
                         </button>
                         <a
                            href={route('frontend.free-estimate-step6')}
-                            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold px-6 py-2.5 rounded-lg text-sm flex items-center gap-1.5 transition-colors"
+                            className="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold px-6 py-2.5 text-sm transition-colors w-full sm:w-auto"
                         >
                             Continue
                             <svg

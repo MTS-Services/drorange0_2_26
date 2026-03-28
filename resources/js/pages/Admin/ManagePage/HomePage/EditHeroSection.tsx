@@ -51,6 +51,7 @@ export default function Index({ hero }: Props) {
             forceFormData: true,
             onSuccess: () => {
                 toast.success('Hero section updated successfully');
+                window.location.reload();
             },
 
             onError: () => {
@@ -230,7 +231,7 @@ export default function Index({ hero }: Props) {
                                                 />
                                             </div>
 
-                                            <div className="grid gap-2">
+                                            {/* <div className="grid gap-2">
                                                 <TipTapEditor
                                                     value={
                                                         data.aditional_information
@@ -251,7 +252,7 @@ export default function Index({ hero }: Props) {
                                                         }
                                                     </p>
                                                 )}
-                                            </div>
+                                            </div> */}
                                         </CardContent>
                                     </Card>
 

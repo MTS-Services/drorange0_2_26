@@ -162,7 +162,7 @@
 
 :root {
   --background: #F9FAFB;
-  --foreground: var(--slate-600);
+  --foreground: #000000;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);

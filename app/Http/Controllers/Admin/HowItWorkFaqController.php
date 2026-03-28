@@ -50,7 +50,7 @@ class HowItWorkFaqController extends Controller
         $this->service->create($data);
 
         return redirect()
-            ->route('admin.pm.home-management.how-it-work-faq.index')
+            ->route('admin.pm.how-it-work-faq.index')
             ->with('success', 'FAQ created successfully.');
     }
 
@@ -84,7 +84,7 @@ class HowItWorkFaqController extends Controller
         $this->service->update($item->id, $data);
 
         return redirect()
-            ->route('admin.pm.home-management.how-it-work-faq.index')
+            ->route('admin.pm.how-it-work-faq.index')
             ->with('success', 'FAQ updated successfully.');
     }
 
@@ -95,7 +95,7 @@ class HowItWorkFaqController extends Controller
         $this->service->delete($item->id);
 
         return redirect()
-            ->route('admin.pm.home-management.how-it-work-faq.index')
+            ->route('admin.pm.how-it-work-faq.index')
             ->with('success', 'FAQ deleted successfully.');
     }
 }

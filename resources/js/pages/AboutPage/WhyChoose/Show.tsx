@@ -27,7 +27,7 @@ export default function Show({ item }: Props) {
       <div className="flex justify-between mb-6">
         <h1 className="text-2xl font-bold text-primary">Why Choose Details</h1>
         <Link href={route('admin.pm.about-why-choose.index')}>
-          <Button variant="secondary">Back</Button>
+          <Button>Back</Button>
         </Link>
       </div>
 

@@ -255,7 +255,7 @@ export default function Index({SiteSetting}: Props) {
                                         <Button
                                             type="submit"
                                             disabled={processing}
-                                            className="flex h-auto w-full items-center justify-center bg-secondary px-6 py-0! hover:bg-secondary/80"
+                                            className="flex h-auto w-full items-center justify-center px-6 py-0!"
                                         >
                                             <Save className="mr-2 h-4 w-4" />
                                             {processing

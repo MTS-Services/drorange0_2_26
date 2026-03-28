@@ -1,11 +1,11 @@
-import { useForm, usePage } from "@inertiajs/react";
+import { router, useForm, usePage } from "@inertiajs/react";
 
-export default function Verify() {
+export default function Verify({ phone }: { phone: string }) {
   const { props } = usePage();
   const flash = props.flash as any;
 
   const {data:resendOtpData, setData: setResendOtpData, post:resendOtpPost, processing:resendOtpProcessing} = useForm({
-    phone: '015681618189',
+    phone: phone,
   });
     const resendOtp = () => {
        resendOtpPost('/estimates/resend-otp', {
@@ -17,12 +17,16 @@ export default function Verify() {
 
     const {data:otpData, setData: setOtpData, post:otpPost, processing:otpProcessing} = useForm({
       otp: '',
-      phone: '015681618189',
+      phone: phone,
     });
     const sumbitOtp = () => {
       otpPost('/estimates/verify-otp')
     };
     
+    const stepPrev = () => {
+      router.visit(route('frontend.free-estimate-step3'))
+    };
+
     return (
         <div className="flex min-h-screen items-start justify-center px-4 py-10">
             <div className="w-full max-w-6xl bg-gray-100 p-4 lg:p-6">
@@ -138,7 +142,7 @@ export default function Verify() {
                             Verify Your Mobile Number
                         </h2>
                         <p className="mx-auto mb-7 max-w-2xl text-sm text-gray-500">
-                            We've sent a verification code to 01716354519.
+                            We've sent a verification code to {phone}.
                             Please enter it below to confirm you're not a bot.
                         </p>
                         {/* Code Input */}
@@ -169,7 +173,7 @@ export default function Verify() {
                             </button>
                         </div>
                         {/* Demo Mode Banner */}
-                        <div className="mx-auto max-w-2xl rounded-xl border border-yellow-200 bg-yellow-50 px-8 py-3.5">
+                        {/* <div className="mx-auto max-w-2xl rounded-xl border border-yellow-200 bg-yellow-50 px-8 py-3.5">
                             <p className="text-sm text-yellow-800">
                                 <span className="font-semibold text-yellow-900">
                                     Demo Mode:
@@ -177,11 +181,13 @@ export default function Verify() {
                                 Check your browser console for the verification
                                 code, or check sessionStorage.
                             </p>
-                        </div>
+                        </div> */}
                     </div>
                     {/* Card Footer */}
                     <div className="flex items-center justify-between border-t border-gray-100 bg-gray-50 px-8 py-5">
-                        <button className="flex items-center gap-1.5 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-100">
+                        <button
+                        onClick={stepPrev}
+                        className="flex items-center gap-1.5 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-100">
                             <svg
                                 className="h-4 w-4"
                                 fill="none"

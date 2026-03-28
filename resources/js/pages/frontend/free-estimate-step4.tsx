@@ -3,13 +3,11 @@ import Verify from '@/components/frontend/estimates/verify';
 import FrontendLayout from '@/layouts/frontend-layout';
 
 export default function FreeEstimateStep2({
-    options,
-    currentSetups,
-    serviceTypeId,
+    phone,
 }: any) {
     return (
         <FrontendLayout>
-           <Verify />
+           <Verify  phone={phone}/>
         </FrontendLayout>
     );
 }

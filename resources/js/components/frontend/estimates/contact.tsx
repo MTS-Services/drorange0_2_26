@@ -1,8 +1,8 @@
 import React from 'react';
-import { useForm } from '@inertiajs/react';
+import { router, useForm } from '@inertiajs/react';
 import InputError from '@/components/input-error';
 
-export default function Contact() {
+export default function Contact({ serviceTypeId }: { serviceTypeId: number }) {
     const { data, setData, post, processing, errors } = useForm({
         first_name: '',
         last_name: '',
@@ -21,7 +21,7 @@ export default function Contact() {
     };
 
     const prevStep = () => {
-        window.history.back();
+       router.visit(route('frontend.free-estimate-step2', { serviceTypeId }));
     };
     return (
         <div className="flex items-start justify-center px-2 py-6 lg:px-4 lg:py-10">

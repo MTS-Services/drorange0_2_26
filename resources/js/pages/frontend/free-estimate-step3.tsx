@@ -8,7 +8,7 @@ export default function FreeEstimateStep2({
 }: any) {
     return (
         <FrontendLayout>
-            <Contact />
+            <Contact serviceTypeId={serviceTypeId} />
         </FrontendLayout>
     );
 }

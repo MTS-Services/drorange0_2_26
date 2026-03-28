@@ -263,6 +263,9 @@ class FrontendController extends Controller
     public function freeEstimate(): Response
     {
 
+        if (session()->has('estimate_data')) {
+            session()->forget('estimate_data');
+        }
         
         $serviceTypes =  $this->serviceTypeService->getAll();
 
@@ -301,10 +304,24 @@ class FrontendController extends Controller
     public function freeEstimateStep2(int $serviceTypeId)
     {
 
+        if (session()->has('estimate_data')) {
+
+           $estimateData = session()->get('estimate_data');
+
+           session()->put('estimate_data', [
+            'service_type_id' => $estimateData['service_type_id'],
+            'files' => $estimateData['files'],
+           ]);
+
+        }else{
+            // if don't have session force him to redirect the first page and start over
+            return redirect()->route('frontend.free-estimate');
+        }
         $options = $this->optionService->getAll();
         $currentSetups = $this->currentSetupService->getAll();
 
 
+      
 
         return Inertia::render('frontend/free-estimate-step2', ['options' => $options, 'currentSetups' => $currentSetups, 'serviceTypeId' => $serviceTypeId]);
     }
@@ -330,7 +347,25 @@ class FrontendController extends Controller
 
     public function freeEstimateStep3()
     {
-        return Inertia::render('frontend/free-estimate-step3');
+
+        if (session()->has('estimate_data')) {
+
+           $estimateData = session()->get('estimate_data');
+
+           session()->put('estimate_data', [
+            'service_type_id' => $estimateData['service_type_id'],
+            'files' => $estimateData['files'],
+            'options'=> $estimateData['options'],
+            'bathroom_size'=> $estimateData['bathroom_size'],
+            'current_setup'=> $estimateData['current_setup'],
+           ]);
+
+        }else{
+            // if don't have session force him to redirect the first page and start over
+            return redirect()->route('frontend.free-estimate');
+        }
+
+        return Inertia::render('frontend/free-estimate-step3', ['serviceTypeId' => $estimateData['service_type_id']]);
     }
 
     public function freeEstimateStoreStep3(Request $request)
@@ -357,7 +392,33 @@ class FrontendController extends Controller
 
     public function freeEstimateStep4()
     {
-        return Inertia::render('frontend/free-estimate-step4');
+         if (session()->has('estimate_data')) {
+
+           $estimateData = session()->get('estimate_data');
+
+          
+           session()->put('estimate_data', [
+            'service_type_id' => $estimateData['service_type_id'],
+            'files' => $estimateData['files'],
+            'options'=> $estimateData['options'],
+            'bathroom_size'=> $estimateData['bathroom_size'],
+            'current_setup'=> $estimateData['current_setup'],
+            'first_name'=> $estimateData['first_name'],
+            'last_name'=> $estimateData['last_name'],
+            'email'=> $estimateData['email'],
+            'phone'=> $estimateData['phone'],
+            'address'=> $estimateData['address'],
+            'city'=> $estimateData['city'],
+            'zip'=> $estimateData['zip'],
+           ]);
+
+        }else{
+            // if don't have session force him to redirect the first page and start over
+            return redirect()->route('frontend.free-estimate');
+        }
+        return Inertia::render('frontend/free-estimate-step4' , [
+            'phone' => $estimateData['phone'],
+        ]);
     }
 
     public function freeEstimateResendOtp(Request $request)

@@ -1,9 +1,12 @@
+import { router } from '@inertiajs/react';
 import { CircleCheckBig } from 'lucide-react';
 
 
 export default function Review({estimateData, options, currentSetup, service, totalFile}: any) {
 
-
+ const stepPrev = ()=>{
+    router.visit(route('frontend.free-estimate-step4'))
+ }
     return (
         <div className="flex min-h-screen items-start justify-center px-4 py-10">
             <div className="w-full max-w-6xl bg-gray-100 p-4 lg:p-6">
@@ -224,6 +227,7 @@ export default function Review({estimateData, options, currentSetup, service, to
                     <div className="border-t border-gray-100 px-8 py-5 flex justify-between items-center bg-gray-50">
                         <button
                           
+                           onClick={stepPrev}
                             className="border border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold px-5 py-2.5 rounded-lg text-sm flex items-center gap-1.5 transition-colors"
                         >
                             <svg

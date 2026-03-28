@@ -76,7 +76,7 @@ export default function Edit({ service }: Props) {
   };
 
   return (
-    <AdminLayout>
+    <AdminLayout activeSlug="service-section">
       <>
         <Head title="Service Section" />
 

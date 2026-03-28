@@ -76,7 +76,7 @@ export default function Edit({ include }: Props) {
     }
 
     return (
-        <AdminLayout>
+        <AdminLayout activeSlug="remodeling-what-include">
             <>
                 <Head title="What Include" />
 

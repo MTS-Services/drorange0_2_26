@@ -98,7 +98,7 @@ export default function Index({ items, pagination, offset, filters, search, sort
   ];
 
   return (
-    <AdminLayout activeSlug="how-it-works">
+    <AdminLayout activeSlug="how-it-work">
       <Head title="How It Works" />
 
       <div className="flex justify-end mb-6">
